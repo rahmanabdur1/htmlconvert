@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NFL Schedule Strength | RotoWire Style</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2f20d",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#222210",
+                        "accent-dark": "#1c1c0d",
+                        "muted-gold": "#9c9c49",
+                        "border-light": "#e8e8ce"
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .italic-header {
+            font-style: italic;
+        }
+        .custom-shadow {
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+        }
+        .heat-map-great { background-color: #f2f20d; color: #1c1c0d; }
+        .heat-map-good { background-color: #f9f985; color: #1c1c0d; }
+        .heat-map-neutral { background-color: #f4f4e7; color: #1c1c0d; }
+        .heat-map-tough { background-color: #d1d1b5; color: #1c1c0d; }
+        .heat-map-hard { background-color: #1c1c0d; color: #ffffff; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-accent-dark dark:text-white min-h-screen">
+<!-- Global TopNavBar -->
+<header class="sticky top-0 z-50 bg-white dark:bg-background-dark border-b border-border-light dark:border-zinc-800 px-6 lg:px-20">
+<div class="max-w-[1400px] mx-auto flex items-center justify-between py-3 h-16">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-accent-dark">sports_football</span>
+</div>
+<h2 class="text-accent-dark dark:text-white text-xl font-bold tracking-tight italic-header">ROTO<span class="text-primary">WIRE</span> NFL</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Scores</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">News</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Lineups</a>
+<a class="text-sm font-medium text-primary border-b-2 border-primary" href="#">Rankings</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">DFS</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Betting</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-muted-gold text-xl">search</span>
+<input class="pl-10 pr-4 py-2 bg-background-light dark:bg-zinc-800 border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary" placeholder="Search Players or Teams"/>
+</div>
+<button class="bg-primary text-accent-dark px-5 py-2 rounded-lg text-sm font-bold hover:brightness-110 transition-all">Subscribe</button>
+<div class="size-10 rounded-full bg-zinc-200 border border-border-light overflow-hidden shadow-sm" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC52Y6o_ZIe0wYGE-bAGMea2FoQ49o5CZs2SCTpTIzMasaucU9TK1YggT4AQQ4Kb_qo3x6nkFEUvMpJtofecEMSWCxapU_O8t-dCp4QJuSz26DXcMNp9sE6ZgRX6TJmmv4OfmJCqfsyxcyjE6ROFKLLzTzYQHw57QFC2SYDQZWWl4FlVyvxzRB4vxirObGpenD_COUUF6sI3By36XiC56vcKwLazZUZagUIV3_jB4RiaWNIKdi1FFL0AfiCeKCUGeiUvtpP4j3NoxU");'></div>
+</div>
+</div>
+</header>
+<main class="max-w-[1400px] mx-auto px-6 lg:px-20 py-10">
+<!-- HeadlineText Section -->
+<div class="mb-8">
+<h1 class="text-accent-dark dark:text-white text-4xl lg:text-5xl font-bold italic-header mb-2 tracking-tight">NFL Schedule Strength</h1>
+<p class="text-muted-gold font-medium">Rest of Season (ROS) Strength of Schedule Analysis for Fantasy Football</p>
+</div>
+<div class="grid grid-cols-12 gap-8">
+<!-- Main Content Area (8 Columns) -->
+<div class="col-span-12 lg:col-span-9 space-y-6">
+<!-- Filters & Controls Card -->
+<div class="bg-white dark:bg-zinc-900 rounded-xl custom-shadow p-2 flex flex-col md:flex-row items-center justify-between gap-4 border border-border-light dark:border-zinc-800">
+<!-- Tabs Component -->
+<div class="flex items-center px-2">
+<a class="px-6 py-3 border-b-4 border-primary text-accent-dark dark:text-white font-bold text-sm italic-header" href="#">QB</a>
+<a class="px-6 py-3 border-b-4 border-transparent text-muted-gold hover:text-accent-dark font-bold text-sm italic-header" href="#">RB</a>
+<a class="px-6 py-3 border-b-4 border-transparent text-muted-gold hover:text-accent-dark font-bold text-sm italic-header" href="#">WR</a>
+<a class="px-6 py-3 border-b-4 border-transparent text-muted-gold hover:text-accent-dark font-bold text-sm italic-header" href="#">TE</a>
+<a class="px-6 py-3 border-b-4 border-transparent text-muted-gold hover:text-accent-dark font-bold text-sm italic-header" href="#">DST</a>
+</div>
+<!-- SegmentedButtons Component -->
+<div class="flex bg-background-light dark:bg-zinc-800 p-1 rounded-lg w-full md:w-auto">
+<button class="flex-1 md:flex-none px-6 py-2 bg-white dark:bg-zinc-700 shadow-sm rounded-md text-sm font-bold text-accent-dark dark:text-white italic-header">Remaining SOS</button>
+<button class="flex-1 md:flex-none px-6 py-2 text-sm font-bold text-muted-gold italic-header">Full Season</button>
+</div>
+</div>
+<!-- Main Table Card -->
+<div class="bg-white dark:bg-zinc-900 rounded-xl custom-shadow overflow-hidden border border-border-light dark:border-zinc-800">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-background-light dark:bg-zinc-800 border-b border-border-light dark:border-zinc-700">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-gold italic-header min-w-[180px]">Team</th>
+<th class="px-4 py-4 text-xs font-bold uppercase tracking-wider text-muted-gold italic-header text-center">Rank</th>
+<th class="px-4 py-4 text-xs font-bold uppercase tracking-wider text-muted-gold italic-header text-center">ROS SOS</th>
+<th class="px-2 py-4 text-xs font-bold uppercase tracking-wider text-muted-gold italic-header text-center">Wk 13</th>
+<th class="px-2 py-4 text-xs font-bold uppercase tracking-wider text-muted-gold italic-header text-center">Wk 14</th>
+<th class="px-2 py-4 text-xs font-bold uppercase tracking-wider text-muted-gold italic-header text-center">Wk 15</th>
+<th class="px-2 py-4 text-xs font-bold uppercase tracking-wider text-muted-gold italic-header text-center">Wk 16</th>
+<th class="px-2 py-4 text-xs font-bold uppercase tracking-wider text-muted-gold italic-header text-center">Wk 17</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light dark:divide-zinc-800">
+<!-- Row 1 -->
+<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="size-8 rounded bg-zinc-100 flex items-center justify-center p-1" data-alt="Arizona Cardinals logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCEeva-2l45ImZgc2b-Isd6sY_alfz6nya1y0W1Wi3T_dipcGEstZlwi0Wy8UscbQc-a48_Cp2rgb8UNBFmf3cFBSo4ZIejAku2mXB755B-40hlvjoY5xxwTYrxAGgj6-I5X8V54UJaVR0KsGvPTC17sTYa9Li7LduRmcttZDOVsoAvb2BKZHDf-O851TdEq0-TPOwmniE9FBLT2iszE6HdnBP-vOPjHrEluIAY5jRL4OCNOANS7-_OhW-rADn4qLfi64GGyck4Z6k");'></div>
+<div>
+<div class="font-bold text-sm italic-header">Cardinals</div>
+<div class="text-[10px] text-muted-gold uppercase font-bold tracking-tighter">Arizona</div>
+</div>
+</td>
+<td class="px-4 py-4 text-center">
+<span class="bg-primary text-accent-dark text-[10px] font-bold px-2 py-1 rounded">1</span>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center justify-center gap-2">
+<div class="w-16 bg-border-light dark:bg-zinc-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 95%;"></div>
+</div>
+<span class="text-xs font-bold">95</span>
+</div>
+</td>
+<td class="px-2 py-4"><div class="heat-map-great rounded py-2 text-center text-[10px] font-bold">@SEA</div></td>
+<td class="px-2 py-4"><div class="heat-map-neutral rounded py-2 text-center text-[10px] font-bold">BYE</div></td>
+<td class="px-2 py-4"><div class="heat-map-good rounded py-2 text-center text-[10px] font-bold">MIN</div></td>
+<td class="px-2 py-4"><div class="heat-map-good rounded py-2 text-center text-[10px] font-bold">SEA</div></td>
+<td class="px-2 py-4"><div class="heat-map-great rounded py-2 text-center text-[10px] font-bold">@NE</div></td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="size-8 rounded bg-zinc-100 flex items-center justify-center p-1" data-alt="Philadelphia Eagles logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDhWXPQoA7Q5TpRBInLFj0sbn_zV7j_RLKVTYN-cGDDySTn2cories_CLjAbx_yIR09IhgHoxyrme04kMY2pBTmtp2EQDlzzjds-YO-4hgesOpC9bdpZh8dYgN9MQhTxWi77AFWVpbdfASmylRlem5nhsQPTXVm6SpLKZwlxdemTEOidnW1na3TL4UYgP3okFOVifQfbn9vaZRi8cA61naHoe4bCWrg2LKLV97tdTvQeqST9rjNAaGnly0viJUkadhbnbddBh8ObsY");'></div>
+<div>
+<div class="font-bold text-sm italic-header">Eagles</div>
+<div class="text-[10px] text-muted-gold uppercase font-bold tracking-tighter">Philadelphia</div>
+</div>
+</td>
+<td class="px-4 py-4 text-center">
+<span class="bg-primary/50 text-accent-dark text-[10px] font-bold px-2 py-1 rounded">2</span>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center justify-center gap-2">
+<div class="w-16 bg-border-light dark:bg-zinc-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 88%;"></div>
+</div>
+<span class="text-xs font-bold">88</span>
+</div>
+</td>
+<td class="px-2 py-4"><div class="heat-map-neutral rounded py-2 text-center text-[10px] font-bold">@BAL</div></td>
+<td class="px-2 py-4"><div class="heat-map-great rounded py-2 text-center text-[10px] font-bold">CAR</div></td>
+<td class="px-2 py-4"><div class="heat-map-tough rounded py-2 text-center text-[10px] font-bold">PIT</div></td>
+<td class="px-2 py-4"><div class="heat-map-neutral rounded py-2 text-center text-[10px] font-bold">@WAS</div></td>
+<td class="px-2 py-4"><div class="heat-map-good rounded py-2 text-center text-[10px] font-bold">NYG</div></td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="size-8 rounded bg-zinc-100 flex items-center justify-center p-1" data-alt="Kansas City Chiefs logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBDoNeXj3Hi3kBkasE_4A6AqRuBqtvktpXXfhOQll8lvYhugqOjuiY7sGfmxYOVLdGmfcZ1SSRk1cMviWg0eOh9slJltZWz6Yqv0NWtI7wJ8RnjfHZDIseoz4e6WPYsvvXkyw9hUl7q0dgvu5Yy6dYHZ_TL0iaHb70PkyAsgknS1AdEb1BHsSoAHLYs2ObuBRO9ndbXFVmAd-Rroes2TjoBJSX3o_1e4E1B-mOGu_HeTXIKn-zGjYgFN0kHCTKygpDPTHwI6D5ZSAY");'></div>
+<div>
+<div class="font-bold text-sm italic-header">Chiefs</div>
+<div class="text-[10px] text-muted-gold uppercase font-bold tracking-tighter">Kansas City</div>
+</div>
+</td>
+<td class="px-4 py-4 text-center">
+<span class="bg-primary/30 text-accent-dark text-[10px] font-bold px-2 py-1 rounded">3</span>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center justify-center gap-2">
+<div class="w-16 bg-border-light dark:bg-zinc-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 85%;"></div>
+</div>
+<span class="text-xs font-bold">85</span>
+</div>
+</td>
+<td class="px-2 py-4"><div class="heat-map-great rounded py-2 text-center text-[10px] font-bold">LV</div></td>
+<td class="px-2 py-4"><div class="heat-map-good rounded py-2 text-center text-[10px] font-bold">LAC</div></td>
+<td class="px-2 py-4"><div class="heat-map-neutral rounded py-2 text-center text-[10px] font-bold">@CLE</div></td>
+<td class="px-2 py-4"><div class="heat-map-tough rounded py-2 text-center text-[10px] font-bold">HOU</div></td>
+<td class="px-2 py-4"><div class="heat-map-hard rounded py-2 text-center text-[10px] font-bold">@PIT</div></td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="size-8 rounded bg-zinc-100 flex items-center justify-center p-1" data-alt="Detroit Lions logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCHBVqTANJ3NdNQ2gpXdYLIaNN3R6nShYmZrfuACSAET9X5MP85HZMjATncFfVHnmkaNUJXX4p2wz-THRDs0eVYpSwVmetx3EG4-DxrC6yj8bz1QmbuUUXY03nGyi4JavHi8esFMcw8BoqikSb4kPjp4ExIpDcen8Eck9pau19aS82ObPAVCqp28Mc9QWsTsy5SH0U_vKwPSgPGgO9I9-zxinIs_NnuF5241qIdLbiSygqV_M1Qp5hbiw8lT-HmsFfWHWKS7EBHzOo");'></div>
+<div>
+<div class="font-bold text-sm italic-header">Lions</div>
+<div class="text-[10px] text-muted-gold uppercase font-bold tracking-tighter">Detroit</div>
+</div>
+</td>
+<td class="px-4 py-4 text-center">
+<span class="bg-zinc-100 text-accent-dark text-[10px] font-bold px-2 py-1 rounded">4</span>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center justify-center gap-2">
+<div class="w-16 bg-border-light dark:bg-zinc-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 82%;"></div>
+</div>
+<span class="text-xs font-bold">82</span>
+</div>
+</td>
+<td class="px-2 py-4"><div class="heat-map-good rounded py-2 text-center text-[10px] font-bold">GB</div></td>
+<td class="px-2 py-4"><div class="heat-map-neutral rounded py-2 text-center text-[10px] font-bold">BUF</div></td>
+<td class="px-2 py-4"><div class="heat-map-great rounded py-2 text-center text-[10px] font-bold">@CHI</div></td>
+<td class="px-2 py-4"><div class="heat-map-good rounded py-2 text-center text-[10px] font-bold">@SF</div></td>
+<td class="px-2 py-4"><div class="heat-map-neutral rounded py-2 text-center text-[10px] font-bold">MIN</div></td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+<td class="px-6 py-4 flex items-center gap-3">
+<div class="size-8 rounded bg-zinc-100 flex items-center justify-center p-1" data-alt="Baltimore Ravens logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDXqiSXnePx7wqorF3tNxQCDNi2VaueIpVasV8C6oVzWJhjictXls3l07HXGv-JqXI-VFVtrvVR9P150KGj9WOG-vaYtnTXlopQRqNMl4Itrig6ICl5jUiiIGP-0xlmkAiMV9DaK1sf6tFZ-kcndwlaCdrPZ1M-VRHmqbZ71hERzjWFbrNjMM6f1ncBppDzaNHcv0r4Qom1LcDIgsEIZCbyzZALwLceZqG_kVReOWVhUvaxaUqD_gYEpDQdluVJqS55uMxQBz43W1M");'></div>
+<div>
+<div class="font-bold text-sm italic-header">Ravens</div>
+<div class="text-[10px] text-muted-gold uppercase font-bold tracking-tighter">Baltimore</div>
+</div>
+</td>
+<td class="px-4 py-4 text-center">
+<span class="bg-zinc-100 text-accent-dark text-[10px] font-bold px-2 py-1 rounded">5</span>
+</td>
+<td class="px-4 py-4">
+<div class="flex items-center justify-center gap-2">
+<div class="w-16 bg-border-light dark:bg-zinc-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 78%;"></div>
+</div>
+<span class="text-xs font-bold">78</span>
+</div>
+</td>
+<td class="px-2 py-4"><div class="heat-map-hard rounded py-2 text-center text-[10px] font-bold">PHI</div></td>
+<td class="px-2 py-4"><div class="heat-map-neutral rounded py-2 text-center text-[10px] font-bold">BYE</div></td>
+<td class="px-2 py-4"><div class="heat-map-great rounded py-2 text-center text-[10px] font-bold">@NYG</div></td>
+<td class="px-2 py-4"><div class="heat-map-hard rounded py-2 text-center text-[10px] font-bold">@PIT</div></td>
+<td class="px-2 py-4"><div class="heat-map-tough rounded py-2 text-center text-[10px] font-bold">@HOU</div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Color Key Legend -->
+<div class="flex flex-wrap items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-muted-gold px-2">
+<span class="flex items-center gap-1.5"><div class="size-3 heat-map-great rounded-sm"></div> Great Matchup</span>
+<span class="flex items-center gap-1.5"><div class="size-3 heat-map-good rounded-sm"></div> Good</span>
+<span class="flex items-center gap-1.5"><div class="size-3 heat-map-neutral rounded-sm"></div> Neutral</span>
+<span class="flex items-center gap-1.5"><div class="size-3 heat-map-tough rounded-sm"></div> Tough</span>
+<span class="flex items-center gap-1.5"><div class="size-3 heat-map-hard rounded-sm"></div> Avoid</span>
+</div>
+</div>
+<!-- Sidebar (3 Columns) -->
+<aside class="col-span-12 lg:col-span-3 space-y-6">
+<!-- Risers Card -->
+<div class="bg-white dark:bg-zinc-900 rounded-xl custom-shadow p-6 border-l-4 border-primary">
+<h3 class="text-lg font-bold italic-header mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-green-500">trending_up</span>
+                        SOS Risers
+                    </h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-zinc-50 rounded flex items-center justify-center text-xs font-bold border border-border-light" data-alt="Giants logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAz90BxD69vAhZWP4zHOKKmrUzw_6KwgZIL-RJLkkehT-EoY-_EQ9JhW8MNgfyJF1_zlYhu7Y-5y5lCdQYYdTwOAwX61hEuwrIUaatsC50TqeW4P9OAD8CdmhK9MqzIXSsxmg3N-XBJwNEIpppScRF8oNK9tjj8xjz-eVirZCHyCuUuTB6V162tvlMbCjOQrq1aS_mJBWaw5tqa3x1JF1bc5cwIpotLjWLfej8Z041L-L4ygshHIoS6m8edSs59cCzGNKmo3QmDB_g");'></div>
+<div>
+<p class="text-sm font-bold">NY Giants</p>
+<p class="text-[10px] text-muted-gold font-medium">+14 Spots</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-muted-gold group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<div class="flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-zinc-50 rounded flex items-center justify-center text-xs font-bold border border-border-light" data-alt="Seahawks logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0T7ey6mNx0jUyGy0FjKH7SM3oFsiyRcNGSQ5wqUkoiLN23-5GM1WYEdItz_WFFZFTyTpFRu_-vruNSPAJuY0f_uMokMxIjiq1mg2aW2oLhCgPQLG52LPRkZuOpWHMYPIrqv5J6lLfhCyZ3D79w6223dDmZkb1Mo3yjdnz_OGO1WRh-I4u92dnoDFUtHDtbY292pxCPbVaaIaga6hR4ObSyUyJSiLrmm8L7SK2vatbhT2lWzoiYzg6jSj7EKZItthrCeVig7nMddY");'></div>
+<div>
+<p class="text-sm font-bold">Seahawks</p>
+<p class="text-[10px] text-muted-gold font-medium">+9 Spots</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-muted-gold group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Fallers Card -->
+<div class="bg-white dark:bg-zinc-900 rounded-xl custom-shadow p-6 border-l-4 border-accent-dark">
+<h3 class="text-lg font-bold italic-header mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-red-500">trending_down</span>
+                        SOS Fallers
+                    </h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-zinc-50 rounded flex items-center justify-center text-xs font-bold border border-border-light" data-alt="Bears logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBcG_y8fAWup6YMdVXZcN47vgcJHB4QDa2Xh1AW8gwrxiQbuzBh_IrXhxCWLvUeRp5tdGgqd2UKLJpRhKfMTd06JjDUNrOQpkCV2ZYWtLTqn-CTw_M6RIF4Gq-p43usO8U0Js9WbreiBcmZGum7hUC_CBJVJe2V_3sdNkAyc6HETb9gSSX4oFIKvgdfow4gXkDHh4yLKOg7ZjcIoaX4akL4EglXuFyVanjvs37Es_myEH_LoYD9HAEB6hq51eb4AN1pbP9_GvO-TCc");'></div>
+<div>
+<p class="text-sm font-bold">Bears</p>
+<p class="text-[10px] text-muted-gold font-medium">-12 Spots</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-muted-gold group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<div class="flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="size-10 bg-zinc-50 rounded flex items-center justify-center text-xs font-bold border border-border-light" data-alt="Cowboys logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB2hReuFW2L-OLT-L8PQo2idmCRaL6j3AfxGinfZgWe-3QT1FPQzlvrJcTTyPtIS-Ozc9XYjVf9vJUglmje0JdcAr2Ag3vgCqia7HySEsdB3jaDn-FvJ8IMlMzKMOxN962MvHWvao5KAp9GCdAr5qf0ZQHI7Xb4ewlp_PPikQ1CK_G2b6wAawWQIN3S-cyjLS6unUVPalY7mHdMJ443LVvVRWfiDrXPT8x2mUwRUZpdwE718lj7MYAa2tJTBKDFjVMUJwHaSGwF15U");'></div>
+<div>
+<p class="text-sm font-bold">Cowboys</p>
+<p class="text-[10px] text-muted-gold font-medium">-8 Spots</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-muted-gold group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Newsletter/CTA Card -->
+<div class="bg-accent-dark text-white rounded-xl custom-shadow p-6 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 size-24 bg-primary rounded-full opacity-20 blur-2xl"></div>
+<h4 class="text-xl font-bold italic-header mb-2 relative z-10">Win Your League</h4>
+<p class="text-xs text-zinc-400 mb-6 relative z-10">Get the Week 13 Matchup Analysis delivered to your inbox every Tuesday.</p>
+<div class="space-y-3 relative z-10">
+<input class="w-full bg-zinc-800 border-zinc-700 rounded-lg py-2 px-3 text-sm focus:ring-primary focus:border-primary" placeholder="Email address" type="email"/>
+<button class="w-full bg-primary text-accent-dark py-2.5 rounded-lg text-sm font-bold uppercase tracking-wider">Join Now</button>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Global Footer -->
+<footer class="bg-white dark:bg-zinc-900 border-t border-border-light dark:border-zinc-800 py-12 px-6 lg:px-20 mt-12">
+<div class="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-3 mb-6">
+<div class="size-6 bg-primary flex items-center justify-center rounded">
+<span class="material-symbols-outlined text-accent-dark text-sm">sports_football</span>
+</div>
+<h2 class="text-accent-dark dark:text-white text-lg font-bold tracking-tight italic-header">ROTO<span class="text-primary">WIRE</span></h2>
+</div>
+<p class="text-xs text-muted-gold leading-relaxed">
+                    The leading provider of fantasy sports news, stats, and analysis since 1997. Trusted by over 1 million fantasy managers globally.
+                </p>
+</div>
+<div>
+<h5 class="font-bold italic-header text-sm mb-6 uppercase tracking-widest text-accent-dark dark:text-white">Fantasy Resources</h5>
+<ul class="space-y-3 text-xs text-muted-gold font-medium">
+<li><a class="hover:text-primary" href="#">Daily Cheat Sheets</a></li>
+<li><a class="hover:text-primary" href="#">Draft Kit 2024</a></li>
+<li><a class="hover:text-primary" href="#">Trade Analyzer</a></li>
+<li><a class="hover:text-primary" href="#">Waiver Wire Picks</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold italic-header text-sm mb-6 uppercase tracking-widest text-accent-dark dark:text-white">Company</h5>
+<ul class="space-y-3 text-xs text-muted-gold font-medium">
+<li><a class="hover:text-primary" href="#">About Us</a></li>
+<li><a class="hover:text-primary" href="#">Careers</a></li>
+<li><a class="hover:text-primary" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary" href="#">Contact Support</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-bold italic-header text-sm mb-6 uppercase tracking-widest text-accent-dark dark:text-white">Follow Us</h5>
+<div class="flex gap-4">
+<div class="size-8 rounded-full bg-background-light dark:bg-zinc-800 flex items-center justify-center text-accent-dark dark:text-white hover:bg-primary hover:text-accent-dark cursor-pointer transition-all">
+<span class="material-symbols-outlined text-lg">share</span>
+</div>
+<div class="size-8 rounded-full bg-background-light dark:bg-zinc-800 flex items-center justify-center text-accent-dark dark:text-white hover:bg-primary hover:text-accent-dark cursor-pointer transition-all">
+<span class="material-symbols-outlined text-lg">rss_feed</span>
+</div>
+<div class="size-8 rounded-full bg-background-light dark:bg-zinc-800 flex items-center justify-center text-accent-dark dark:text-white hover:bg-primary hover:text-accent-dark cursor-pointer transition-all">
+<span class="material-symbols-outlined text-lg">alternate_email</span>
+</div>
+</div>
+</div>
+</div>
+<div class="max-w-[1400px] mx-auto border-t border-border-light dark:border-zinc-800 mt-12 pt-8 text-center">
+<p class="text-[10px] text-muted-gold font-bold uppercase tracking-widest">© 2024 RotoWire. All Rights Reserved. Not for use in illegal gambling.</p>
+</div>
+</footer>
+</body></html>

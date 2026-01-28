@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Matchup Detail Modal - NFL Pro Analysis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2f20d",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#222210",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Lexend', sans-serif; }
+        .modal-overlay { background-color: rgba(0, 0, 0, 0.6); }
+        .italic-header { font-style: italic; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen">
+<!-- Modal Backdrop -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay overflow-y-auto">
+<!-- Main Modal Card -->
+<div class="relative w-full max-w-[800px] bg-white dark:bg-[#1a1a0d] rounded-xl shadow-2xl overflow-hidden flex flex-col">
+<!-- Header Section -->
+<div class="px-8 pt-8 pb-4">
+<div class="flex items-center justify-between mb-6">
+<button class="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="italic-header text-zinc-500 text-sm font-bold tracking-widest uppercase">Matchup Analysis: Week 10</div>
+<div class="w-6"></div> <!-- Spacer for symmetry -->
+</div>
+<div class="flex items-center justify-between px-10">
+<div class="flex flex-col items-center gap-2">
+<div class="size-20 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center p-3 shadow-sm border border-zinc-100 dark:border-zinc-700">
+<div class="w-full h-full bg-contain bg-center bg-no-repeat" data-alt="Kansas City Chiefs primary team logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBonktRsZW6eCNQJ9QTfPnsa_qnpVp807ZRiw9uRpwJtGEdf3_b3rWYY0tS-8246baR8iYkFhSa8WCyjNmmpgl28e6jMdVwMYpfW1jH_swKYnI49kf6XbtLvn7qbmNMLx2Jk8gL6DW1PJavFjqGtMB0LqbCLac2yr0tNquLb1EhUDx8SqdIN29xI8r39-cSlVQxXu9-MVJ4ivzvB5ktjGuopkO1ytRMD-DnqQc_TpH1PCRZWM4etxOJ-bif7-aRADGGS_Od_w2Z9yA");'></div>
+</div>
+<span class="font-bold text-lg dark:text-white">Chiefs</span>
+<span class="text-xs text-zinc-400 font-medium">8-1</span>
+</div>
+<div class="flex flex-col items-center">
+<div class="text-[#9c9c49] text-2xl italic font-black tracking-tighter">VS</div>
+<div class="mt-1 px-3 py-1 bg-zinc-100 dark:bg-zinc-800 rounded-full text-[10px] font-bold text-zinc-500 uppercase tracking-wider">GEHA Field</div>
+</div>
+<div class="flex flex-col items-center gap-2">
+<div class="size-20 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center p-3 shadow-sm border border-zinc-100 dark:border-zinc-700">
+<div class="w-full h-full bg-contain bg-center bg-no-repeat" data-alt="Opponent team logo profile" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDXsYf4xdAzHVr7jkB_Xwh4g9aIrwscHNxg37cHM7c_TonNKuFZtYuK0G4zc8M3z5TxC4TavMYli6zALS-yymyUZ1jLrUoENHjCdjpm2PKogouVQ1bm8Y7pbrCUdkRWaCCV3I2gYao7O4SMytsDF2q1H95NhHtgLdROLW6LfcR2GNofcBxsbOG2-grcknOESl6YVsev3NyCM3zWgLMXRCwxwxcL5bSNBhVDGkHu3GFXvJPvSZJaZ5TPTPrNzjiWukxCb19HEVWC0gQ");'></div>
+</div>
+<span class="font-bold text-lg dark:text-white">Chargers</span>
+<span class="text-xs text-zinc-400 font-medium">5-4</span>
+</div>
+</div>
+</div>
+<!-- Quick Stats Bar -->
+<div class="px-8">
+<div class="grid grid-cols-3 gap-4 border-y border-zinc-100 dark:border-zinc-800 py-4">
+<div class="flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-zinc-400">cloud</span>
+<div class="text-sm font-bold dark:text-white">52°F Clear</div>
+</div>
+<div class="flex items-center justify-center gap-3 border-x border-zinc-100 dark:border-zinc-800">
+<span class="material-symbols-outlined text-zinc-400">payments</span>
+<div class="text-sm font-bold dark:text-white">KC -7.5 <span class="text-zinc-400 font-normal">O/U 48.5</span></div>
+</div>
+<div class="flex items-center justify-center gap-3">
+<span class="material-symbols-outlined text-zinc-400">calendar_today</span>
+<div class="text-sm font-bold dark:text-white">Sun, 4:25 PM</div>
+</div>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="p-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Offensive Outlook -->
+<div class="flex flex-col gap-4">
+<h3 class="italic-header text-sm font-extrabold uppercase tracking-tight text-zinc-800 dark:text-zinc-200 border-l-4 border-primary pl-2">Offensive Outlook</h3>
+<div class="bg-background-light dark:bg-zinc-800/50 p-4 rounded-lg flex flex-col gap-4">
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] font-bold text-zinc-500 uppercase">
+<span>KC</span>
+<span>Passing YPG</span>
+<span>LAC</span>
+</div>
+<div class="flex h-2 w-full bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+<div class="bg-primary w-[65%]"></div>
+<div class="bg-zinc-400 w-[35%]"></div>
+</div>
+<div class="flex justify-between text-xs font-bold dark:text-white">
+<span>278.4</span>
+<span>221.2</span>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] font-bold text-zinc-500 uppercase">
+<span>KC</span>
+<span>Rushing YPG</span>
+<span>LAC</span>
+</div>
+<div class="flex h-2 w-full bg-zinc-200 dark:bg-zinc-700 rounded-full overflow-hidden">
+<div class="bg-primary w-[40%]"></div>
+<div class="bg-zinc-400 w-[60%]"></div>
+</div>
+<div class="flex justify-between text-xs font-bold dark:text-white">
+<span>112.5</span>
+<span>134.8</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Defensive Matchup -->
+<div class="flex flex-col gap-4">
+<h3 class="italic-header text-sm font-extrabold uppercase tracking-tight text-zinc-800 dark:text-zinc-200 border-l-4 border-primary pl-2">Defensive Matchup</h3>
+<div class="bg-background-light dark:bg-zinc-800/50 p-4 rounded-lg flex flex-col gap-3">
+<div class="flex items-center justify-between p-2 bg-white dark:bg-zinc-800 rounded border border-zinc-100 dark:border-zinc-700 shadow-sm">
+<span class="text-xs font-medium text-zinc-600 dark:text-zinc-400">Total Sacks</span>
+<span class="font-bold text-zinc-900 dark:text-white">28</span>
+</div>
+<div class="flex items-center justify-between p-2 bg-white dark:bg-zinc-800 rounded border border-zinc-100 dark:border-zinc-700 shadow-sm">
+<span class="text-xs font-medium text-zinc-600 dark:text-zinc-400">Takeaways</span>
+<span class="font-bold text-zinc-900 dark:text-white">14</span>
+</div>
+<div class="flex items-center justify-between p-2 bg-white dark:bg-zinc-800 rounded border border-zinc-100 dark:border-zinc-700 shadow-sm border-l-4 border-l-red-500">
+<div class="flex flex-col">
+<span class="text-xs font-medium text-zinc-600 dark:text-zinc-400">Injury Alert</span>
+<span class="text-[10px] text-red-500 font-bold">Nick Bolton (Q)</span>
+</div>
+<span class="material-symbols-outlined text-red-500 text-sm">warning</span>
+</div>
+</div>
+</div>
+<!-- Fantasy Projections -->
+<div class="flex flex-col gap-4">
+<h3 class="italic-header text-sm font-extrabold uppercase tracking-tight text-zinc-800 dark:text-zinc-200 border-l-4 border-primary pl-2">Fantasy Projections</h3>
+<div class="flex flex-col gap-3">
+<!-- Player Card 1 -->
+<div class="flex items-center gap-3 bg-white dark:bg-zinc-800 p-3 rounded-lg border border-zinc-100 dark:border-zinc-700 shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-primary text-[10px] font-black px-2 py-0.5 rounded-bl">START</div>
+<div class="size-10 bg-zinc-200 dark:bg-zinc-700 rounded-full bg-cover bg-center" data-alt="Patrick Mahomes portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBk5UA82Ir0FWfyvJoR46j94c8oK___GdGV35oESwT_6-NbjWHNzN0keBGYI9vWz9bPAFrbNchOs0epveP-HrYezEfrpPjaWHb14Y1cTUApRz0TLV-1fCll_PCYvX5cefbdL7BBkPpH9uQdxLdj6_0Fqxy33AxTYzgl-yX9e9xDAtBDrdy-FjZkM27GK5ekFxLUGDHVCym5HlUl4O3L7Qj2lTVT9JHD3ADZ1x8BCkAtLWu57BGfA-Plp446skNLCDpchPbWQSsoegc");'></div>
+<div class="flex flex-col">
+<span class="text-xs font-bold dark:text-white leading-tight">P. Mahomes</span>
+<span class="text-[10px] font-medium text-zinc-500">Proj: 22.4 pts</span>
+</div>
+</div>
+<!-- Player Card 2 -->
+<div class="flex items-center gap-3 bg-white dark:bg-zinc-800 p-3 rounded-lg border border-zinc-100 dark:border-zinc-700 shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-primary text-[10px] font-black px-2 py-0.5 rounded-bl">START</div>
+<div class="size-10 bg-zinc-200 dark:bg-zinc-700 rounded-full bg-cover bg-center" data-alt="Travis Kelce portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBP0i7CStERfYLvkBSDOBmFtUD5KchQlU_LPs6by19jwzRBPk_mww9clblsnY7okAD0ZAfgM7-wrwwDL0YuE_sBxv7roOvEv6tmFsN_hbzbXAcZUN3UrB0G6qxlNxK6BmK0pJ0d7lAzyLviYDZB9Jo25TBcivUN7i4ovwOaDqI9Y4K7ggjrEfAiaW4M5kpGTaCZHT_ehI79UVadN6Xt0Vok2I6soP7r8UNaNuoh7b5j-JB_S5T6k9eoQYmSYE5BwguMzq5cymAN8_U");'></div>
+<div class="flex flex-col">
+<span class="text-xs font-bold dark:text-white leading-tight">T. Kelce</span>
+<span class="text-[10px] font-medium text-zinc-500">Proj: 16.8 pts</span>
+</div>
+</div>
+<!-- Player Card 3 -->
+<div class="flex items-center gap-3 bg-white dark:bg-zinc-800 p-3 rounded-lg border border-zinc-100 dark:border-zinc-700 shadow-sm relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-zinc-400 text-white text-[10px] font-black px-2 py-0.5 rounded-bl">SIT</div>
+<div class="size-10 bg-zinc-200 dark:bg-zinc-700 rounded-full bg-cover bg-center" data-alt="KC Defense profile image" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBqEy3LWKRJN2KBK20GRzd3BMoZ1hOKn6QvhHC9nLqqB2xg5N2WOmJFStJWLigZ6AEaE2UbtzD4G9rWj47Zc40k9A43mnQj7Q3CDQUX1d9CSdIYU7Wdy2SEeiEfEEv6QMy606eGmn7nykWxqfgDOdOjRCNkWg2q9_cIwzM_kPbXjDJP0eOJHGDIJv7UGYRJCtxRcJKRMs7bpx3A9IbJIUJxZsBnFhYWwg_IBjo0o_my3LxghLW1Rn6BR0jy0WJjZtzOl-JsW8vRLkk");'></div>
+<div class="flex flex-col">
+<span class="text-xs font-bold dark:text-white leading-tight">Chiefs D/ST</span>
+<span class="text-[10px] font-medium text-zinc-500">Proj: 4.2 pts</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="px-8 pb-8 pt-4 flex flex-col gap-3">
+<button class="w-full bg-primary hover:bg-[#e6e60c] text-black font-black italic-header py-4 rounded-lg shadow-lg transition-colors flex items-center justify-center gap-2 uppercase tracking-wide">
+                    View Full Game Center
+                    <span class="material-symbols-outlined font-bold">arrow_forward</span>
+</button>
+<button class="w-full py-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 text-xs font-bold uppercase tracking-widest transition-colors">
+                    Close Analysis
+                </button>
+</div>
+</div>
+</div>
+</body></html>

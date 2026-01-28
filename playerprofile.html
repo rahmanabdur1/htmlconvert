@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NFL Player Profile - RotoWire Fantasy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2f20d",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#222210",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .player-name-italic {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#1c1c0d] dark:text-[#fcfcf8]">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-[#e8e8ce] bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-6 md:px-10 py-3">
+<div class="max-w-[1200px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-black text-xl">sports_football</span>
+</div>
+<h2 class="text-[#1c1c0d] dark:text-white text-xl font-extrabold tracking-tight">ROTO<span class="text-primary-600">WIRE</span></h2>
+</div>
+<nav class="hidden lg:flex items-center gap-6">
+<a class="hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider" href="#">NFL</a>
+<a class="hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider" href="#">NBA</a>
+<a class="hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider" href="#">MLB</a>
+<a class="hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider" href="#">NHL</a>
+<a class="hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider" href="#">College</a>
+<a class="hover:text-primary transition-colors text-sm font-semibold uppercase tracking-wider" href="#">Betting</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center bg-[#f4f4e7] dark:bg-zinc-800 rounded-lg px-3 py-1.5">
+<span class="material-symbols-outlined text-[#9c9c49] text-xl">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 placeholder-[#9c9c49]" placeholder="Search players..." type="text"/>
+</div>
+<button class="bg-primary text-black px-5 py-2 rounded-lg font-bold text-sm hover:brightness-95 transition-all">Sign In</button>
+<div class="size-10 rounded-full bg-cover bg-center border-2 border-primary" data-alt="User profile avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCNsvto1xpj7CBe9CcsEMD_lE9a83nc3I58ni6DSGetJbe5iQ0cAik3RMgppHA4qN39ClMQZ8FLZHt_wTz57s1jfXySkbFZFq6EozpNLKJ4lChzW_63ujJTINm9TQ6rreXAcEC_RXQsKlb0-N7dd5Wou5M2-qagkLaJvNAGYfxteMkbBBUXoEVN1dxu3LxxSEdN3K99zAYdbbegY8KFBvAKFPbhPAHG-wn9Qmgsualjs5_AksgYsWDnhW6CEKS4rft359xWn79Msx4");'></div>
+</div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-4 md:px-6 py-8">
+<!-- Elevated Player Hero Card -->
+<div class="bg-white dark:bg-zinc-900 rounded-xl shadow-xl overflow-hidden mb-8 border border-[#e8e8ce] dark:border-zinc-800">
+<div class="flex flex-col md:flex-row p-6 md:p-8 gap-8 items-center md:items-end">
+<div class="relative">
+<div class="w-48 h-64 bg-[#f4f4e7] dark:bg-zinc-800 rounded-xl overflow-hidden shadow-inner border-b-4 border-primary">
+<div class="w-full h-full bg-cover bg-bottom" data-alt="Action shot of Trey Lance in game uniform" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAB6JBVUYCsRMwmtENOQLqq9HC25pihhzSXcYxNLIWgy5T2RprVSFbuV42On_cgrYN83X-toUtX6dFJUH-68w5nFtjEFCQmrsZFHPYqgB02QfxBA6idnd8QsyMEDTpfODYykSaBVV_79rKCWzh9dFwIBWCv1p_XfYFnEVW8BXc4L3jf-HsO36-a-W9cQ9OhPW36THGIJgeRVbTI8Z1QeeBTsNcK0rHr8h-Or8VwmxwS5UVrMBqexAMaiJtc7tkOSSsLN0zDEdtI33c");'></div>
+</div>
+<div class="absolute -top-3 -right-3 bg-primary text-black font-black px-3 py-1 rounded-lg text-lg shadow-md italic">
+                        QB1
+                    </div>
+</div>
+<div class="flex-1 text-center md:text-left">
+<div class="flex flex-col md:flex-row md:items-center gap-3 mb-2 justify-center md:justify-start">
+<span class="bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 text-xs font-bold px-2 py-1 rounded uppercase tracking-widest">San Francisco 49ers</span>
+<span class="hidden md:block text-zinc-300">|</span>
+<span class="text-zinc-500 font-medium">Quarterback</span>
+<span class="hidden md:block text-zinc-300">|</span>
+<span class="text-primary font-black">#5</span>
+</div>
+<h1 class="text-5xl md:text-6xl font-black player-name-italic uppercase tracking-tighter mb-4 text-[#1c1c0d] dark:text-white">
+                        TREY LANCE
+                    </h1>
+<div class="grid grid-cols-2 md:flex gap-6 text-[#9c9c49] dark:text-zinc-400 text-sm font-medium">
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-widest opacity-70">Ht / Wt</span>
+<span class="text-lg text-[#1c1c0d] dark:text-zinc-200">6'4", 224 lbs</span>
+</div>
+<div class="flex flex-col border-l border-[#e8e8ce] dark:border-zinc-800 pl-6">
+<span class="text-[10px] uppercase tracking-widest opacity-70">Age</span>
+<span class="text-lg text-[#1c1c0d] dark:text-zinc-200">23</span>
+</div>
+<div class="flex flex-col border-l border-[#e8e8ce] dark:border-zinc-800 pl-6">
+<span class="text-[10px] uppercase tracking-widest opacity-70">Exp</span>
+<span class="text-lg text-[#1c1c0d] dark:text-zinc-200">3 Years</span>
+</div>
+<div class="flex flex-col border-l border-[#e8e8ce] dark:border-zinc-800 pl-6 hidden lg:flex">
+<span class="text-[10px] uppercase tracking-widest opacity-70">College</span>
+<span class="text-lg text-[#1c1c0d] dark:text-zinc-200 font-bold">North Dakota St.</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3 w-full md:w-auto min-w-[200px]">
+<button class="bg-primary hover:brightness-105 active:scale-95 transition-all w-full text-black font-black py-4 px-8 rounded-xl shadow-[0_4px_0_rgb(180,180,0)] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined font-bold">notifications_active</span>
+                        FOLLOW PLAYER
+                    </button>
+<div class="flex justify-between items-center px-4 py-2 bg-[#f4f4e7] dark:bg-zinc-800 rounded-lg">
+<span class="text-xs font-bold uppercase tracking-widest opacity-70">Status</span>
+<span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded">ACTIVE</span>
+</div>
+</div>
+</div>
+<!-- Profile Tabs -->
+<div class="flex border-t border-[#e8e8ce] dark:border-zinc-800 px-6 gap-8 overflow-x-auto">
+<a class="flex flex-col items-center justify-center border-b-[4px] border-primary text-[#1c1c0d] dark:text-white pb-[14px] pt-5 shrink-0" href="#">
+<p class="text-sm font-bold tracking-widest uppercase">News</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[4px] border-transparent text-[#9c9c49] hover:text-[#1c1c0d] pb-[14px] pt-5 shrink-0 transition-colors" href="#">
+<p class="text-sm font-bold tracking-widest uppercase">Stats</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[4px] border-transparent text-[#9c9c49] hover:text-[#1c1c0d] pb-[14px] pt-5 shrink-0 transition-colors" href="#">
+<p class="text-sm font-bold tracking-widest uppercase">Game Log</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[4px] border-transparent text-[#9c9c49] hover:text-[#1c1c0d] pb-[14px] pt-5 shrink-0 transition-colors" href="#">
+<p class="text-sm font-bold tracking-widest uppercase">Projections</p>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[4px] border-transparent text-[#9c9c49] hover:text-[#1c1c0d] pb-[14px] pt-5 shrink-0 transition-colors" href="#">
+<p class="text-sm font-bold tracking-widest uppercase">Contract</p>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Main Content Area (Left 2/3) -->
+<div class="lg:col-span-2 space-y-8">
+<!-- Latest News & Analysis Section -->
+<div class="bg-white dark:bg-zinc-900 rounded-xl shadow-md border border-[#e8e8ce] dark:border-zinc-800 overflow-hidden">
+<div class="bg-[#f4f4e7] dark:bg-zinc-800/50 px-6 py-4 flex justify-between items-center">
+<h2 class="text-xl font-black player-name-italic uppercase tracking-tight">Latest News &amp; Analysis</h2>
+<a class="text-xs font-bold text-[#9c9c49] hover:text-black transition-colors uppercase tracking-widest" href="#">View All</a>
+</div>
+<div class="divide-y divide-[#f4f4e7] dark:divide-zinc-800">
+<!-- News Card 1 -->
+<div class="p-6 hover:bg-[#fcfcf8] dark:hover:bg-zinc-800/20 transition-colors">
+<div class="flex gap-4 items-start">
+<div class="bg-primary rounded-lg p-2 shrink-0">
+<span class="material-symbols-outlined text-black">article</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-extrabold text-lg leading-tight group-hover:text-primary transition-colors cursor-pointer">
+                                            Lance expected to start preseason opener
+                                        </h3>
+<span class="text-[10px] font-bold text-[#9c9c49] bg-[#f4f4e7] dark:bg-zinc-800 px-2 py-0.5 rounded">14H AGO</span>
+</div>
+<p class="text-[#1c1c0d] dark:text-zinc-300 text-sm leading-relaxed mb-4">
+                                        Kyle Shanahan confirmed that Trey Lance will see significant snaps in the upcoming preseason matchup against the Raiders. The coaching staff is looking for consistency in his pocket presence and decision-making under pressure.
+                                    </p>
+<div class="bg-[#f4f4e7]/50 dark:bg-zinc-800/30 p-4 rounded-lg border-l-4 border-primary">
+<p class="text-xs font-bold uppercase tracking-widest text-[#9c9c49] mb-1">Fantasy Impact</p>
+<p class="text-sm text-zinc-700 dark:text-zinc-400 italic">
+                                            "This is a crucial showcase for Lance. His mobility remains his greatest asset for fantasy managers, but he needs to secure the QB2 spot definitively."
+                                        </p>
+</div>
+</div>
+</div>
+</div>
+<!-- News Card 2 -->
+<div class="p-6 hover:bg-[#fcfcf8] dark:hover:bg-zinc-800/20 transition-colors">
+<div class="flex gap-4 items-start">
+<div class="bg-primary/20 rounded-lg p-2 shrink-0">
+<span class="material-symbols-outlined text-black">update</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-extrabold text-lg leading-tight">
+                                            Full participation in Tuesday's practice
+                                        </h3>
+<span class="text-[10px] font-bold text-[#9c9c49] bg-[#f4f4e7] dark:bg-zinc-800 px-2 py-0.5 rounded">1D AGO</span>
+</div>
+<p class="text-[#1c1c0d] dark:text-zinc-300 text-sm leading-relaxed">
+                                        Lance completed 12-of-15 passes during 11-on-11 drills, including a 45-yard touchdown strike to Brandon Aiyuk. Beat writers noted his release looks noticeably faster than last season.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Projected Stats Section -->
+<div class="bg-white dark:bg-zinc-900 rounded-xl shadow-md border border-[#e8e8ce] dark:border-zinc-800 overflow-hidden">
+<div class="bg-[#f4f4e7] dark:bg-zinc-800/50 px-6 py-4">
+<h2 class="text-xl font-black player-name-italic uppercase tracking-tight">Week 1 Projections</h2>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-[#fcfcf8] dark:bg-zinc-800 p-4 rounded-xl border border-[#f4f4e7] dark:border-zinc-700 text-center">
+<span class="text-[10px] font-bold text-[#9c9c49] uppercase tracking-widest">Passing Yds</span>
+<p class="text-3xl font-black text-black dark:text-white">245.5</p>
+<span class="text-[10px] text-green-600 font-bold">▲ 12.0</span>
+</div>
+<div class="bg-[#fcfcf8] dark:bg-zinc-800 p-4 rounded-xl border border-[#f4f4e7] dark:border-zinc-700 text-center">
+<span class="text-[10px] font-bold text-[#9c9c49] uppercase tracking-widest">Passing TDs</span>
+<p class="text-3xl font-black text-black dark:text-white">1.8</p>
+<span class="text-primary font-bold text-[10px]">Rank #12</span>
+</div>
+<div class="bg-[#fcfcf8] dark:bg-zinc-800 p-4 rounded-xl border border-[#f4f4e7] dark:border-zinc-700 text-center">
+<span class="text-[10px] font-bold text-[#9c9c49] uppercase tracking-widest">Rushing Yds</span>
+<p class="text-3xl font-black text-black dark:text-white">42.1</p>
+<span class="text-[10px] text-zinc-400 font-bold">Projected</span>
+</div>
+<div class="bg-primary p-4 rounded-xl text-center shadow-lg">
+<span class="text-[10px] font-bold text-black uppercase tracking-widest opacity-70">FPTS (PPR)</span>
+<p class="text-3xl font-black text-black">21.4</p>
+<span class="text-[10px] text-black font-black">ELITE</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Season Recap -->
+<div class="bg-white dark:bg-zinc-900 rounded-xl shadow-md border border-[#e8e8ce] dark:border-zinc-800 p-6">
+<h2 class="text-xl font-black player-name-italic uppercase tracking-tight mb-4">Season Recap</h2>
+<p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                        After an injury-shortened sophomore campaign, Trey Lance enters the current season with a massive chip on his shoulder. Despite off-season rumors of trade talks, the 49ers coaching staff has doubled down on his development. Lance spent the summer working with Jeff Christensen to refine his mechanics, focusing on a more compact throwing motion. 
+                    </p>
+<div class="mt-6 p-4 rounded-lg bg-zinc-50 dark:bg-zinc-800 border border-zinc-100 dark:border-zinc-700 flex items-center gap-4">
+<span class="material-symbols-outlined text-primary text-3xl">insights</span>
+<div>
+<p class="font-bold text-sm">Insider Perspective</p>
+<p class="text-xs text-zinc-500 italic">"Lance's ability to extend plays makes him a dual-threat nightmare if the accuracy holds up." - Mike Silver</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar (Right 1/3) -->
+<div class="space-y-8">
+<!-- Depth Chart Status -->
+<div class="bg-white dark:bg-zinc-900 rounded-xl shadow-md border border-[#e8e8ce] dark:border-zinc-800 overflow-hidden">
+<div class="bg-[#f4f4e7] dark:bg-zinc-800/50 px-6 py-4">
+<h2 class="text-sm font-black uppercase tracking-widest text-[#9c9c49]">Depth Chart Status</h2>
+</div>
+<div class="p-6">
+<div class="relative h-2 w-full bg-[#f4f4e7] dark:bg-zinc-800 rounded-full mb-6">
+<div class="absolute top-0 left-0 h-full w-1/3 bg-primary rounded-full"></div>
+<div class="absolute -top-1 left-[30%] h-4 w-4 bg-white border-4 border-primary rounded-full shadow-md"></div>
+</div>
+<ul class="space-y-3">
+<li class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-primary"></span>
+<span class="font-bold text-sm">1. Trey Lance</span>
+</div>
+<span class="text-[10px] font-bold text-zinc-400">STARTER</span>
+</li>
+<li class="flex justify-between items-center opacity-50">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-zinc-300"></span>
+<span class="text-sm">2. Sam Darnold</span>
+</div>
+<span class="text-[10px] font-bold text-zinc-400">BACKUP</span>
+</li>
+<li class="flex justify-between items-center opacity-50">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-zinc-300"></span>
+<span class="text-sm">3. Brandon Allen</span>
+</div>
+<span class="text-[10px] font-bold text-zinc-400">RESERVE</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Related Players Carousel (Vertical for Desktop) -->
+<div class="bg-white dark:bg-zinc-900 rounded-xl shadow-md border border-[#e8e8ce] dark:border-zinc-800 overflow-hidden">
+<div class="bg-[#f4f4e7] dark:bg-zinc-800/50 px-6 py-4 flex justify-between items-center">
+<h2 class="text-sm font-black uppercase tracking-widest text-[#9c9c49]">Similar Players</h2>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-sm cursor-pointer hover:text-primary">arrow_back_ios</span>
+<span class="material-symbols-outlined text-sm cursor-pointer hover:text-primary">arrow_forward_ios</span>
+</div>
+</div>
+<div class="p-4 space-y-4">
+<!-- Related Player 1 -->
+<div class="flex items-center gap-4 p-2 hover:bg-[#f4f4e7] dark:hover:bg-zinc-800 rounded-lg cursor-pointer transition-colors group">
+<div class="size-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 bg-cover overflow-hidden" data-alt="Small headshot of Jalen Hurts" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBx4ncq5Uok9AyFGSTiWNUtAUECtKuY4Epo6vDkHOgV4RVTGfYI_45pgXQX-6OXC2IsBAQWz54iTjV7ToThIGFCljPw2ytw3cWJxb6PIXQosq67_mhFbQ2WRvgbb4i-oN-iLoabkgLhmll2WalHn0GDeGfwxYfVNeUr2sDCQ9P6kgYxT7ui68l__qdRZm4qaLhXmqV6sh2fba9EW9_fcWef618nL35tA6sKPIBtYCoT-j9Nd1yCJhRvfihx2pZi6Yx5CMVzsyW2PWs");'></div>
+<div class="flex-1">
+<p class="font-bold text-sm group-hover:text-primary transition-colors">Jalen Hurts</p>
+<p class="text-[10px] text-[#9c9c49] font-medium uppercase tracking-tighter">PHI • QB • #1</p>
+</div>
+<span class="material-symbols-outlined text-[#9c9c49] text-sm">trending_up</span>
+</div>
+<!-- Related Player 2 -->
+<div class="flex items-center gap-4 p-2 hover:bg-[#f4f4e7] dark:hover:bg-zinc-800 rounded-lg cursor-pointer transition-colors group">
+<div class="size-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 bg-cover overflow-hidden" data-alt="Small headshot of Anthony Richardson" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAGN2zpLCaJMY4hqmIsU3VHwgrg6adgnZ7mUoVSvXIfM2fbS_QALz2Yp-VHPgSigtR3O3NjK06uEZdtJ4cvzMpUWCBVL9lkPEi1iqUd2chxm59SKu12uy-MjP0elY8Z49fhlEaPCw00g7yqlmTFlr4T6pN9tg2CcGRXwI8odYB28kFHbT4DNqoPKDgAWuVjPn-qnuh6DnON4JpWUbpGr6d29hpULH2hbvJ1HM9GOOlusjfLfRNmJ89-X0nevt2Z7NJl-v7kAMurBME");'></div>
+<div class="flex-1">
+<p class="font-bold text-sm group-hover:text-primary transition-colors">A. Richardson</p>
+<p class="text-[10px] text-[#9c9c49] font-medium uppercase tracking-tighter">IND • QB • #5</p>
+</div>
+<span class="material-symbols-outlined text-green-500 text-sm">bolt</span>
+</div>
+<!-- Related Player 3 -->
+<div class="flex items-center gap-4 p-2 hover:bg-[#f4f4e7] dark:hover:bg-zinc-800 rounded-lg cursor-pointer transition-colors group">
+<div class="size-12 rounded-lg bg-zinc-100 dark:bg-zinc-800 bg-cover overflow-hidden" data-alt="Small headshot of Justin Fields" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBIIRmNvLNwzOelDjsABs7nxvfQytzvWE0ghiw3e2NNvLyc6_MjwdhpFgO-djDk7budQy4P0g1FlIt3AZIlzeYSqsWIGH38xkCflwbhg-fDFU9Bnpx5xXPfDB8Xu1-JjnGm4uAtUJbMKaMYEriCK82lPMLspiW7O8B6k390DSkMi8nSM_-Pi6DcxVMIgcMmmrN-za-CmnmOyYuy3N76T8Sbwpii9P-AYBfdaag5PHZ-lVL3MkofBNJaOHfEdZI--XYRGohjEFKvzx8");'></div>
+<div class="flex-1">
+<p class="font-bold text-sm group-hover:text-primary transition-colors">Justin Fields</p>
+<p class="text-[10px] text-[#9c9c49] font-medium uppercase tracking-tighter">CHI • QB • #1</p>
+</div>
+<span class="material-symbols-outlined text-[#9c9c49] text-sm">trending_flat</span>
+</div>
+</div>
+</div>
+<!-- Newsletter Card -->
+<div class="bg-zinc-900 text-white rounded-xl p-6 shadow-xl relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-20 rotate-12">
+<span class="material-symbols-outlined text-[100px] text-primary">mail</span>
+</div>
+<h3 class="font-black italic uppercase text-xl mb-2">Expert Alerts</h3>
+<p class="text-zinc-400 text-xs mb-4">Get real-time injury alerts and lineup changes for Trey Lance delivered to your inbox.</p>
+<div class="flex gap-2">
+<input class="bg-zinc-800 border-none rounded-lg text-xs flex-1 focus:ring-1 focus:ring-primary" placeholder="Email" type="text"/>
+<button class="bg-primary text-black p-2 rounded-lg transition-transform hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-white dark:bg-zinc-950 border-t border-[#e8e8ce] dark:border-zinc-800 py-12 mt-12">
+<div class="max-w-[1200px] mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="col-span-2 md:col-span-1">
+<div class="flex items-center gap-2 mb-4">
+<div class="size-6 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-black text-xs">sports_football</span>
+</div>
+<h2 class="text-[#1c1c0d] dark:text-white text-lg font-black tracking-tight italic">ROTOWIRE</h2>
+</div>
+<p class="text-xs text-[#9c9c49] dark:text-zinc-500 leading-relaxed">
+                    The most comprehensive fantasy sports resource since 1997. Expert advice, real-time news, and winning strategies.
+                </p>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-4 uppercase tracking-widest text-primary">Tools</h4>
+<ul class="text-xs space-y-2 text-zinc-500">
+<li><a class="hover:text-primary transition-colors" href="#">Lineup Optimizer</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Depth Charts</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Injury Report</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-4 uppercase tracking-widest text-primary">Fantasy</h4>
+<ul class="text-xs space-y-2 text-zinc-500">
+<li><a class="hover:text-primary transition-colors" href="#">Draft Kit</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Cheat Sheets</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Projections</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-4 uppercase tracking-widest text-primary">Company</h4>
+<ul class="text-xs space-y-2 text-zinc-500">
+<li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Subscribe</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-[1200px] mx-auto px-6 pt-8 mt-8 border-t border-[#f4f4e7] dark:border-zinc-800 flex justify-between items-center">
+<p class="text-[10px] text-[#9c9c49]">© 2023 RotoWire. All Rights Reserved.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#9c9c49] hover:text-primary cursor-pointer">social_leaderboard</span>
+<span class="material-symbols-outlined text-[#9c9c49] hover:text-primary cursor-pointer">share</span>
+</div>
+</div>
+</footer>
+</body></html>
