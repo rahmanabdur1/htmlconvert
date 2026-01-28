@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NFL Injury Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;family=Noto+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2f20d",
+                        "background-light": "#fcfcf8", // Slightly warmer white/grey based on components
+                        "background-dark": "#1c1c0d", // Dark olive/black based on components text color inversion
+                        "text-main": "#1c1c0d",
+                        "text-secondary": "#9c9c49",
+                        "border-color": "#e8e8ce",
+                        "surface-light": "#f4f4e7",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for horizontal scrolling areas */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main font-display antialiased">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 w-full border-b border-border-color bg-background-light/95 backdrop-blur-sm dark:bg-background-dark/95">
+<div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+<div class="flex items-center gap-4">
+<div class="flex size-8 items-center justify-center rounded-lg bg-primary text-background-dark">
+<span class="material-symbols-outlined">sports_football</span>
+</div>
+<h2 class="text-xl font-black italic tracking-tight text-text-main">RotoWire NFL</h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-center gap-8">
+<a class="text-sm font-bold text-text-main hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-sm font-bold text-text-main hover:text-primary transition-colors" href="#">News</a>
+<a class="text-sm font-bold text-primary transition-colors" href="#">Injuries</a>
+<a class="text-sm font-bold text-text-main hover:text-primary transition-colors" href="#">Fantasy</a>
+<a class="text-sm font-bold text-text-main hover:text-primary transition-colors" href="#">Betting</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 rounded-full bg-surface-light px-3 py-1.5 text-sm font-medium text-text-main hover:bg-border-color transition-colors">
+<span class="material-symbols-outlined text-[20px]">search</span>
+<span class="hidden sm:inline">Search</span>
+</button>
+<div class="size-9 rounded-full bg-cover bg-center border border-border-color" data-alt="User profile avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAGVOynRWqy53HF47tAU7YdwYvoVpGihH7OAnq45pgJzTK4voXU8uGEh5-jn61rIY9L80YJSDEooalbIqE27E8Iwp3ocoAhYFtiOdJ_Mv2QHylzWuALV5PH-QPATbD-WWd2wPcAmEkB3aS6cudSBpq4LrqnCuXdFA33ik6eaw7Yn3gH0y8VMfucBnlLa2nJyesiP7A9o3oXJTs83SsVrBPo8QhuJzoIbFb0B9epxs5_JYJJ_8wEuY3qNRtbOWFBx9ZYFxQOhOq1GH8");'></div>
+</div>
+</div>
+</header>
+<div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+<!-- Page Header -->
+<div class="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+<div>
+<h1 class="text-4xl font-black italic tracking-tighter text-text-main">NFL Injury Report</h1>
+<p class="mt-2 text-lg text-text-secondary">Official daily injury reports for all 32 NFL teams.</p>
+</div>
+<!-- Search Bar Component Reuse/Adaptation -->
+<div class="w-full md:w-auto">
+<div class="relative flex w-full md:w-80 items-center rounded-lg bg-surface-light px-3 py-2 border border-transparent focus-within:border-primary focus-within:ring-1 focus-within:ring-primary">
+<span class="material-symbols-outlined text-text-secondary">search</span>
+<input class="ml-2 w-full border-none bg-transparent p-0 text-sm placeholder:text-text-secondary focus:ring-0 text-text-main" placeholder="Search for a player..." type="text"/>
+</div>
+</div>
+</div>
+<!-- Team Filter Bar (Chips) -->
+<div class="mb-8">
+<div class="flex gap-4 overflow-x-auto pb-4 hide-scrollbar">
+<!-- All Teams - Active State -->
+<button class="group flex shrink-0 flex-col items-center gap-2">
+<div class="flex size-14 items-center justify-center rounded-full bg-primary shadow-lg ring-2 ring-primary ring-offset-2 ring-offset-background-light transition-transform group-hover:-translate-y-1">
+<span class="material-symbols-outlined text-background-dark" style="font-size: 32px;">sports_football</span>
+</div>
+<span class="text-xs font-bold text-text-main">All Teams</span>
+</button>
+<!-- Teams Loop -->
+<button class="group flex shrink-0 flex-col items-center gap-2">
+<div class="flex size-14 items-center justify-center rounded-full bg-white shadow-md border border-border-color transition-transform group-hover:-translate-y-1 group-hover:border-primary">
+<img alt="Arizona Cardinals logo" class="opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1PHN6lRdtLLhT-s4g2hW4zwJpkw9b_USKHF_yiup9ao683ApxECl8j1_S-EBFVv75sUaTI5VqxFsBUaqET1VfV7-Np-Ve4kS7kuCmg5yavOUMZcyRtq4q4gQ9Dilyc5iWl39QghLj_3BsrYlninf6rI7WldlakgyRhAsy1zT45Y0Zrbv0tAaS3nJrZUMXI9lfuf5LsFRvMo2zgv3ewAN0VcLI_s2shr1hiG-npROUsjBJmSjoUeo26ZQxBLmdxSVJndQhf5zh1HU"/>
+</div>
+<span class="text-xs font-medium text-text-secondary group-hover:text-text-main">ARI</span>
+</button>
+<button class="group flex shrink-0 flex-col items-center gap-2">
+<div class="flex size-14 items-center justify-center rounded-full bg-white shadow-md border border-border-color transition-transform group-hover:-translate-y-1 group-hover:border-primary">
+<img alt="Atlanta Falcons logo" class="opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs90Q_-vRpc4kXW0QHAVCL7GredHIfkRjLX7EeASkdC-nY23y4UpKuD61qwdNiqhGqeGrxaUHurEvFFz3JMfEVPCWc3I1LR7KTJXMIrUcxc5PRBCoxtQzDQnixNcU4WM6wF6RLUolYDzkg159oTkr1t4Ms0wA40QgpAsE22pGXsZEDgh9_huyEyTk3OamMFGKqf8C9xxavw_iwTYR3AiqESMUMV8h7P4Cly9RkPGcHfymMVrEWp07r6eaLi34F2gLJET7O61CUuRw"/>
+</div>
+<span class="text-xs font-medium text-text-secondary group-hover:text-text-main">ATL</span>
+</button>
+<button class="group flex shrink-0 flex-col items-center gap-2">
+<div class="flex size-14 items-center justify-center rounded-full bg-white shadow-md border border-border-color transition-transform group-hover:-translate-y-1 group-hover:border-primary">
+<img alt="Baltimore Ravens logo" class="opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPrn6cSeBTLP6RCvKx4WiwsQoqPs3xrZQQqSR4moH2NlpPliUd3vbqNjcM3Dff0kroSEofbMYBzGJN8iLAU4pePh4-DU1xDoMCran8es8Uj8H4Rsj5ChBoOGXmV09_-PtszS5op-34RdHO5zeCmAObiRw6cp7gPNZZjdvlc2TVPkfbBrNosx7-hzE7Hm8Y2bHeOAj_nnm-Cbw65E12WIYKqxhL5xiPAZfdCFKg3hbiLBysxjQfiHIYYNnsPVJgdJdxLre1peiA4Pc"/>
+</div>
+<span class="text-xs font-medium text-text-secondary group-hover:text-text-main">BAL</span>
+</button>
+<button class="group flex shrink-0 flex-col items-center gap-2">
+<div class="flex size-14 items-center justify-center rounded-full bg-white shadow-md border border-border-color transition-transform group-hover:-translate-y-1 group-hover:border-primary">
+<img alt="Buffalo Bills logo" class="opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOyz8RVhUPYEwZWY07f2F3PEshJdiPzzS1Sh9ks3pBOL-FlBBTCriwepQv4mqYTa5potUNpvAx1hqy3ue50BOh7tUmCngJDSwO7VFLtKMGrCgELHYeyzUnWUgeIwT53A1b0bYxpsng2akJC7MuPJ1T7CAeC8yxeK5XNRlGd9WFoEOGHKl09McoIv2bDRFzBwdJZxPByMZe6-_5xvhCQ15bqx8BuUvllnD4yE6eQuBcAh002PlgHrYl63sh1h4LXxHuhAhhaiFJpuk"/>
+</div>
+<span class="text-xs font-medium text-text-secondary group-hover:text-text-main">BUF</span>
+</button>
+<button class="group flex shrink-0 flex-col items-center gap-2">
+<div class="flex size-14 items-center justify-center rounded-full bg-white shadow-md border border-border-color transition-transform group-hover:-translate-y-1 group-hover:border-primary">
+<img alt="Carolina Panthers logo" class="opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzqzQOxcT6Dosu7Q5q2OPqgIkGQ2UtJNZOfwGFjjq9003_O5aPQTCHOooBMAI2bUuywraIt2CfKeYPu2rr6w3P1mGdm7JFKb8dBjgxRfMc-tS0fkEuuE_TBg3jx7Z-eA8XAm924nRZoPmrRkOwMPrJOPsh3ygavwk2NFUM_OO20T0W-UzqUFcUkAQ7g5TZ-qEM0x-DHcfJc4kvhk8YYiLBY3WeaMIdbS6jYboEk0OK_5ooF4M7h4bMOjsL_SlHEBU3rxhJ9az6bE8"/>
+</div>
+<span class="text-xs font-medium text-text-secondary group-hover:text-text-main">CAR</span>
+</button>
+<button class="group flex shrink-0 flex-col items-center gap-2">
+<div class="flex size-14 items-center justify-center rounded-full bg-white shadow-md border border-border-color transition-transform group-hover:-translate-y-1 group-hover:border-primary">
+<img alt="Chicago Bears logo" class="opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUxc-FoYGfyxTcUWyfcdh3SG9eQMuaesDT4kAaztVqT6845BK32yeUwALi1y-icCfAkleGOFYiTNIRh_IqkLbubsz_JXUNEt1XJpCFlIl_G1rexa01hfd8pfuy7T7R8M-A0l8qKbZCgA2En2D6y82vx36FxYOqTYMswWjmulDN8q3pqnOY0qA4FpKme-XHkYlDw89kcSOd87BO7JSudIgNPiKwsb9d-nnc1FmcbuTyP77C3nWzhUEOh4Nb293VVPmrxuIdEnVi7l4"/>
+</div>
+<span class="text-xs font-medium text-text-secondary group-hover:text-text-main">CHI</span>
+</button>
+<button class="group flex shrink-0 flex-col items-center gap-2">
+<div class="flex size-14 items-center justify-center rounded-full bg-white shadow-md border border-border-color transition-transform group-hover:-translate-y-1 group-hover:border-primary">
+<img alt="Cincinnati Bengals logo" class="opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzz3VrJy4oVTQWmnv1AJLxBT3jhXOE9spWDD4hdu4F2d4bb4Vlvj65fnD4ae37oZGRc6JqfyeVzpXlg9zG3IvHQpCHOBVsELVl1RQAqvqWXxhr4RSJfruGRoh-CbOenBtRZY2mK6F3Gr-pPu0fC2HHHQZhymQOk0PRhKeYyONgcKeEpPdPaby18Yz2LafUVSI2DXgxXrDBSwTnqNopDY7x5XeFAILYWXm0OCW21VNhJ8XjRfMg_NFerLEhBeFSPMVl8dYmbFNq7iI"/>
+</div>
+<span class="text-xs font-medium text-text-secondary group-hover:text-text-main">CIN</span>
+</button>
+<button class="group flex shrink-0 flex-col items-center gap-2">
+<div class="flex size-14 items-center justify-center rounded-full bg-white shadow-md border border-border-color transition-transform group-hover:-translate-y-1 group-hover:border-primary">
+<img alt="Cleveland Browns logo" class="opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2QD4d89T49RO8JOGmxRCJy8ZuupbXU4l-mAz8zghJxSvHxdENdV_4hv6lN7tuccydJa4rg3Gz7rorfB3m7U6wVklaCvguc8cdlx4Yzb708wb_gru57mtt54SYzXCqphHoxS4zCoBshVF08s6GOStosQE77_ZZLb0xzTmRg47OTMxegrbfoDqGQiM0GHyMB2m_BvPR-L5HuvgEYcQ0zRCiNoImbYSbH32QwA31eN-Djq4EiCDPy1huzz1zeBkbFiped4NzqXBHx34"/>
+</div>
+<span class="text-xs font-medium text-text-secondary group-hover:text-text-main">CLE</span>
+</button>
+<button class="group flex shrink-0 flex-col items-center gap-2">
+<div class="flex size-14 items-center justify-center rounded-full bg-white shadow-md border border-border-color transition-transform group-hover:-translate-y-1 group-hover:border-primary">
+<img alt="Dallas Cowboys logo" class="opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCau9SKlJQ7Vl3pQxWTzcGbEaUCDPB5DcTZIhJIE8qPBhC95R0Qz3TrH33C70y_YX97mJJLH9ad125o_qcCmUXi8UbJzp2QO2FV7HKZJlBanxUegA7Q53eZreu8_vGAZwK-u5XFo5f9XNu99Llre5Oxiv0tv69pNnWttsDox_kraJmpB6guFQ_VbgPHVU9L9RSdXvKUUvsQsp7vdZrkQ6KzkDELn6WmZ1usRwW2sTgcBckV5Scq-HdXINdf_Zvx_9y8_6ymPpVb664"/>
+</div>
+<span class="text-xs font-medium text-text-secondary group-hover:text-text-main">DAL</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-8 lg:grid-cols-12">
+<!-- Main Content Area: Table -->
+<div class="lg:col-span-8 xl:col-span-9">
+<div class="mb-4 flex items-center justify-between">
+<h3 class="text-xl font-bold italic text-text-main">Player Status Updates</h3>
+<div class="flex items-center gap-2">
+<span class="text-sm font-medium text-text-secondary">Last updated: 10 mins ago</span>
+<button class="rounded-lg p-1 text-text-secondary hover:bg-surface-light hover:text-text-main">
+<span class="material-symbols-outlined">refresh</span>
+</button>
+</div>
+</div>
+<!-- Table Component -->
+<div class="overflow-hidden rounded-xl border border-border-color bg-white shadow-sm @container">
+<div class="overflow-x-auto">
+<table class="w-full min-w-[800px]">
+<thead class="bg-surface-light border-b border-border-color">
+<tr>
+<th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-text-secondary w-16"></th>
+<th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-text-secondary">Player</th>
+<th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-text-secondary">Pos</th>
+<th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-text-secondary">Team</th>
+<th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-text-secondary">Injury</th>
+<th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-text-secondary">Status</th>
+<th class="px-6 py-4 text-left text-xs font-bold uppercase tracking-wider text-text-secondary">Practice</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-color bg-white">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-light/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="size-10 rounded-full bg-cover bg-center bg-gray-200" data-alt="Patrick Mahomes avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuApgPZX82pNj8z8gZrLV4-uLi9Ungu_74h_ETTXn2oskpA2F_R70z1LtBNAj7oPWwGgDNtoRRqIEhiCePJwEdrFXrzUnHWwqH3fnAEkylY4mLuh25sWaiZNWRIUn-eAafGv0UrJoSUEMjzBlUsWC43BASDvg2DdK_PdHaeARnUIiV_DRpmrpBrjtCP02mBhlw5Z6k9oN5lyFfDhMpy5Twj_2KLJvI4szy9lh6kLC9owlnEq52se8qJfb2YcJbhtOCtRJzlsEr6Vgnc");'></div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-text-main">Patrick Mahomes</span>
+<span class="text-xs text-text-secondary">Projected: 24.5 Pts</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-secondary">QB</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-md bg-red-100 px-2 py-1 text-xs font-bold text-red-800">KC</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-main">Ankle</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-full bg-primary/20 px-3 py-1 text-xs font-bold text-yellow-700 border border-primary/40">
+                                            Questionable
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">Full Practice</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-light/50 transition-colors bg-surface-light/20">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="size-10 rounded-full bg-cover bg-center bg-gray-200" data-alt="Christian McCaffrey avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCED6GsQolYBFKdNZfHo7Ljiil_N1lkkTYPek8pb-5sr2joAgRNgraTRs_pSjBxwmHcOunou1YEYdieTZDZFRAXR0o_R5hV5Je75L1dEvVObMvU2yTPA2D067-_91WLmT2ZfGOs2N7SPQ__9-ltjbwutM1PNWukV6c-1UVSE7UTDFGVeSOi0lFrbk3OVunK1IMI3ljVROqW6pBDEh28m56NAkdqetBHIIJtqdSYxwMp5DamcUxGL7Y9jZOlFPQ1Bdc9T2Rskhuvm3s");'></div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-text-main">Christian McCaffrey</span>
+<span class="text-xs text-text-secondary">Projected: 0 Pts</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-secondary">RB</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-md bg-red-100 px-2 py-1 text-xs font-bold text-red-900">SF</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-main">Calf</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-xs font-bold text-red-700 border border-red-200">
+                                            Out
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">DNP</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-light/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="size-10 rounded-full bg-cover bg-center bg-gray-200" data-alt="A.J. Brown avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDkoL1UK95pHHxN2K4G_IpNd2h5a7q9oEzUvuu3IbD0waVzm4PZMkV2U9kQPfv_CuhoTqV7E7VZgOiibpZszhPuTeOl28ps8yJQsS0CNv4sAZMEaWg3A9YiB3hWjDlAeqhanOj5VaTA6B5U4gdSq--lr5cR5nir-bbZwmJ9Iducg7s8fyPuL_8BjtQqz2NGt3-XBgjT5EOqS_-wsOGeDo6btWygIs0NSoXiI8l96CjEuSkcvqNjBVZBEyHK0UBqJeqyW961HZTXbMw");'></div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-text-main">A.J. Brown</span>
+<span class="text-xs text-text-secondary">Projected: 18.2 Pts</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-secondary">WR</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-md bg-emerald-100 px-2 py-1 text-xs font-bold text-emerald-800">PHI</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-main">Hamstring</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-full bg-primary/20 px-3 py-1 text-xs font-bold text-yellow-700 border border-primary/40">
+                                            Questionable
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">Limited</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-light/50 transition-colors bg-surface-light/20">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="size-10 rounded-full bg-cover bg-center bg-gray-200" data-alt="Aaron Jones avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAFVc67YL7n6Aw0UVYVNeMigsud9yfxqKss2y6pvBhES0AVhM8ZTQguer7IAc2hgL50_YjWAevHWCHSwUA_d0jjMlWm4Y_EOonMuvtTddM1BRFdlgYoZbDTJHUVYFfZrCShkBHFqJCwZ3uNMkThSJYQp8KNm1QUrgNjTodijz03e4spEHn7UF-jpYHeVGTibLtyowjj-6ekoLEtID1ml8JUJbXRHHiwWpvoHkLbjmGM2gx-Ee4Jw02XKM1ZQY0ooIdPzpDZeuzEFhw");'></div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-text-main">Aaron Jones</span>
+<span class="text-xs text-text-secondary">Projected: 15.6 Pts</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-secondary">RB</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-md bg-purple-100 px-2 py-1 text-xs font-bold text-purple-800">MIN</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-main">Hip</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-700 border border-emerald-200">
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">Full Practice</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-light/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="size-10 rounded-full bg-cover bg-center bg-gray-200" data-alt="Justin Jefferson avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCjb7E60N8N3e_a8VHRn-6qxATTYYrQsXjkdMtFrZ6I1o3bMGq0Ioq6A1dNZqOqnqgsaV_6vWaLG71eLJUnS8-Zza6VbNzcIcVmvlR_RA2UWWoU6Osk28nzvjXhym0r98kCG8HcsvXVGUfq-zBmWUGe-AS5-b3fSpfRQEaqFI3nDuFDJsAsdkFm6Xz95YOzOz5xiEUYpqQKEFeJe-5I5XAw5g3qfVblZbCqYYux8p-iPlp-ajB8by7UxV48ISFaj1-lSHHIHLVF7ck");'></div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-text-main">Justin Jefferson</span>
+<span class="text-xs text-text-secondary">Projected: 20.1 Pts</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-secondary">WR</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-md bg-purple-100 px-2 py-1 text-xs font-bold text-purple-800">MIN</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-text-main">Quad</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-full bg-orange-100 px-3 py-1 text-xs font-bold text-orange-700 border border-orange-200">
+                                            Doubtful
+                                        </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">DNP</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="flex items-center justify-between border-t border-border-color bg-surface-light px-6 py-3">
+<span class="text-sm text-text-secondary">Showing 1 to 5 of 84 players</span>
+<div class="flex gap-2">
+<button class="rounded-lg border border-border-color bg-white px-3 py-1 text-sm font-medium text-text-secondary hover:bg-background-light disabled:opacity-50">Prev</button>
+<button class="rounded-lg border border-border-color bg-white px-3 py-1 text-sm font-medium text-text-main hover:bg-background-light">Next</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar -->
+<div class="lg:col-span-4 xl:col-span-3 flex flex-col gap-6">
+<!-- Ad Spot -->
+<div class="overflow-hidden rounded-xl bg-gradient-to-br from-background-dark to-gray-800 p-6 text-white shadow-lg">
+<div class="mb-2 text-xs font-bold uppercase tracking-wider text-primary">Featured</div>
+<h3 class="mb-2 text-xl font-black italic">Fantasy League Pro</h3>
+<p class="mb-4 text-sm text-gray-300">Get real-time injury alerts sent straight to your phone.</p>
+<button class="w-full rounded-lg bg-primary py-2 text-sm font-bold text-background-dark hover:bg-white transition-colors">Sign Up Now</button>
+</div>
+<!-- Recent News Feed -->
+<div>
+<h3 class="mb-4 text-xl font-bold italic text-text-main">Recent News</h3>
+<div class="flex flex-col gap-4">
+<!-- News Card 1 -->
+<div class="group relative rounded-lg border border-border-color bg-white p-4 shadow-sm transition-all hover:shadow-md hover:border-primary/50">
+<div class="mb-2 flex items-center justify-between">
+<span class="rounded bg-surface-light px-2 py-0.5 text-[10px] font-bold uppercase text-text-secondary">Just Now</span>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary">arrow_forward</span>
+</div>
+<h4 class="mb-1 text-sm font-bold text-text-main group-hover:text-primary transition-colors">Jones limited in Thursday practice</h4>
+<p class="text-xs leading-relaxed text-text-secondary">Aaron Jones (hip) was officially listed as limited for Thursday's practice session. His status for Sunday remains...</p>
+</div>
+<!-- News Card 2 -->
+<div class="group relative rounded-lg border border-border-color bg-white p-4 shadow-sm transition-all hover:shadow-md hover:border-primary/50">
+<div class="mb-2 flex items-center justify-between">
+<span class="rounded bg-surface-light px-2 py-0.5 text-[10px] font-bold uppercase text-text-secondary">24 min ago</span>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary">arrow_forward</span>
+</div>
+<h4 class="mb-1 text-sm font-bold text-text-main group-hover:text-primary transition-colors">Jefferson downgraded to Doubtful</h4>
+<p class="text-xs leading-relaxed text-text-secondary">Head coach Kevin O'Connell indicated that Jefferson's quad injury hasn't responded to treatment as hoped.</p>
+</div>
+<!-- News Card 3 -->
+<div class="group relative rounded-lg border border-border-color bg-white p-4 shadow-sm transition-all hover:shadow-md hover:border-primary/50">
+<div class="mb-2 flex items-center justify-between">
+<span class="rounded bg-surface-light px-2 py-0.5 text-[10px] font-bold uppercase text-text-secondary">1 hour ago</span>
+<span class="material-symbols-outlined text-text-secondary group-hover:text-primary">arrow_forward</span>
+</div>
+<h4 class="mb-1 text-sm font-bold text-text-main group-hover:text-primary transition-colors">Mahomes expected to start</h4>
+<p class="text-xs leading-relaxed text-text-secondary">Despite the ankle tweak, sources say Mahomes took all first-team reps today and looked sharp.</p>
+</div>
+<button class="flex w-full items-center justify-center gap-2 rounded-lg border border-border-color bg-surface-light py-2 text-sm font-medium text-text-main hover:bg-white hover:text-primary transition-colors">
+                            View All News
+                            <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body></html>

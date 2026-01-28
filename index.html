@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SportsWire - Fantasy &amp; Betting News</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2f20d",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#222210",
+                        "text-main": "#1c1c0d",
+                        "text-muted": "#5c5c49",
+                        "border-color": "#e4e4d7",
+                    },
+                    fontFamily: {
+                        "display": ["Saira", "sans-serif"],
+                        "body": ["Work Sans", "sans-serif"]
+                    },
+                    boxShadow: {
+                        "standing": "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)",
+                        "standing-hover": "0 20px 35px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.1)"
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Work Sans", "Noto Sans", sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: "Saira", sans-serif;
+            font-style: italic;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-white flex flex-col min-h-screen overflow-x-hidden">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-border-color bg-white/95 backdrop-blur dark:bg-background-dark/95 dark:border-[#333320] px-4 md:px-10 py-3 shadow-sm">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-text-main dark:text-white">
+<div class="size-8 rounded bg-primary text-black flex items-center justify-center shadow-sm rotate-3">
+<span class="material-symbols-outlined text-[24px]">sports_score</span>
+</div>
+<h2 class="text-2xl font-black italic tracking-tighter uppercase font-heading">SportsWire</h2>
+</div>
+<div class="hidden lg:flex items-center gap-6">
+<a class="text-base font-bold italic uppercase hover:text-primary transition-colors font-heading" href="#">NFL</a>
+<a class="text-base font-bold italic uppercase hover:text-primary transition-colors font-heading" href="#">NBA</a>
+<a class="text-base font-bold italic uppercase hover:text-primary transition-colors font-heading" href="#">MLB</a>
+<a class="text-base font-bold italic uppercase hover:text-primary transition-colors font-heading" href="#">NHL</a>
+<a class="text-base font-bold italic uppercase hover:text-primary transition-colors font-heading" href="#">DFS</a>
+<a class="text-base font-bold italic uppercase hover:text-primary transition-colors font-heading" href="#">Betting</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-4 md:gap-8">
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64 relative group">
+<div class="absolute inset-0 bg-gray-100 dark:bg-[#333320] rounded-lg -skew-x-6 group-hover:bg-white border border-transparent group-hover:border-border-color transition-all"></div>
+<div class="relative flex w-full flex-1 items-stretch rounded-lg h-full overflow-hidden z-10">
+<div class="text-text-muted flex items-center justify-center pl-3">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none bg-transparent border-none focus:ring-0 text-base font-normal leading-normal px-2 placeholder:text-text-muted dark:text-white italic" placeholder="Search players..."/>
+</div>
+</label>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary text-[#1c1c0d] text-base font-black italic uppercase leading-normal hover:bg-[#d9d90b] shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+<span class="truncate">Go Premium</span>
+</button>
+</div>
+</header>
+<div class="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-6 py-6 lg:py-8">
+<section class="mb-10">
+<div class="flex items-center gap-3 mb-4 px-1">
+<span class="material-symbols-outlined text-primary text-2xl animate-pulse">local_fire_department</span>
+<h3 class="text-xl font-black italic uppercase">Trending Players</h3>
+</div>
+<div class="flex gap-4 overflow-x-auto pb-6 scrollbar-hide snap-x">
+<div class="min-w-[220px] snap-start bg-white dark:bg-[#2a2a15] rounded-xl p-4 shadow-standing hover:shadow-standing-hover transition-all duration-300 border border-border-color dark:border-[#333320] flex flex-col items-center text-center cursor-pointer group">
+<div class="relative mb-3">
+<div class="size-16 rounded-full p-1 bg-gradient-to-tr from-primary to-transparent">
+<div class="w-full h-full rounded-full bg-cover bg-center border-2 border-white dark:border-[#2a2a15]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD7HmVrv_qIP7etyKK3HVtxGrYSUJ1El2r0JF58ggDE5ht9d4T48o0SiYubppKGqoieZb77xavCuXYx368eKiHLVUjWSuSAXQyUFHybnDNc37ZXuD7rGOzuIG8ys7XW3ohUCQ-TNRTDQI4fphcDhiaEVkY_uAlNXQm-6TQhGz5w_xL0q_S1ZOCpf3xAEisG3d-zzktJ1ZuFWFvfXZHAhe33dIdvd1ENhrHDbe4DvPN42whFsXNtatrH5PNICcRM1m5gLp5lf_82WiM');"></div>
+</div>
+<span class="absolute -bottom-1 -right-1 bg-green-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm">UP</span>
+</div>
+<h4 class="font-bold text-lg leading-tight group-hover:text-primary transition-colors">Justin Jefferson</h4>
+<p class="text-xs text-text-muted font-bold mb-2">WR • Vikings</p>
+<div class="mt-auto w-full bg-background-light dark:bg-[#333320] rounded p-2">
+<p class="text-xs font-medium text-green-600 dark:text-green-400">+12% Rostered</p>
+</div>
+</div>
+<div class="min-w-[220px] snap-start bg-white dark:bg-[#2a2a15] rounded-xl p-4 shadow-standing hover:shadow-standing-hover transition-all duration-300 border border-border-color dark:border-[#333320] flex flex-col items-center text-center cursor-pointer group">
+<div class="relative mb-3">
+<div class="size-16 rounded-full p-1 bg-gray-200">
+<div class="w-full h-full rounded-full bg-cover bg-center border-2 border-white dark:border-[#2a2a15]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB8Cj5MbtKAUXkJXvxGGasgdbMdcOsxmXlTSS_Jp2wbdhzC-v9wautpn7P0RqbAvpGlIT1hjJdrjZ49wUtZWEXxIFNnevuWiyXf_WTuA86Nx-qlxyTxJ8ZdvIrVN10JRvlNWcHoFRpeHr_KBHwjyYWDB5AA15zFmhOUPGpTYc94XYDeoO9r22VKjgnIksoNyzzmJYlfxMAN-PU-aKf8zQOEDg1USEwxPGjCbGsKG9KDEfLdjxtF3eCIqCtQ7EcdgExdvYT38reSOi8');"></div>
+</div>
+<span class="absolute -bottom-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm">Ques</span>
+</div>
+<h4 class="font-bold text-lg leading-tight group-hover:text-primary transition-colors">LeBron James</h4>
+<p class="text-xs text-text-muted font-bold mb-2">SF • Lakers</p>
+<div class="mt-auto w-full bg-background-light dark:bg-[#333320] rounded p-2">
+<p class="text-xs font-medium text-red-600 dark:text-red-400">Ankle Injury</p>
+</div>
+</div>
+<div class="min-w-[220px] snap-start bg-white dark:bg-[#2a2a15] rounded-xl p-4 shadow-standing hover:shadow-standing-hover transition-all duration-300 border border-border-color dark:border-[#333320] flex flex-col items-center text-center cursor-pointer group">
+<div class="relative mb-3">
+<div class="size-16 rounded-full p-1 bg-gradient-to-tr from-primary to-transparent">
+<div class="w-full h-full rounded-full bg-cover bg-center border-2 border-white dark:border-[#2a2a15]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_b47fydgTg_i6C5mPjXKZLTEl1gTG2Y2RsXwC915fFnwmcc7EQxq4lxfZSnTHz4cnCS0476AvwDSjAxL2RTQbBU4ab1cNMQAp07n0YgG614_leMfxysHcaMTWGsvktm6HQsFGplHUg_SaNVvGMwvB9iUjbATXNCYF-8_h0majsJn_UivlXGDf0xmBJkevsvTP-HHSTczHtjYJ9Q1T3WRdZZLsRr0V7kTALHRgHprRB88_Q5f-kGTE4KOrkaTzeIZVU6gRPvvqolo');"></div>
+</div>
+<span class="absolute -bottom-1 -right-1 bg-primary text-black text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm">HOT</span>
+</div>
+<h4 class="font-bold text-lg leading-tight group-hover:text-primary transition-colors">Steph Curry</h4>
+<p class="text-xs text-text-muted font-bold mb-2">PG • Warriors</p>
+<div class="mt-auto w-full bg-background-light dark:bg-[#333320] rounded p-2">
+<p class="text-xs font-medium text-text-main dark:text-white">35.4 PPG (Last 5)</p>
+</div>
+</div>
+<div class="min-w-[220px] snap-start bg-white dark:bg-[#2a2a15] rounded-xl p-4 shadow-standing hover:shadow-standing-hover transition-all duration-300 border border-border-color dark:border-[#333320] flex flex-col items-center text-center cursor-pointer group">
+<div class="relative mb-3">
+<div class="size-16 rounded-full p-1 bg-gray-200">
+<div class="w-full h-full rounded-full bg-cover bg-center border-2 border-white dark:border-[#2a2a15]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBnn3gWTM56Jas3corwyrnsD7FP42D_Ab95shtVlAtUjhI-bOBFo2IA__h7buy7BxPiSPp65fB0TsDLo-ekLlGYptlg0jCQKj0OgESKxhKoY4xisgBkqc7jq6SB5nDWVxv4LtCSbodbWi45kL1q4koYiwDcoB_CehpAb9mWoi6IhWGPjbqedd6lzh_MaEIZviplU_Sa6khLhXLjLv7iMjetI3k_FVc-lyRp4zePHL4OJy5XxIOi7j7ril1jcpdU3mkFauCM_IDT2aY');"></div>
+</div>
+</div>
+<h4 class="font-bold text-lg leading-tight group-hover:text-primary transition-colors">T. Kelce</h4>
+<p class="text-xs text-text-muted font-bold mb-2">TE • Chiefs</p>
+<div class="mt-auto w-full bg-background-light dark:bg-[#333320] rounded p-2">
+<p class="text-xs font-medium text-text-muted">Target Share Drop</p>
+</div>
+</div>
+<div class="min-w-[220px] snap-start bg-white dark:bg-[#2a2a15] rounded-xl p-4 shadow-standing hover:shadow-standing-hover transition-all duration-300 border border-border-color dark:border-[#333320] flex flex-col items-center text-center cursor-pointer group">
+<div class="relative mb-3">
+<div class="size-16 rounded-full p-1 bg-gradient-to-tr from-primary to-transparent">
+<div class="w-full h-full rounded-full bg-cover bg-center border-2 border-white dark:border-[#2a2a15]" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCX6vJVOTpa-iXoeomS-tpQ_A2RjHZ-h0EAgjKL1qljTvwpdJ3fROQgLmQSKiYMtyzGkv-MEzENOOvytvA2d-9n3VvAl9S6dAx3_Nfh6TPnquTp-bT7JnOWfeAnpHWmsRnxhte8locgwqvnkEsyCHc7P-ZWlpj8OxPgIfZJ4QaS4lYSCWKisQI7viQroLYLRr0b8904DAhdATQuHCYky6aSgdG9Xo-4YhiqstlNfd-D3sXdt1ksMgNLb5q3pJJoA4dpTBeIF7ySlv8');"></div>
+</div>
+</div>
+<h4 class="font-bold text-lg leading-tight group-hover:text-primary transition-colors">Shohei Ohtani</h4>
+<p class="text-xs text-text-muted font-bold mb-2">DH • Dodgers</p>
+<div class="mt-auto w-full bg-background-light dark:bg-[#333320] rounded p-2">
+<p class="text-xs font-medium text-text-main dark:text-white">Record Breaker</p>
+</div>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<aside class="lg:col-span-3 space-y-8">
+<div class="bg-white dark:bg-[#2a2a15] rounded-xl border border-border-color dark:border-[#333320] overflow-hidden shadow-standing transition-transform hover:-translate-y-1 duration-300">
+<div class="flex items-center justify-between px-4 py-3 border-b border-border-color dark:border-[#333320] bg-gray-50 dark:bg-[#333320]">
+<h3 class="text-base font-bold flex items-center gap-2 italic uppercase">
+<span class="material-symbols-outlined text-primary text-xl">sensors</span>
+                            Live Action
+                        </h3>
+<a class="text-xs font-bold text-text-muted hover:text-primary uppercase" href="#">View All</a>
+</div>
+<div class="divide-y divide-border-color dark:divide-[#333320]">
+<div class="p-4 hover:bg-background-light dark:hover:bg-[#333320] transition-colors cursor-pointer group">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-black text-red-600 dark:text-red-400 flex items-center gap-1 uppercase italic">
+<span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span> Q4 02:30
+                                </span>
+<span class="text-xs font-bold text-text-muted">TNT</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden border border-gray-200">
+<div class="w-full h-full bg-cover bg-center" data-alt="Lakers Logo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB8Cj5MbtKAUXkJXvxGGasgdbMdcOsxmXlTSS_Jp2wbdhzC-v9wautpn7P0RqbAvpGlIT1hjJdrjZ49wUtZWEXxIFNnevuWiyXf_WTuA86Nx-qlxyTxJ8ZdvIrVN10JRvlNWcHoFRpeHr_KBHwjyYWDB5AA15zFmhOUPGpTYc94XYDeoO9r22VKjgnIksoNyzzmJYlfxMAN-PU-aKf8zQOEDg1USEwxPGjCbGsKG9KDEfLdjxtF3eCIqCtQ7EcdgExdvYT38reSOi8');"></div>
+</div>
+<span class="font-black italic text-lg">LAL</span>
+</div>
+<span class="font-black italic text-xl">112</span>
+</div>
+<div class="flex justify-between items-center mt-3">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden border border-gray-200">
+<div class="w-full h-full bg-cover bg-center" data-alt="Warriors Logo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC_b47fydgTg_i6C5mPjXKZLTEl1gTG2Y2RsXwC915fFnwmcc7EQxq4lxfZSnTHz4cnCS0476AvwDSjAxL2RTQbBU4ab1cNMQAp07n0YgG614_leMfxysHcaMTWGsvktm6HQsFGplHUg_SaNVvGMwvB9iUjbATXNCYF-8_h0majsJn_UivlXGDf0xmBJkevsvTP-HHSTczHtjYJ9Q1T3WRdZZLsRr0V7kTALHRgHprRB88_Q5f-kGTE4KOrkaTzeIZVU6gRPvvqolo');"></div>
+</div>
+<span class="font-black italic text-lg">GSW</span>
+</div>
+<span class="font-black italic text-xl text-text-muted group-hover:text-text-main">110</span>
+</div>
+</div>
+<div class="p-4 hover:bg-background-light dark:hover:bg-[#333320] transition-colors cursor-pointer group">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-black uppercase italic text-text-muted">Halftime</span>
+<span class="text-xs font-bold text-text-muted">ESPN</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden border border-gray-200">
+<div class="w-full h-full bg-cover bg-center" data-alt="Heat Logo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDB0roD1DJ6twmYoMBauq7jQ-zFEDrfUhWoV8hVjFWAFY8fUe4p0d3S1wpq1-nUsHhJNCXsS4Q9vzCww5NJxxu-NI9OVzwIUBlpBEtP_e0ckpCCEoQtA3OwksF2Za6uDlt6vvUlCasUXsRlB4kM7szXprcyZ7rfhqM5qwrkZKd-VjQmXUmr1zw0H4OZWesGH2pDoEg5v1MEQ4Jrhm4zrL8tZRzfLi5inF3O46ispcsaWRFfMOEdJKSFyNyG0vN65MVMDiC-XkQuTjI');"></div>
+</div>
+<span class="font-black italic text-lg">MIA</span>
+</div>
+<span class="font-black italic text-xl">45</span>
+</div>
+<div class="flex justify-between items-center mt-3">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-gray-100 rounded-full flex items-center justify-center overflow-hidden border border-gray-200">
+<div class="w-full h-full bg-cover bg-center" data-alt="Celtics Logo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDO8_0YqjzRQFKBB2MR3XtUr-7T-hJf4zBw5y21vKDp0fwMBYSXeYugEi1cK-dvvYtWazoZ3zLyK-KP5M0GGeYm077wtjObJtoBWvr6v99zQZmvYMyw1SLopRXziqmwCtaJSn68lqaxqQKBpe0VVR9jL7DqorWVX2AGgPneZiWchwRSyvepi8vpz8t02x4yN2NkS7qHiMw79kJvHdlbm3sMlQhRjQD_UPTOi_k-AONZsXCTVtzk0E9eJwZhx61dVo4bDqPzcHTmyAM');"></div>
+</div>
+<span class="font-black italic text-lg">BOS</span>
+</div>
+<span class="font-black italic text-xl">48</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#2a2a15] rounded-xl border border-border-color dark:border-[#333320] overflow-hidden shadow-standing transition-transform hover:-translate-y-1 duration-300">
+<div class="flex items-center justify-between px-4 py-3 border-b border-border-color dark:border-[#333320] bg-gray-50 dark:bg-[#333320]">
+<h3 class="text-base font-bold flex items-center gap-2 italic uppercase">
+<span class="material-symbols-outlined text-primary text-xl">local_hospital</span>
+                            Injury Ward
+                        </h3>
+</div>
+<div class="p-2">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-xs uppercase font-bold text-text-muted border-b border-border-color dark:border-[#333320]">
+<th class="p-2">Player</th>
+<th class="p-2 text-right">Status</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="border-b border-border-color dark:border-[#333320] last:border-0 hover:bg-background-light">
+<td class="p-2">
+<div class="font-bold italic">J. Embiid</div>
+<div class="text-[11px] font-bold text-text-muted uppercase">76ers • C</div>
+</td>
+<td class="p-2 text-right">
+<span class="inline-block px-2 py-0.5 rounded text-xs font-black bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-200 uppercase">OUT</span>
+</td>
+</tr>
+<tr class="border-b border-border-color dark:border-[#333320] last:border-0 hover:bg-background-light">
+<td class="p-2">
+<div class="font-bold italic">L. Doncic</div>
+<div class="text-[11px] font-bold text-text-muted uppercase">Mavs • PG</div>
+</td>
+<td class="p-2 text-right">
+<span class="inline-block px-2 py-0.5 rounded text-xs font-black bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200 uppercase">Ques</span>
+</td>
+</tr>
+<tr class="border-b border-border-color dark:border-[#333320] last:border-0 hover:bg-background-light">
+<td class="p-2">
+<div class="font-bold italic">A. Davis</div>
+<div class="text-[11px] font-bold text-text-muted uppercase">Lakers • PF</div>
+</td>
+<td class="p-2 text-right">
+<span class="inline-block px-2 py-0.5 rounded text-xs font-black bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 uppercase">Prob</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</aside>
+<main class="lg:col-span-6 space-y-8">
+<article class="bg-white dark:bg-[#2a2a15] rounded-xl overflow-hidden border border-border-color dark:border-[#333320] shadow-standing group cursor-pointer transition-transform hover:-translate-y-1 duration-300">
+<div class="relative w-full aspect-video overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Wide shot of american football stadium during a game" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCzm3t_iWwhlMKV5EKIJh3jQOjwuuvtwQVWMT8ok-cBs7jOvbLa3RO1Fyb1plBPx-KOGVmd83gQAII75eP8YqML9b5ELK8DNKB_YPpSa8Q2xHXzl4LRELCGOoskC4DbgpgOJfnM_Cq7Xvn5CV0mse6W2AtigSCNwEZdDCtzbbdJdxNHw88QnFPQiwn8WCYut17xNb0uiNP1epW69LldakreggLgLwtSczbkbZJvMfkIrn-INBpKmJVQOlT86ni6F3Vf5S1LixADiMs');"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-6 w-full">
+<span class="inline-block px-3 py-1 mb-3 rounded bg-primary text-black text-xs font-black uppercase tracking-wide skew-x-[-10deg]">Must Read</span>
+<h2 class="text-3xl md:text-4xl font-black italic text-white leading-[0.95] mb-3 drop-shadow-md">Week 5 Waiver Wire: The Hidden Gems You Need</h2>
+<p class="text-gray-200 line-clamp-2 text-sm md:text-base font-medium">Our analysts break down the top targets for every position heading into the weekend. Don't miss out on these potential league-winners.</p>
+</div>
+</div>
+</article>
+<div class="flex flex-col gap-6">
+<div class="flex justify-between items-center px-2">
+<h3 class="text-2xl font-black italic uppercase">Latest Analysis</h3>
+<div class="h-1 flex-1 bg-border-color ml-4 rounded-full overflow-hidden">
+<div class="w-20 h-full bg-primary"></div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-4 p-5 bg-white dark:bg-[#2a2a15] rounded-xl border border-border-color dark:border-[#333320] shadow-standing hover:shadow-standing-hover transition-all duration-300 cursor-pointer group">
+<div class="w-full md:w-48 aspect-[3/2] md:aspect-square shrink-0 rounded-lg overflow-hidden bg-gray-100 relative shadow-sm">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Basketball player shooting a hoop outdoors" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBxmE7RUEtteITfdihyWsLndSiON4BSDtRULBWyAKlaHkYOevY2LdGP9nDUbJxWNbnqJ2gTFfQJUfCzbbhh9BSGY2AgU-dFoRxEBng9WJ-xQTupdHkFONAZVaHYpExieB91YJs8oSSTMpHoZ5UdMjpSrmNIWqkqzRcdV52WaomfevkOW9wSVPbMX1JfM52hdHczVUX5-ZYRa6iodnWt_6CyfLrtKr0WMUIz2uVa0loQKEJK-ncAGcdszURUm5rAm6R-6achOkUQacY');"></div>
+</div>
+<div class="flex flex-col justify-center flex-1">
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-black text-primary uppercase italic">DFS</span>
+<span class="text-xs font-bold text-text-muted uppercase">2 hours ago</span>
+</div>
+<h4 class="text-xl font-bold italic mb-2 leading-tight group-hover:text-primary transition-colors">Top Value Plays for Tonight's NBA Slate</h4>
+<p class="text-sm text-text-muted line-clamp-2 mb-4">Finding value is key to taking down GPPs. Here are three players priced under $5k that are poised for big minutes tonight.</p>
+<div class="flex items-center gap-2 mt-auto">
+<div class="size-6 rounded-full bg-gray-200 border border-white shadow-sm" data-alt="Author avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA9H4WtnkBhCam6h-npEd1VfLb4LkEcouQdJ7GVO8yhrchyp43ArkeRP-2wMOY8jdLIhIQKJh-2ycILm9qJFGOb_AKBUqVMB39Jvzj4iJGuT7BiHwJIWjSbsYJ6zh_QzgrQfPT_3WLJJGmrttQF2xk_rp0QjEgM3MpQWF7kxq1YTnMCwJQsWJN6lUaNnyM6BmbO_v3kuhg2io1ydYMH5T8221TpAQFKhcq5zSQBz_xBWAZdceLG2ItiUP8pTfQlh10jpMQ6aJufrOY'); background-size: cover;"></div>
+<span class="text-xs font-bold uppercase text-text-muted">Mike Johnson</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-4 p-5 bg-white dark:bg-[#2a2a15] rounded-xl border border-border-color dark:border-[#333320] shadow-standing hover:shadow-standing-hover transition-all duration-300 cursor-pointer group">
+<div class="w-full md:w-48 aspect-[3/2] md:aspect-square shrink-0 rounded-lg overflow-hidden bg-gray-100 relative shadow-sm">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Baseball glove and ball on grass" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCX6vJVOTpa-iXoeomS-tpQ_A2RjHZ-h0EAgjKL1qljTvwpdJ3fROQgLmQSKiYMtyzGkv-MEzENOOvytvA2d-9n3VvAl9S6dAx3_Nfh6TPnquTp-bT7JnOWfeAnpHWmsRnxhte8locgwqvnkEsyCHc7P-ZWlpj8OxPgIfZJ4QaS4lYSCWKisQI7viQroLYLRr0b8904DAhdATQuHCYky6aSgdG9Xo-4YhiqstlNfd-D3sXdt1ksMgNLb5q3pJJoA4dpTBeIF7ySlv8');"></div>
+</div>
+<div class="flex flex-col justify-center flex-1">
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-black text-primary uppercase italic">Dynasty</span>
+<span class="text-xs font-bold text-text-muted uppercase">4 hours ago</span>
+</div>
+<h4 class="text-xl font-bold italic mb-2 leading-tight group-hover:text-primary transition-colors">Prospect Watch: Should You Stash This Rookie Pitcher?</h4>
+<p class="text-sm text-text-muted line-clamp-2 mb-4">With a fastball touching 102mph in Triple-A, the call-up seems imminent. We analyze his long-term fantasy outlook.</p>
+<div class="flex items-center gap-2 mt-auto">
+<div class="size-6 rounded-full bg-gray-200 border border-white shadow-sm" data-alt="Author avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBgwl191H45_uPJNUEuXAXtW-AYkYrcMUSSJCu33jPysOEM7BGldrFkd6axY3X8PptjjRaNSp4LmpelQz7ZfMA7Q5vRqI6nxfdHRp_ccUOsqjck6ckT_82_fc4bJpkxNeC6MkSlqqRea4yUimu5ziMlP3oSMeb9wVrukCjVsk8dxl82qK46uo-PpbUdaHvyARv8Irpbx5YxlYRuBWbWQNDdco0m3ROUDBP2Jc8-WvPXrnySYcQux3kGs1kOSraBLovC7fTjHtUb_Tk'); background-size: cover;"></div>
+<span class="text-xs font-bold uppercase text-text-muted">Sarah Connor</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-4 p-5 bg-white dark:bg-[#2a2a15] rounded-xl border border-border-color dark:border-[#333320] shadow-standing hover:shadow-standing-hover transition-all duration-300 cursor-pointer group">
+<div class="w-full md:w-48 aspect-[3/2] md:aspect-square shrink-0 rounded-lg overflow-hidden bg-gray-100 relative shadow-sm">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-500" data-alt="Close up of football helmet on grass" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBnn3gWTM56Jas3corwyrnsD7FP42D_Ab95shtVlAtUjhI-bOBFo2IA__h7buy7BxPiSPp65fB0TsDLo-ekLlGYptlg0jCQKj0OgESKxhKoY4xisgBkqc7jq6SB5nDWVxv4LtCSbodbWi45kL1q4koYiwDcoB_CehpAb9mWoi6IhWGPjbqedd6lzh_MaEIZviplU_Sa6khLhXLjLv7iMjetI3k_FVc-lyRp4zePHL4OJy5XxIOi7j7ril1jcpdU3mkFauCM_IDT2aY');"></div>
+</div>
+<div class="flex flex-col justify-center flex-1">
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-black text-primary uppercase italic">NFL</span>
+<span class="text-xs font-bold text-text-muted uppercase">5 hours ago</span>
+</div>
+<h4 class="text-xl font-bold italic mb-2 leading-tight group-hover:text-primary transition-colors">Start 'Em, Sit 'Em: Quarterbacks Week 5</h4>
+<p class="text-sm text-text-muted line-clamp-2 mb-4">Don't let a tough matchup scare you away from starting this QB1. Plus, why you should bench a struggling veteran.</p>
+<div class="flex items-center gap-2 mt-auto">
+<div class="size-6 rounded-full bg-gray-200 border border-white shadow-sm" data-alt="Author avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCfq3YTTd-QSrzOEuESRlT4korKJTfZEAvtqz0lFJ2qyRseE6U3cuYMWgsyUG7txvt-7ps0QyhKePe5GdbraJHKdnSKTJax1hB3mxJLOivCdl2NLO0ahj4Mz84_CczOW8Duf8XG3_7pykjNNYDJCJ4xFKKw-_6FvMLTHknv9qTq0vCiBpfRukhBy_czli83C2VfvzGFKm7e5J4zO_te73El5Hdphr2zQk4JstJBxyPXJIUA8A_kiKIk5haCWPg_GOJcwX9kD8XsYCE'); background-size: cover;"></div>
+<span class="text-xs font-bold uppercase text-text-muted">Tom Brady Sr.</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-center pt-6">
+<button class="px-8 py-3 rounded-lg bg-white dark:bg-[#333320] border-2 border-border-color dark:border-[#444430] text-sm font-black italic uppercase text-text-main dark:text-white hover:bg-primary hover:border-primary hover:text-black transition-all shadow-sm">
+                        Load More Articles
+                    </button>
+</div>
+</main>
+<aside class="lg:col-span-3 space-y-8">
+<div class="bg-white dark:bg-[#2a2a15] rounded-xl border border-border-color dark:border-[#333320] overflow-hidden shadow-standing transition-transform hover:-translate-y-1 duration-300">
+<div class="flex items-center justify-between px-4 py-3 border-b border-border-color dark:border-[#333320] bg-gray-50 dark:bg-[#333320]">
+<h3 class="text-base font-bold flex items-center gap-2 italic uppercase">
+<span class="material-symbols-outlined text-primary text-xl">psychology</span>
+                            Expert Picks
+                        </h3>
+</div>
+<div class="p-4 space-y-4">
+<div class="flex gap-3 items-start">
+<div class="size-10 rounded-full bg-gray-200 border border-white shadow-sm shrink-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBgwl191H45_uPJNUEuXAXtW-AYkYrcMUSSJCu33jPysOEM7BGldrFkd6axY3X8PptjjRaNSp4LmpelQz7ZfMA7Q5vRqI6nxfdHRp_ccUOsqjck6ckT_82_fc4bJpkxNeC6MkSlqqRea4yUimu5ziMlP3oSMeb9wVrukCjVsk8dxl82qK46uo-PpbUdaHvyARv8Irpbx5YxlYRuBWbWQNDdco0m3ROUDBP2Jc8-WvPXrnySYcQux3kGs1kOSraBLovC7fTjHtUb_Tk'); background-size: cover;"></div>
+<div>
+<p class="text-xs font-bold text-text-muted uppercase mb-1">Sarah's Lock</p>
+<div class="bg-primary/10 border border-primary/30 rounded p-2">
+<p class="font-bold italic text-sm">Bills -3.5 <span class="text-text-muted font-normal">vs KC</span></p>
+<p class="text-xs text-text-muted mt-1">"Defense too strong."</p>
+</div>
+</div>
+</div>
+<div class="w-full h-px bg-border-color dark:bg-[#333320]"></div>
+<div class="flex gap-3 items-start">
+<div class="size-10 rounded-full bg-gray-200 border border-white shadow-sm shrink-0" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCfq3YTTd-QSrzOEuESRlT4korKJTfZEAvtqz0lFJ2qyRseE6U3cuYMWgsyUG7txvt-7ps0QyhKePe5GdbraJHKdnSKTJax1hB3mxJLOivCdl2NLO0ahj4Mz84_CczOW8Duf8XG3_7pykjNNYDJCJ4xFKKw-_6FvMLTHknv9qTq0vCiBpfRukhBy_czli83C2VfvzGFKm7e5J4zO_te73El5Hdphr2zQk4JstJBxyPXJIUA8A_kiKIk5haCWPg_GOJcwX9kD8XsYCE'); background-size: cover;"></div>
+<div>
+<p class="text-xs font-bold text-text-muted uppercase mb-1">Tom's Upset</p>
+<div class="bg-gray-100 dark:bg-[#333320] border border-border-color dark:border-gray-700 rounded p-2">
+<p class="font-bold italic text-sm">Titans ML <span class="text-text-muted font-normal">@ JAX</span></p>
+<p class="text-xs text-text-muted mt-1">"Value play of the week."</p>
+</div>
+</div>
+</div>
+<button class="w-full text-center text-xs font-bold text-primary hover:underline mt-2 uppercase">See All Picks</button>
+</div>
+</div>
+<div class="bg-white dark:bg-[#2a2a15] rounded-xl border border-border-color dark:border-[#333320] overflow-hidden shadow-standing transition-transform hover:-translate-y-1 duration-300">
+<div class="flex items-center justify-between px-4 py-3 border-b border-border-color dark:border-[#333320] bg-gray-50 dark:bg-[#333320]">
+<h3 class="text-base font-bold flex items-center gap-2 italic uppercase">
+<span class="material-symbols-outlined text-primary text-xl">candlestick_chart</span>
+                            Market Odds
+                        </h3>
+<div class="bg-primary text-black text-[10px] px-2 py-0.5 rounded font-black uppercase shadow-sm">Week 5</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-center border-collapse">
+<thead>
+<tr class="text-[10px] uppercase font-bold text-text-muted border-b border-border-color dark:border-[#333320]">
+<th class="p-2 text-left pl-4">Team</th>
+<th class="p-2">Spread</th>
+<th class="p-2">ML</th>
+<th class="p-2 pr-4">Total</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="border-b border-border-color dark:border-[#333320] hover:bg-background-light dark:hover:bg-[#333320]">
+<td class="p-2 text-left pl-4 font-black italic text-xs">KC</td>
+<td class="p-2 text-xs font-medium">-3.5</td>
+<td class="p-2 text-xs font-bold text-green-600 dark:text-green-400">-180</td>
+<td class="p-2 text-xs pr-4">O 52.5</td>
+</tr>
+<tr class="border-b-4 border-border-color dark:border-[#333320] hover:bg-background-light dark:hover:bg-[#333320]">
+<td class="p-2 text-left pl-4 font-black italic text-xs">BUF</td>
+<td class="p-2 text-xs font-medium">+3.5</td>
+<td class="p-2 text-xs font-bold text-green-600 dark:text-green-400">+155</td>
+<td class="p-2 text-xs pr-4">U 52.5</td>
+</tr>
+<tr class="border-b border-border-color dark:border-[#333320] hover:bg-background-light dark:hover:bg-[#333320]">
+<td class="p-2 text-left pl-4 font-black italic text-xs">SF</td>
+<td class="p-2 text-xs font-medium">-7.0</td>
+<td class="p-2 text-xs font-bold text-green-600 dark:text-green-400">-320</td>
+<td class="p-2 text-xs pr-4">O 44.0</td>
+</tr>
+<tr class="border-b-4 border-border-color dark:border-[#333320] hover:bg-background-light dark:hover:bg-[#333320]">
+<td class="p-2 text-left pl-4 font-black italic text-xs">LAR</td>
+<td class="p-2 text-xs font-medium">+7.0</td>
+<td class="p-2 text-xs font-bold text-green-600 dark:text-green-400">+260</td>
+<td class="p-2 text-xs pr-4">U 44.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-2 text-center bg-gray-50 dark:bg-[#333320] border-t border-border-color dark:border-[#333320]">
+<a class="text-xs font-black italic uppercase text-primary hover:underline tracking-wide" href="#">View Full Board -&gt;</a>
+</div>
+</div>
+<div class="relative bg-black rounded-xl overflow-hidden shadow-standing text-white border border-gray-800 transition-transform hover:-translate-y-1 duration-300 group">
+<div class="absolute top-0 right-0 p-3 z-10">
+<span class="bg-primary text-black text-[10px] font-black px-2 py-1 rounded shadow-lg uppercase italic transform rotate-3 inline-block">HOT PROP</span>
+</div>
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#333 1px, transparent 1px); background-size: 10px 10px;"></div>
+<div class="p-6 flex flex-col items-center text-center relative z-0">
+<div class="size-20 rounded-full border-4 border-primary p-1 mb-4 bg-white shadow-lg">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="Justin Jefferson Headshot" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD7HmVrv_qIP7etyKK3HVtxGrYSUJ1El2r0JF58ggDE5ht9d4T48o0SiYubppKGqoieZb77xavCuXYx368eKiHLVUjWSuSAXQyUFHybnDNc37ZXuD7rGOzuIG8ys7XW3ohUCQ-TNRTDQI4fphcDhiaEVkY_uAlNXQm-6TQhGz5w_xL0q_S1ZOCpf3xAEisG3d-zzktJ1ZuFWFvfXZHAhe33dIdvd1ENhrHDbe4DvPN42whFsXNtatrH5PNICcRM1m5gLp5lf_82WiM');"></div>
+</div>
+<h4 class="text-2xl font-black italic uppercase">Justin Jefferson</h4>
+<p class="text-sm text-gray-400 mb-5 font-bold uppercase tracking-wider">Minnesota Vikings</p>
+<div class="w-full bg-[#1a1a0d] rounded-lg p-4 mb-5 border border-gray-800 group-hover:border-primary/50 transition-colors">
+<div class="text-xs text-gray-400 font-bold uppercase mb-1">Receiving Yards</div>
+<div class="text-3xl font-black italic text-primary">Over 88.5</div>
+<div class="text-[10px] text-gray-500 mt-1 font-bold uppercase">vs. Chicago Bears</div>
+</div>
+<button class="w-full py-3 bg-primary text-black font-black italic uppercase text-sm rounded-lg hover:bg-white hover:scale-[1.02] transition-all shadow-md">
+                            Bet Now (-115)
+                        </button>
+</div>
+</div>
+<div class="bg-white dark:bg-[#2a2a15] rounded-xl p-5 border border-border-color dark:border-[#333320] shadow-standing relative overflow-hidden">
+<div class="absolute -right-6 -top-6 size-20 bg-primary/10 rounded-full"></div>
+<div class="flex items-start gap-4 relative">
+<span class="material-symbols-outlined text-primary mt-1 text-3xl">mail</span>
+<div>
+<h4 class="font-black italic uppercase text-lg mb-1">Daily Edge</h4>
+<p class="text-xs text-text-muted mb-4 font-medium leading-relaxed">Get our top 3 picks delivered to your inbox every morning.</p>
+<div class="flex flex-col gap-2">
+<input class="w-full text-xs p-2.5 rounded border border-border-color focus:ring-1 focus:ring-primary focus:border-primary bg-gray-50 dark:bg-[#333320]" placeholder="Email Address" type="email"/>
+<button class="bg-black text-white text-xs font-black uppercase italic px-3 py-2.5 rounded hover:bg-primary hover:text-black transition-colors shadow-sm">Join Free</button>
+</div>
+</div>
+</div>
+</div></aside>
+</div>
+<section class="mt-16 mb-12 border-t border-border-color dark:border-[#333320] pt-12">
+<div class="flex items-center justify-between mb-8 px-1">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">chat_bubble</span>
+<h3 class="text-2xl font-black italic uppercase">Analyst Chatter</h3>
+</div>
+<button class="text-sm font-bold italic uppercase hover:text-primary transition-colors flex items-center gap-1">View Feed <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white dark:bg-[#2a2a15] p-6 rounded-xl border border-border-color dark:border-[#333320] shadow-standing hover:shadow-standing-hover transition-all duration-300">
+<div class="flex items-center gap-3 mb-4">
+<div class="size-10 rounded-full bg-gray-200 bg-cover bg-center border border-white shadow-sm" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCTG5U_c9VipVGI-7_mY1WxkLeEqo7W-lD7z0ZcxXa1P78es87D0mR0EqD6b37OpjWJx8MlhSONy9ZtQjN8czKlcaarsXMTQZP1K4lEXqQKJOTobc7oY5nWsYSFD-wWALA6fP9WTKNcPKXdWfVPhqCEYkJ0jfQuh2Oit6rCGpRz-S95Us6itgaOCjWZYQu2hoIX3Q2LFq4XIyPeEKIZjIy630aeRfZ2Kf364pg4mL4O8tRpS4a8EUFgwAjL9mKDPRsY5cVamEVI-ro');"></div>
+<div>
+<h4 class="font-bold text-sm leading-none italic">Ian Rapoport</h4>
+<span class="text-xs text-text-muted font-medium">@RapSheet</span>
+</div>
+<span class="material-symbols-outlined text-blue-400 text-lg ml-auto">verified</span>
+</div>
+<p class="text-sm font-medium leading-relaxed mb-4">Sources say the <span class="text-primary font-bold">#Vikings</span> are planning to open extension talks with Jefferson before camp starts. Huge numbers expected.</p>
+<div class="flex items-center justify-between text-xs text-text-muted font-bold uppercase border-t border-border-color dark:border-[#333320] pt-3">
+<span>10:42 AM · Oct 5</span>
+<div class="flex gap-4">
+<span class="flex items-center gap-1 hover:text-red-500 transition-colors cursor-pointer"><span class="material-symbols-outlined text-sm">favorite</span> 1.2K</span>
+<span class="flex items-center gap-1 hover:text-green-500 transition-colors cursor-pointer"><span class="material-symbols-outlined text-sm">repeat</span> 450</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#2a2a15] p-6 rounded-xl border border-border-color dark:border-[#333320] shadow-standing hover:shadow-standing-hover transition-all duration-300">
+<div class="flex items-center gap-3 mb-4">
+<div class="size-10 rounded-full bg-gray-200 bg-cover bg-center border border-white shadow-sm" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCH2AO4kQvMthQ9dtQb-CPG1prpnGWXURWJHovlfWEjo3R86_x8bmJR6Cq4gzHQ3g_5soPlbwak-PEO8Me5KHT7ssKt-qPoIrGyZFtc_-3NSwZOd1pCGocLaQBAiss71E-3tu3k8wuDfXp3zJKZWNwFWlBKXyxuEkHV8Q3dK70xgJF_kWG5Qbnic-rQ5zWsaQwVTvietPB8r_SoXKz2GXAGQHm7_aBHM8l3YlVxCYXkrO69BQ7GFNhcuj0emtTA1c9gd35dfnCpp2w');"></div>
+<div>
+<h4 class="font-bold text-sm leading-none italic">Adrian Wojnarowski</h4>
+<span class="text-xs text-text-muted font-medium">@wojespn</span>
+</div>
+<span class="material-symbols-outlined text-blue-400 text-lg ml-auto">verified</span>
+</div>
+<p class="text-sm font-medium leading-relaxed mb-4">Breaking: The Lakers are finalizing a deal to acquire a backup center. Details on the trade package coming shortly on ESPN.</p>
+<div class="flex items-center justify-between text-xs text-text-muted font-bold uppercase border-t border-border-color dark:border-[#333320] pt-3">
+<span>11:15 AM · Oct 5</span>
+<div class="flex gap-4">
+<span class="flex items-center gap-1 hover:text-red-500 transition-colors cursor-pointer"><span class="material-symbols-outlined text-sm">favorite</span> 5.8K</span>
+<span class="flex items-center gap-1 hover:text-green-500 transition-colors cursor-pointer"><span class="material-symbols-outlined text-sm">repeat</span> 2.1K</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#2a2a15] p-6 rounded-xl border border-border-color dark:border-[#333320] shadow-standing hover:shadow-standing-hover transition-all duration-300">
+<div class="flex items-center gap-3 mb-4">
+<div class="size-10 rounded-full bg-gray-200 bg-cover bg-center border border-white shadow-sm" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAuqjkmMvJ0Js8YsSm5oVvl03XnHt5o9ti_9Oa1LOgpFxiCFBMHhFmWkiS6vPJRt1n-yQxKGUC49Byv1jT_J8sqLTUfOCPYUDpnsqswhG3i3vqFlVCHXK_iNit2L0b8bRXX1VXRndf3dSnkxLVDnD3M5BvD5j2khO0PhiydEXffj14WSyAknUwfMgr-bWsR2Raa4hcBHStxPgHJGGPHDyS6ZAqUGz8mIb7S_XTCt9fEYTPrNHNpcgku34iCEf7xzPNpKPv3MEzWXoU');"></div>
+<div>
+<h4 class="font-bold text-sm leading-none italic">Fantasy Focus</h4>
+<span class="text-xs text-text-muted font-medium">@FantasyFocus</span>
+</div>
+<span class="material-symbols-outlined text-blue-400 text-lg ml-auto">verified</span>
+</div>
+<p class="text-sm font-medium leading-relaxed mb-4">Start your studs? Not this week. The matchup data suggests benching Pollard against that formidable 49ers run defense.</p>
+<div class="flex items-center justify-between text-xs text-text-muted font-bold uppercase border-t border-border-color dark:border-[#333320] pt-3">
+<span>09:30 AM · Oct 5</span>
+<div class="flex gap-4">
+<span class="flex items-center gap-1 hover:text-red-500 transition-colors cursor-pointer"><span class="material-symbols-outlined text-sm">favorite</span> 890</span>
+<span class="flex items-center gap-1 hover:text-green-500 transition-colors cursor-pointer"><span class="material-symbols-outlined text-sm">repeat</span> 120</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-12">
+<div class="flex items-center gap-3 mb-6 px-1">
+<span class="material-symbols-outlined text-primary text-3xl">headphones</span>
+<h3 class="text-2xl font-black italic uppercase">Latest Podcasts</h3>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-[#2a2a15] rounded-xl overflow-hidden border border-border-color dark:border-[#333320] shadow-standing group cursor-pointer hover:-translate-y-1 transition-all duration-300">
+<div class="relative aspect-square bg-gray-200">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBBd02ffrK3WEGyt9IfESnAKfGuSn7DAWWv3uesmtPjfUGAJPW3Hw4anUI8aE8_x6giCLS6XBszzZc11ZPe6j2bwkmrzZNqryzVIwC1xO9JbD07lczKVc83nRvoYzc_HRWTq9y7SKmF-AlcC98PzCs1UH-lHaMsdhGY8_yCieHdmO3GEgpR6uP2t8xMxT100Co3CGySlCSwa-R-ayL_TdREGzVICKPe1tE-yQef5KL5Jn_LzWfieMdtvGzW4PQhgRxLmOP7C88z7ts');"></div>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
+<button class="size-12 rounded-full bg-primary text-black flex items-center justify-center shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300">
+<span class="material-symbols-outlined text-3xl ml-1">play_arrow</span>
+</button>
+</div>
+</div>
+<div class="p-4">
+<h4 class="font-bold italic text-lg leading-tight mb-2 line-clamp-2 group-hover:text-primary transition-colors">Week 5 Fantasy Waiver Wire Targets</h4>
+<div class="flex justify-between items-end">
+<p class="text-xs font-bold text-text-muted uppercase">The Fantasy Edge</p>
+<span class="text-[10px] font-black bg-gray-100 dark:bg-[#333320] px-1.5 py-0.5 rounded">45m</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#2a2a15] rounded-xl overflow-hidden border border-border-color dark:border-[#333320] shadow-standing group cursor-pointer hover:-translate-y-1 transition-all duration-300">
+<div class="relative aspect-square bg-gray-200">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAdzlO-7VA1-OIPqLzsh5gUezjEHsvb5jyayOqY5JwWgERwITo-REHq845mUj6WxUIfaEFiCh6ouFFw3i0MHOhQwLyOg8zV6UfkcA2Cah417pYQCQdwCD72jWAGITzD2guVtLpyQDbt4s84NcODYcseNH-5-TGIK1GHXJTnm6tTfoy8m7iuXCSKU9-Q9cNhHO-xfoOl__FgaH8Gc6hiSC-7SmOhMWOZk1x9PsJxNGCiWStfzIH57Ut8SsIhR5xzpppD4oVDvG2P0ek');"></div>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
+<button class="size-12 rounded-full bg-primary text-black flex items-center justify-center shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300">
+<span class="material-symbols-outlined text-3xl ml-1">play_arrow</span>
+</button>
+</div>
+</div>
+<div class="p-4">
+<h4 class="font-bold italic text-lg leading-tight mb-2 line-clamp-2 group-hover:text-primary transition-colors">Can the Lakers Turn It Around?</h4>
+<div class="flex justify-between items-end">
+<p class="text-xs font-bold text-text-muted uppercase">Hoops Talk</p>
+<span class="text-[10px] font-black bg-gray-100 dark:bg-[#333320] px-1.5 py-0.5 rounded">52m</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#2a2a15] rounded-xl overflow-hidden border border-border-color dark:border-[#333320] shadow-standing group cursor-pointer hover:-translate-y-1 transition-all duration-300">
+<div class="relative aspect-square bg-gray-200">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAVXHg2MtxiFi7F5dHQFQroIhiL10G_I6CWN76QBGUT2wG2PZ-knaHC-U_aosvZmUDpRH8ogKRsuDsrG8dMXP7lW9xvGHSqSNZMiwVKceS1bjIrHzhCvTN8gZGqfMnZh2B-Fri7aBbm0np2WMYxCaVmZQmrU1syHZjAiW9QJBSDPC0M8hthXHDI7csvuuhJcvDaYCZUNXvYDpdIlrinVbDf8ltglmgsQfNJ_I6NeaiWaOylYVgdsdfhW6J-0jBKMTvWUT3iyLZ3yLY');"></div>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
+<button class="size-12 rounded-full bg-primary text-black flex items-center justify-center shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300">
+<span class="material-symbols-outlined text-3xl ml-1">play_arrow</span>
+</button>
+</div>
+</div>
+<div class="p-4">
+<h4 class="font-bold italic text-lg leading-tight mb-2 line-clamp-2 group-hover:text-primary transition-colors">World Series Preview &amp; Predictions</h4>
+<div class="flex justify-between items-end">
+<p class="text-xs font-bold text-text-muted uppercase">Diamond Digest</p>
+<span class="text-[10px] font-black bg-gray-100 dark:bg-[#333320] px-1.5 py-0.5 rounded">1h 10m</span>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-[#2a2a15] rounded-xl overflow-hidden border border-border-color dark:border-[#333320] shadow-standing group cursor-pointer hover:-translate-y-1 transition-all duration-300">
+<div class="relative aspect-square bg-gray-200">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDm081aOuyQlAkpXHoDICRy6jkbhaawEoIJWaJp5ZrDMAiQ-0CoTFgUBJeLrXnT2l09ASY81cVCgRik8pXreK6HlBWHkMknEufLQNEHJ5QkQCSQ9W8bCooOnZviZFbAE3vklr3vvXdHjXaZNxdQvmrV5j9Xr2FoEOlNenjMUIxxmAgwxvE_Sh3ARbMt3WSMmiQc-BzVNQiek-wYyJ1_SG3W2SB3X_LXvhFOQPBM2-nQ1i6PgBRYu4MotiDXNCRA0v_89VFErHof_yk');"></div>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm">
+<button class="size-12 rounded-full bg-primary text-black flex items-center justify-center shadow-lg transform scale-0 group-hover:scale-100 transition-transform duration-300">
+<span class="material-symbols-outlined text-3xl ml-1">play_arrow</span>
+</button>
+</div>
+</div>
+<div class="p-4">
+<h4 class="font-bold italic text-lg leading-tight mb-2 line-clamp-2 group-hover:text-primary transition-colors">Top Rookies to Watch This Season</h4>
+<div class="flex justify-between items-end">
+<p class="text-xs font-bold text-text-muted uppercase">Puck Drop</p>
+<span class="text-[10px] font-black bg-gray-100 dark:bg-[#333320] px-1.5 py-0.5 rounded">35m</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-12">
+<div class="flex items-center gap-3 mb-6 px-1">
+<span class="material-symbols-outlined text-primary text-3xl">paid</span>
+<h3 class="text-2xl font-black italic uppercase">Featured Best Bets</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white dark:bg-[#2a2a15] rounded-xl border border-border-color dark:border-[#333320] shadow-standing overflow-hidden flex flex-col group hover:-translate-y-1 transition-transform duration-300">
+<div class="bg-gray-50 dark:bg-[#333320] p-4 flex justify-between items-center border-b border-border-color dark:border-[#333320]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-text-muted text-lg">schedule</span>
+<span class="text-xs font-bold uppercase text-text-muted">Sun, 1:00 PM</span>
+</div>
+<span class="bg-primary text-black text-[10px] font-black px-2 py-0.5 rounded uppercase">NFL</span>
+</div>
+<div class="p-6 flex-1 flex flex-col items-center text-center">
+<div class="flex items-center justify-center gap-6 mb-4 w-full">
+<div class="flex flex-col items-center gap-2">
+<div class="size-12 bg-gray-100 rounded-full flex items-center justify-center font-black italic text-sm">DAL</div>
+<span class="font-bold text-sm">Cowboys</span>
+</div>
+<span class="text-xs font-bold text-text-muted">VS</span>
+<div class="flex flex-col items-center gap-2">
+<div class="size-12 bg-gray-100 rounded-full flex items-center justify-center font-black italic text-sm">PHI</div>
+<span class="font-bold text-sm">Eagles</span>
+</div>
+</div>
+<div class="w-full bg-background-light dark:bg-black/20 rounded-lg p-3 mb-4 border border-border-color dark:border-[#333320]">
+<span class="block text-xs font-bold uppercase text-text-muted mb-1">Expert Pick</span>
+<span class="block text-xl font-black italic text-primary">Cowboys -3.5</span>
+</div>
+<p class="text-sm text-text-muted mb-4 line-clamp-2">"Dak has been lights out at home and the Eagles secondary is struggling with injuries."</p>
+<button class="w-full mt-auto py-2.5 rounded bg-black text-white text-xs font-black uppercase italic hover:bg-primary hover:text-black transition-colors shadow-sm">Tail This Bet</button>
+</div>
+</div>
+<div class="bg-white dark:bg-[#2a2a15] rounded-xl border border-border-color dark:border-[#333320] shadow-standing overflow-hidden flex flex-col group hover:-translate-y-1 transition-transform duration-300">
+<div class="bg-gray-50 dark:bg-[#333320] p-4 flex justify-between items-center border-b border-border-color dark:border-[#333320]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-text-muted text-lg">schedule</span>
+<span class="text-xs font-bold uppercase text-text-muted">Tonight, 7:30 PM</span>
+</div>
+<span class="bg-primary text-black text-[10px] font-black px-2 py-0.5 rounded uppercase">NBA</span>
+</div>
+<div class="p-6 flex-1 flex flex-col items-center text-center">
+<div class="flex items-center justify-center gap-6 mb-4 w-full">
+<div class="flex flex-col items-center gap-2">
+<div class="size-12 bg-gray-100 rounded-full flex items-center justify-center font-black italic text-sm">BOS</div>
+<span class="font-bold text-sm">Celtics</span>
+</div>
+<span class="text-xs font-bold text-text-muted">VS</span>
+<div class="flex flex-col items-center gap-2">
+<div class="size-12 bg-gray-100 rounded-full flex items-center justify-center font-black italic text-sm">MIL</div>
+<span class="font-bold text-sm">Bucks</span>
+</div>
+</div>
+<div class="w-full bg-background-light dark:bg-black/20 rounded-lg p-3 mb-4 border border-border-color dark:border-[#333320]">
+<span class="block text-xs font-bold uppercase text-text-muted mb-1">Expert Pick</span>
+<span class="block text-xl font-black italic text-primary">Over 225.5</span>
+</div>
+<p class="text-sm text-text-muted mb-4 line-clamp-2">"Both teams are top 5 in pace this month. Expect a shootout in Milwaukee."</p>
+<button class="w-full mt-auto py-2.5 rounded bg-black text-white text-xs font-black uppercase italic hover:bg-primary hover:text-black transition-colors shadow-sm">Tail This Bet</button>
+</div>
+</div>
+<div class="bg-white dark:bg-[#2a2a15] rounded-xl border border-border-color dark:border-[#333320] shadow-standing overflow-hidden flex flex-col group hover:-translate-y-1 transition-transform duration-300">
+<div class="bg-gray-50 dark:bg-[#333320] p-4 flex justify-between items-center border-b border-border-color dark:border-[#333320]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-text-muted text-lg">schedule</span>
+<span class="text-xs font-bold uppercase text-text-muted">Sat, 4:05 PM</span>
+</div>
+<span class="bg-primary text-black text-[10px] font-black px-2 py-0.5 rounded uppercase">MLB</span>
+</div>
+<div class="p-6 flex-1 flex flex-col items-center text-center">
+<div class="flex items-center justify-center gap-6 mb-4 w-full">
+<div class="flex flex-col items-center gap-2">
+<div class="size-12 bg-gray-100 rounded-full flex items-center justify-center font-black italic text-sm">NYY</div>
+<span class="font-bold text-sm">Yankees</span>
+</div>
+<span class="text-xs font-bold text-text-muted">VS</span>
+<div class="flex flex-col items-center gap-2">
+<div class="size-12 bg-gray-100 rounded-full flex items-center justify-center font-black italic text-sm">TOR</div>
+<span class="font-bold text-sm">Jays</span>
+</div>
+</div>
+<div class="w-full bg-background-light dark:bg-black/20 rounded-lg p-3 mb-4 border border-border-color dark:border-[#333320]">
+<span class="block text-xs font-bold uppercase text-text-muted mb-1">Expert Pick</span>
+<span class="block text-xl font-black italic text-primary">Yankees ML</span>
+</div>
+<p class="text-sm text-text-muted mb-4 line-clamp-2">"Cole is on the mound looking to secure the division. Great value at -130."</p>
+<button class="w-full mt-auto py-2.5 rounded bg-black text-white text-xs font-black uppercase italic hover:bg-primary hover:text-black transition-colors shadow-sm">Tail This Bet</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<footer class="bg-white dark:bg-[#1a1a0d] border-t border-border-color dark:border-[#333320] pt-16 pb-8">
+<div class="max-w-[1440px] mx-auto px-4 md:px-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+<div>
+<div class="flex items-center gap-2 mb-4 text-text-main dark:text-white">
+<div class="size-8 rounded bg-primary text-black flex items-center justify-center shadow-sm rotate-3">
+<span class="material-symbols-outlined text-[24px]">sports_score</span>
+</div>
+<h2 class="text-2xl font-black italic tracking-tighter uppercase font-heading">SportsWire</h2>
+</div>
+<p class="text-sm text-text-muted leading-relaxed mb-6">Your ultimate destination for sports news, fantasy analysis, and betting insights. Stay ahead of the game with our expert coverage.</p>
+<div class="flex gap-4">
+<a class="size-8 rounded-full bg-gray-100 dark:bg-[#333320] flex items-center justify-center hover:bg-primary hover:text-black transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">public</span>
+</a>
+<a class="size-8 rounded-full bg-gray-100 dark:bg-[#333320] flex items-center justify-center hover:bg-primary hover:text-black transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">alternate_email</span>
+</a>
+<a class="size-8 rounded-full bg-gray-100 dark:bg-[#333320] flex items-center justify-center hover:bg-primary hover:text-black transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">rss_feed</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="font-black italic uppercase text-lg mb-6">Sports</h4>
+<ul class="space-y-3 text-sm font-medium text-text-muted">
+<li><a class="hover:text-primary transition-colors" href="#">NFL Football</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">NBA Basketball</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">MLB Baseball</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">NHL Hockey</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">PGA Golf</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Soccer</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-black italic uppercase text-lg mb-6">Company</h4>
+<ul class="space-y-3 text-sm font-medium text-text-muted">
+<li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Contact Support</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Advertise</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-black italic uppercase text-lg mb-6">Newsletter</h4>
+<p class="text-sm text-text-muted mb-4">Subscribe to our daily newsletter for top picks and breaking news.</p>
+<div class="flex gap-2">
+<input class="w-full text-sm p-3 rounded bg-gray-50 dark:bg-[#333320] border border-border-color focus:ring-1 focus:ring-primary focus:border-primary" placeholder="Email Address" type="email"/>
+<button class="bg-primary text-black px-4 py-2 rounded font-black italic uppercase text-sm hover:bg-[#d9d90b] transition-colors">Go</button>
+</div>
+</div>
+</div>
+<div class="border-t border-border-color dark:border-[#333320] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs font-bold text-text-muted uppercase">© 2023 SportsWire Inc. All rights reserved.</p>
+<div class="flex gap-6 text-xs font-bold uppercase text-text-muted">
+<a class="hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms</a>
+<a class="hover:text-primary transition-colors" href="#">Sitemap</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

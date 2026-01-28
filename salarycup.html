@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fantasy Salary Cap Calculator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#FACC15", // Bright Yellow
+                        secondary: "#1F2937", // Dark Gray/Black
+                        "accent-blue": "#38BDF8", // Sky Blue (Keeping variable but will change usage)
+                        "background-light": "#F3F4F6", // Light Gray
+                        "background-dark": "#0F172A", // Deep Navy
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1E293B", // Slate 800
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                    },
+                    boxShadow: {
+                        'standing': '0 25px 50px -12px rgba(0, 0, 0, 0.25)', // Enhanced shadow depth
+                        'card-elevated': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)', // Specific for cards
+                    },
+                   backgroundImage: {
+                        'stadium-pattern': "url('https://images.unsplash.com/photo-1566577739112-5180d4bf9390?q=80&w=2626&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+                    }
+                },
+            },
+        };
+    </script>
+<style>body {
+    font-family: "Inter", sans-serif
+    }
+.italic-custom {
+    font-style: italic
+    }
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAbAKHVf3lUKNZNddLnLFnZTD_WPqIq8zNo0pgaSO45ucS5sopscRqNUl-BvkKF_HKZaqTkVeU8PW8mEzmoPSX_ffA8Wvwqezln6RJhG4D0UDx9dGqRzABGIaf0oTL2tIcraQOqhgRm_oVe9p7JCkdN4JAkQIfwoUmvlwN9MLt6_K7-QgKuyoP7x-XISUCWo_mp_8wo3jNscL--wB3FVbtGo804Z0E0aXMfKicYC1oKONniCfzSXEZKGZ271_Q4NBmMnCe5FJKYVRM);
+    background-size: cover;
+    background-position: center;
+    opacity: 0.35;filter: saturate(1.2);}
+main {
+    position: relative;
+    z-index: 10
+    }::-webkit-scrollbar {
+    width: 8px;
+    height: 8px
+    }
+::-webkit-scrollbar-track {
+    background: transparent
+    }
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px
+    }</style>
+</head>
+<body class="bg-gray-100 dark:bg-background-dark text-gray-800 dark:text-gray-200 min-h-screen flex flex-col font-body relative">
+<div class="bg-overlay pointer-events-none"></div>
+<header class="bg-surface-light dark:bg-surface-dark shadow-sm border-b border-gray-200 dark:border-gray-700 h-16 flex items-center justify-between px-6 sticky top-0 z-30">
+<div class="flex items-center space-x-8">
+<div class="flex items-center gap-2 cursor-pointer">
+<div class="bg-primary text-secondary p-1 rounded font-bold text-xl leading-none italic-custom">FB</div>
+<div class="flex flex-col">
+<span class="text-xs text-gray-500 dark:text-gray-400 font-bold tracking-widest leading-none">FANTASY</span>
+<span class="font-black text-xl leading-none italic-custom text-secondary dark:text-white">BUZZ</span>
+</div>
+</div>
+<nav class="hidden md:flex space-x-6">
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary font-medium flex items-center gap-1 text-sm italic-custom" href="#">
+                    Draft Plan <span class="material-symbols-outlined text-base not-italic">expand_more</span>
+</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary font-medium flex items-center gap-1 text-sm italic-custom" href="#">
+                    Game Plan <span class="material-symbols-outlined text-base not-italic">expand_more</span>
+</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary font-medium flex items-center gap-1 text-sm italic-custom" href="#">
+                    Rankings <span class="material-symbols-outlined text-base not-italic">expand_more</span>
+</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary font-medium flex items-center gap-1 text-sm italic-custom" href="#">
+                    Insights <span class="material-symbols-outlined text-base not-italic">expand_more</span>
+</a>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-gray-400 text-lg">search</span>
+<input class="pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-full text-sm w-64 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-gray-400 dark:placeholder-gray-500 text-gray-700 dark:text-gray-200" placeholder="Search..." type="text"/>
+</div>
+<button class="text-gray-500 dark:text-gray-400 hover:text-primary relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+</button>
+<div class="flex items-center gap-3 border-l border-gray-200 dark:border-gray-700 pl-4">
+<div class="h-9 w-9 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
+<span class="material-symbols-outlined text-xl">person</span>
+</div>
+<div class="hidden xl:flex flex-col">
+<span class="text-sm font-bold text-gray-800 dark:text-white leading-tight">John Doe</span>
+<span class="text-xs text-gray-500 dark:text-gray-400">Pro Member</span>
+</div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden relative z-10">
+<aside class="w-64 bg-surface-light dark:bg-surface-dark border-r border-gray-200 dark:border-gray-700 flex flex-col overflow-y-auto hidden md:flex shadow-[4px_0_24px_rgba(0,0,0,0.02)]">
+<div class="p-6 border-b border-gray-100 dark:border-gray-800 shadow-sm">
+<div class="mb-2">
+<div class="flex items-center justify-between text-gray-500 dark:text-gray-400 mb-4 cursor-pointer hover:text-gray-800 dark:hover:text-gray-200 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">emoji_events</span>
+<span class="font-bold text-sm tracking-wide italic-custom">DRAFT PLAN</span>
+</div>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+<div class="pl-2">
+<a class="flex items-center gap-3 px-4 py-2 text-gray-600 hover:text-primary transition-colors mb-1" href="#">
+<span class="material-symbols-outlined text-gray-400">groups</span>
+<span class="font-medium text-sm">My Leagues</span>
+</a>
+</div>
+</div>
+</div>
+<div class="p-6 border-b border-gray-100 dark:border-gray-800 shadow-sm">
+<h3 class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 italic-custom">Draft Tools</h3>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary">smart_toy</span>
+<span class="font-medium text-sm">Draft Simulator</span>
+<span class="ml-auto bg-secondary text-white text-[10px] font-bold px-1.5 py-0.5 rounded">Popular</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary">touch_app</span>
+<span class="font-medium text-sm">Draft Assist</span>
+<span class="ml-auto bg-primary text-secondary text-[10px] font-bold px-1.5 py-0.5 rounded">New</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary">poll</span>
+<span class="font-medium text-sm">Mock Draft Lobby</span>
+</a>
+</nav>
+</div>
+<div class="p-6 shadow-sm">
+<h3 class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 italic-custom">Analysis Tools</h3>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary">analytics</span>
+<span class="font-medium text-sm">Power Rankings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary text-white rounded-lg shadow-md mb-2 group transition-transform hover:scale-[1.02]" href="#">
+<span class="material-symbols-outlined text-white">calculate</span>
+<span class="font-bold text-sm">Salary Cap Calculator</span>
+</a>
+</nav>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto p-8 bg-transparent">
+<div class="max-w-7xl mx-auto space-y-8">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-surface-light dark:bg-surface-dark p-6 rounded-xl shadow-standing border border-white/20">
+<div>
+<h1 class="text-3xl font-extrabold text-secondary dark:text-white italic-custom mb-2">Fantasy Football Salary Cap Calculator</h1>
+<p class="text-gray-600 dark:text-gray-300 text-sm max-w-2xl font-medium">
+                            Create custom rankings and dollar values based on consensus projections. Customize your league settings below to generate your cheat sheet.
+                        </p>
+</div>
+<button class="px-5 py-2.5 bg-secondary hover:bg-gray-800 text-white rounded shadow-lg font-bold text-sm transition-all transform hover:-translate-y-0.5 whitespace-nowrap">
+                        Standard (Default)
+                    </button>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<div class="lg:col-span-12 xl:col-span-12 space-y-6">
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-standing p-6">
+<div class="flex flex-wrap items-center gap-6 mb-8 border-b border-gray-100 pb-6">
+<label class="inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-300 dark:peer-focus:ring-yellow-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary relative"></div>
+<span class="ml-3 text-sm font-bold text-gray-900 dark:text-gray-300 italic-custom">Flex Positions</span>
+</label>
+<label class="inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-300 dark:peer-focus:ring-yellow-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary relative"></div>
+<span class="ml-3 text-sm font-bold text-gray-900 dark:text-gray-300 italic-custom">IDP Positions</span>
+</label>
+<label class="inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-300 dark:peer-focus:ring-yellow-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary relative"></div>
+<span class="ml-3 text-sm font-bold text-gray-900 dark:text-gray-300 italic-custom">Salary Cap Draft</span>
+</label>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-surface-light dark:bg-surface-dark border-0 rounded-xl p-6 shadow-card-elevated hover:shadow-standing transition-shadow duration-300">
+<h3 class="font-bold text-secondary dark:text-white mb-4 italic-custom text-lg">Receiving</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<input class="w-20 rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="6"/>
+<span class="text-sm font-medium text-gray-600 dark:text-gray-400">pts per Receiving TD</span>
+</div>
+<div class="flex items-center gap-3">
+<input class="w-20 rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="1"/>
+<span class="text-sm font-medium text-gray-600 dark:text-gray-400">pt per 10 Rec Yds</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark border-0 rounded-xl p-6 shadow-card-elevated hover:shadow-standing transition-shadow duration-300">
+<h3 class="font-bold text-secondary dark:text-white mb-4 italic-custom text-lg">Rushing</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<input class="w-20 rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="6"/>
+<span class="text-sm font-medium text-gray-600 dark:text-gray-400">pts per Rushing TD</span>
+</div>
+<div class="flex items-center gap-3">
+<input class="w-20 rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="1"/>
+<span class="text-sm font-medium text-gray-600 dark:text-gray-400">pt per 10 Rush Yds</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark border-0 rounded-xl p-6 shadow-card-elevated hover:shadow-standing transition-shadow duration-300">
+<h3 class="font-bold text-secondary dark:text-white mb-4 italic-custom text-lg">Passing</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<input class="w-20 rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="4"/>
+<span class="text-sm font-medium text-gray-600 dark:text-gray-400">pts per Passing TD</span>
+</div>
+<div class="flex items-center gap-3">
+<input class="w-20 rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="1"/>
+<span class="text-sm font-medium text-gray-600 dark:text-gray-400">pt per 25 Pass Yds</span>
+</div>
+<div class="flex items-center gap-3">
+<input class="w-20 rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="-1"/>
+<span class="text-sm font-medium text-gray-600 dark:text-gray-400">pts per Int Thrown</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark border-0 rounded-xl p-6 shadow-card-elevated hover:shadow-standing transition-shadow duration-300">
+<h3 class="font-bold text-secondary dark:text-white mb-4 italic-custom text-lg">Other</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<input class="w-20 rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="-2"/>
+<span class="text-sm font-medium text-gray-600 dark:text-gray-400">pts per Fumble Lost</span>
+</div>
+<div class="flex items-center gap-3">
+<input class="w-20 rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="2"/>
+<span class="text-sm font-medium text-gray-600 dark:text-gray-400">pts per 2pt Conv</span>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<div class="md:col-span-3 bg-surface-light dark:bg-surface-dark border-0 rounded-xl p-6 shadow-card-elevated hover:shadow-standing transition-shadow duration-300">
+<h3 class="font-bold text-secondary dark:text-white mb-4 italic-custom text-lg">League Setup</h3>
+<div class="space-y-4">
+<div>
+<label class="block text-xs font-bold text-gray-500 dark:text-gray-300 mb-1 uppercase tracking-wider"># of Teams</label>
+<input class="w-full rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm font-bold" type="number" value="12"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-500 dark:text-gray-300 mb-1 uppercase tracking-wider">Budget ($)</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500 text-sm">$</span>
+<input class="w-full pl-7 rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm font-bold" type="number" value="200"/>
+</div>
+</div>
+</div>
+</div>
+<div class="md:col-span-9 bg-surface-light dark:bg-surface-dark border-0 rounded-xl p-6 shadow-card-elevated hover:shadow-standing transition-shadow duration-300">
+<h3 class="font-bold text-secondary dark:text-white mb-4 italic-custom text-lg">Offense Positions</h3>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+<div>
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1 tracking-wider">QB</label>
+<input class="w-full rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="1"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1 tracking-wider">RB</label>
+<input class="w-full rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="2"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1 tracking-wider">WR</label>
+<input class="w-full rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="3"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1 tracking-wider">TE</label>
+<input class="w-full rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="1"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1 tracking-wider">Flex</label>
+<input class="w-full rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="1"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1 tracking-wider">K</label>
+<input class="w-full rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="1"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1 tracking-wider">DST</label>
+<input class="w-full rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="1"/>
+</div>
+<div>
+<label class="block text-xs font-bold text-gray-500 uppercase mb-1 tracking-wider">Bench</label>
+<input class="w-full rounded border-gray-200 bg-gray-50 shadow-sm focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50 text-sm text-center font-bold" type="number" value="6"/>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8">
+<button class="w-full bg-primary hover:bg-yellow-400 text-secondary font-bold text-lg py-4 rounded-lg shadow-lg shadow-yellow-500/30 transition-all transform hover:-translate-y-0.5">
+                            Calculate
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-standing overflow-hidden border border-gray-100 dark:border-gray-700">
+<div class="flex flex-col sm:flex-row justify-between items-center p-6 gap-4">
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-secondary text-white text-sm font-bold rounded shadow-md">Overall Rankings</button>
+<button class="px-4 py-2 bg-white border border-gray-300 text-gray-700 text-sm font-bold rounded shadow-sm hover:bg-gray-50">Positional Rankings</button>
+</div>
+<button class="px-4 py-2 bg-primary text-secondary text-sm font-bold rounded shadow-md flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">save_alt</span> Save as Cheat Sheet
+                </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead>
+<tr class="bg-primary border-b border-yellow-500">
+<th class="px-6 py-4 font-black text-secondary uppercase text-xs w-16 text-center">RK</th>
+<th class="px-6 py-4 font-black text-secondary uppercase text-xs">Overall</th>
+<th class="px-6 py-4 font-black text-secondary uppercase text-xs text-center">POS</th>
+<th class="px-6 py-4 font-black text-secondary uppercase text-xs text-center">Points</th>
+<th class="px-6 py-4 font-black text-secondary uppercase text-xs text-center">Value</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 text-center font-bold text-gray-800 dark:text-gray-200">1</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+<span class="font-bold text-secondary dark:text-white">Christian McCaffrey</span>
+<span class="text-xs text-gray-400 ml-1">SF</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center text-gray-500 font-medium">RB</td>
+<td class="px-6 py-4 text-center text-gray-500 font-medium">354</td>
+<td class="px-6 py-4 text-center font-bold text-secondary bg-yellow-50 dark:bg-yellow-900/30 rounded px-2 dark:text-white">$68</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 text-center font-bold text-gray-800 dark:text-gray-200">2</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+<span class="font-bold text-secondary dark:text-white">CeeDee Lamb</span>
+<span class="text-xs text-gray-400 ml-1">DAL</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center text-gray-500 font-medium">WR</td>
+<td class="px-6 py-4 text-center text-gray-500 font-medium">321</td>
+<td class="px-6 py-4 text-center font-bold text-secondary bg-yellow-50 dark:bg-yellow-900/30 rounded px-2 dark:text-white">$62</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 text-center font-bold text-gray-800 dark:text-gray-200">3</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+<span class="font-bold text-secondary dark:text-white">Tyreek Hill</span>
+<span class="text-xs text-gray-400 ml-1">MIA</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center text-gray-500 font-medium">WR</td>
+<td class="px-6 py-4 text-center text-gray-500 font-medium">308</td>
+<td class="px-6 py-4 text-center font-bold text-secondary bg-yellow-50 dark:bg-yellow-900/30 rounded px-2 dark:text-white">$59</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 text-center font-bold text-gray-800 dark:text-gray-200">4</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+<span class="font-bold text-secondary dark:text-white">Ja'Marr Chase</span>
+<span class="text-xs text-gray-400 ml-1">CIN</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center text-gray-500 font-medium">WR</td>
+<td class="px-6 py-4 text-center text-gray-500 font-medium">289</td>
+<td class="px-6 py-4 text-center font-bold text-secondary bg-yellow-50 dark:bg-yellow-900/30 rounded px-2 dark:text-white">$55</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors">
+<td class="px-6 py-4 text-center font-bold text-gray-800 dark:text-gray-200">5</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+<span class="font-bold text-secondary dark:text-white">Justin Jefferson</span>
+<span class="text-xs text-gray-400 ml-1">MIN</span>
+</div>
+</td>
+<td class="px-6 py-4 text-center text-gray-500 font-medium">WR</td>
+<td class="px-6 py-4 text-center text-gray-500 font-medium">285</td>
+<td class="px-6 py-4 text-center font-bold text-secondary bg-yellow-50 dark:bg-yellow-900/30 rounded px-2 dark:text-white">$54</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

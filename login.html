@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign In - Fantasy NFL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2f20d",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#222210",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-[#1c1c0d] dark:text-white overflow-hidden antialiased selection:bg-primary selection:text-black h-screen">
+<div class="fixed inset-0 z-0">
+<img alt="Stadium Background" class="w-full h-full object-cover brightness-[0.50] blur-[2px]" data-alt="Blurred vibrant american football stadium at night with bright lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJQTWo9u8UU7fKKuSRjkpIRbPEhlevoHpDnk-aqNXOO_1nhxQJEmBO_L9AF9pbQKiBPDhU4nWOBmVkxYh0Brl7zNJDkp8Lfl4Rzt4Sq80mRdVU1nmJ8E2NNZoFYii1pP2vk-cKAoE8KXpWMHopSXwszncyLGQ852hsiswoBGaKctVG609ILdD-8zq0F3bO6J3qGlypfSjc-UfuTt5xT5kOZ2HMS_L2oDC0Ro2GyJeBKbNjJ5NOAlvfWiIDAKjmAsRBbW7hI8n0a9w"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20"></div>
+</div>
+<div class="relative z-10 flex h-full w-full flex-col items-center justify-center p-4">
+<div class="mb-4 flex flex-col items-center gap-2 text-white drop-shadow-md">
+<div class="flex items-center gap-2">
+<div class="size-8 text-primary">
+<svg class="w-full h-full drop-shadow-sm" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<span class="text-2xl font-black italic tracking-tighter">Fantasy NFL</span>
+</div>
+</div>
+<div class="w-full max-w-[400px] bg-white dark:bg-[#1a1a0d] rounded-xl shadow-2xl flex flex-col relative overflow-hidden ring-1 ring-white/10">
+<div class="h-1.5 w-full bg-primary"></div>
+<div class="p-6 flex flex-col gap-4">
+<div class="text-center space-y-1">
+<h1 class="text-[#1c1c0d] dark:text-white text-2xl font-bold italic leading-none tracking-tight">Welcome Back</h1>
+<p class="text-[#5c5c2b] dark:text-[#a3a380] text-xs font-medium">Sign in to manage your fantasy team.</p>
+</div>
+<form class="flex flex-col gap-3" onsubmit="event.preventDefault();">
+<div class="group relative">
+<label class="sr-only" for="email">Email Address</label>
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-[20px] text-[#9c9c49] transition-colors duration-200 group-focus-within:text-primary">mail</span>
+</div>
+<input class="form-input block w-full rounded-lg border border-[#e8e8ce] dark:border-[#333320] bg-background-light dark:bg-[#2a2a1a] py-3 pl-10 pr-3 text-sm text-[#1c1c0d] dark:text-white placeholder-[#9c9c49] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="email" placeholder="Email Address" type="email"/>
+</div>
+<div class="group relative">
+<label class="sr-only" for="password">Password</label>
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-[20px] text-[#9c9c49] transition-colors duration-200 group-focus-within:text-primary">lock</span>
+</div>
+<input class="form-input block w-full rounded-lg border border-[#e8e8ce] dark:border-[#333320] bg-background-light dark:bg-[#2a2a1a] py-3 pl-10 pr-10 text-sm text-[#1c1c0d] dark:text-white placeholder-[#9c9c49] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="password" placeholder="Password" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-[#9c9c49] hover:text-[#1c1c0d] dark:hover:text-white transition-colors p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10 outline-none" type="button">
+<span class="material-symbols-outlined text-[18px] leading-none">visibility</span>
+</button>
+</div>
+<div class="flex justify-between items-center mt-1">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="size-3.5 rounded border border-[#e8e8ce] dark:border-[#333320] bg-background-light dark:bg-[#2a2a1a] text-primary focus:ring-1 focus:ring-primary focus:ring-offset-0 transition-all cursor-pointer" type="checkbox"/>
+<span class="text-[11px] font-medium text-[#5c5c2b] dark:text-[#a3a380] group-hover:text-[#1c1c0d] dark:group-hover:text-white transition-colors select-none">Remember me</span>
+</label>
+<a class="text-[11px] font-bold text-[#1c1c0d] dark:text-white hover:text-primary transition-colors underline decoration-primary/50 decoration-1 underline-offset-2 hover:decoration-primary" href="#">Forgot Password?</a>
+</div>
+<button class="mt-1 flex w-full items-center justify-center rounded-lg bg-primary h-11 px-6 text-sm font-bold text-[#1c1c0d] shadow-md transition-all hover:bg-[#d9d900] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-[#1a1a0d]" type="submit">
+                        Sign In
+                    </button>
+</form>
+<div class="relative flex py-1 items-center">
+<div class="flex-grow border-t border-[#e8e8ce] dark:border-[#333320]"></div>
+<span class="flex-shrink-0 mx-4 text-[10px] font-bold italic text-[#9c9c49]">OR CONTINUE WITH</span>
+<div class="flex-grow border-t border-[#e8e8ce] dark:border-[#333320]"></div>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex items-center justify-center gap-2 bg-white dark:bg-[#2a2a1a] border border-[#e8e8ce] dark:border-[#333320] rounded-lg py-2.5 px-4 shadow-[0_2px_0_0_rgba(0,0,0,0.05)] hover:shadow-[0_4px_0_0_rgba(0,0,0,0.05)] hover:-translate-y-0.5 transition-all active:translate-y-0 active:shadow-none focus:outline-none focus:ring-2 focus:ring-primary" type="button">
+<svg aria-hidden="true" class="w-4 h-4" viewBox="0 0 24 24">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+<span class="text-xs font-bold italic text-[#1c1c0d] dark:text-white">Google</span>
+</button>
+<button class="flex items-center justify-center gap-2 bg-white dark:bg-[#2a2a1a] border border-[#e8e8ce] dark:border-[#333320] rounded-lg py-2.5 px-4 shadow-[0_2px_0_0_rgba(0,0,0,0.05)] hover:shadow-[0_4px_0_0_rgba(0,0,0,0.05)] hover:-translate-y-0.5 transition-all active:translate-y-0 active:shadow-none focus:outline-none focus:ring-2 focus:ring-primary" type="button">
+<svg aria-hidden="true" class="w-4 h-4 text-[#1877F2]" fill="currentColor" viewBox="0 0 24 24">
+<path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path>
+</svg>
+<span class="text-xs font-bold italic text-[#1c1c0d] dark:text-white">Facebook</span>
+</button>
+</div>
+<div class="text-center pt-2 border-t border-[#f4f4e7] dark:border-[#333320]">
+<p class="text-xs text-[#5c5c2b] dark:text-[#a3a380]">
+                        Don't have an account? 
+                        <a class="font-bold text-[#1c1c0d] dark:text-white hover:text-primary transition-colors ml-1" href="#">Create Account</a>
+</p>
+</div>
+</div>
+</div>
+<p class="mt-4 text-[10px] text-white/60 font-medium text-center max-w-sm">
+            © 2024 Fantasy NFL. All rights reserved.
+        </p>
+</div>
+</body></html>

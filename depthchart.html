@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NFL Depth Charts - FantasySportsPro</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2f20d",
+                        "background-light": "#fcfcf8",
+                        "background-dark": "#222210",
+                        "secondary-text": "#9c9c49",
+                        "primary-text": "#1c1c0d",
+                        "card-border": "#e8e8ce",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans", "Noto Sans", "sans-serif"],
+                        "body": ["Work Sans", "Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                    boxShadow: {
+                        'standing': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-primary-text dark:text-white transition-colors duration-200">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-card-border bg-background-light/95 backdrop-blur dark:bg-background-dark/95 dark:border-gray-800 px-6 py-3 lg:px-10">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary-text dark:text-white">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined !text-4xl">sports_football</span>
+</div>
+<h2 class="text-primary-text dark:text-white text-xl font-bold italic leading-tight tracking-tight">FantasySportsPro</h2>
+</div>
+<div class="hidden md:flex items-center gap-9">
+<a class="text-primary-text dark:text-gray-200 text-sm font-medium hover:text-primary transition-colors" href="#">Home</a>
+<a class="text-primary-text dark:text-gray-200 text-sm font-bold border-b-2 border-primary transition-colors" href="#">NFL</a>
+<a class="text-primary-text dark:text-gray-200 text-sm font-medium hover:text-primary transition-colors" href="#">MLB</a>
+<a class="text-primary-text dark:text-gray-200 text-sm font-medium hover:text-primary transition-colors" href="#">NBA</a>
+<a class="text-primary-text dark:text-gray-200 text-sm font-medium hover:text-primary transition-colors" href="#">NHL</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-4 md:gap-8">
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-card-border dark:border-gray-700 bg-white dark:bg-gray-900">
+<div class="text-secondary-text flex border-none items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-secondary-text px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal" placeholder="Search players, teams..."/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="hidden sm:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary hover:bg-yellow-300 text-primary-text text-sm font-bold tracking-wide transition-colors">
+                        Sign Up
+                    </button>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-white border border-card-border hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 text-primary-text dark:text-white text-sm font-bold tracking-wide transition-colors">
+                        Log In
+                    </button>
+</div>
+</div>
+</header>
+<div class="layout-container flex h-full grow flex-col">
+<div class="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="mb-8">
+<h1 class="text-4xl font-black italic tracking-tighter text-primary-text dark:text-white mb-2">NFL Depth Charts</h1>
+<p class="text-secondary-text dark:text-gray-400 text-lg">Real-time depth charts updated daily based on practice reports and official team announcements.</p>
+</div>
+<div class="mb-10">
+<h3 class="text-sm font-bold uppercase tracking-wider text-secondary-text dark:text-gray-500 mb-4 ml-1">Select Team</h3>
+<div class="grid grid-cols-4 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-[repeat(16,minmax(0,1fr))] gap-2">
+<button class="group flex flex-col items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-lg border border-card-border dark:border-gray-700 hover:border-primary hover:shadow-md transition-all aspect-square" title="Arizona Cardinals">
+<div class="w-8 h-8 bg-red-600 rounded-full mb-1" data-alt="Red team logo circle"></div>
+<span class="text-[10px] font-bold text-gray-500 group-hover:text-primary-text dark:group-hover:text-white">ARI</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-lg border border-card-border dark:border-gray-700 hover:border-primary hover:shadow-md transition-all aspect-square" title="Atlanta Falcons">
+<div class="w-8 h-8 bg-black rounded-full mb-1" data-alt="Black team logo circle"></div>
+<span class="text-[10px] font-bold text-gray-500 group-hover:text-primary-text dark:group-hover:text-white">ATL</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-lg border border-card-border dark:border-gray-700 hover:border-primary hover:shadow-md transition-all aspect-square" title="Baltimore Ravens">
+<div class="w-8 h-8 bg-purple-700 rounded-full mb-1" data-alt="Purple team logo circle"></div>
+<span class="text-[10px] font-bold text-gray-500 group-hover:text-primary-text dark:group-hover:text-white">BAL</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-2 bg-primary/20 dark:bg-gray-800 rounded-lg border border-primary dark:border-primary hover:shadow-md transition-all aspect-square ring-2 ring-primary ring-offset-2 dark:ring-offset-gray-900" title="Buffalo Bills">
+<div class="w-8 h-8 bg-blue-600 rounded-full mb-1" data-alt="Blue team logo circle"></div>
+<span class="text-[10px] font-bold text-primary-text dark:text-white">BUF</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-lg border border-card-border dark:border-gray-700 hover:border-primary hover:shadow-md transition-all aspect-square" title="Carolina Panthers">
+<div class="w-8 h-8 bg-blue-400 rounded-full mb-1" data-alt="Light blue team logo circle"></div>
+<span class="text-[10px] font-bold text-gray-500 group-hover:text-primary-text dark:group-hover:text-white">CAR</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-lg border border-card-border dark:border-gray-700 hover:border-primary hover:shadow-md transition-all aspect-square" title="Chicago Bears">
+<div class="w-8 h-8 bg-orange-700 rounded-full mb-1" data-alt="Orange team logo circle"></div>
+<span class="text-[10px] font-bold text-gray-500 group-hover:text-primary-text dark:group-hover:text-white">CHI</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-lg border border-card-border dark:border-gray-700 hover:border-primary hover:shadow-md transition-all aspect-square">
+<div class="w-8 h-8 bg-gray-300 rounded-full mb-1" data-alt="Gray generic logo circle"></div>
+<span class="text-[10px] font-bold text-gray-500">CIN</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-lg border border-card-border dark:border-gray-700 hover:border-primary hover:shadow-md transition-all aspect-square">
+<div class="w-8 h-8 bg-orange-500 rounded-full mb-1" data-alt="Orange generic logo circle"></div>
+<span class="text-[10px] font-bold text-gray-500">CLE</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-lg border border-card-border dark:border-gray-700 hover:border-primary hover:shadow-md transition-all aspect-square">
+<div class="w-8 h-8 bg-blue-900 rounded-full mb-1" data-alt="Dark blue generic logo circle"></div>
+<span class="text-[10px] font-bold text-gray-500">DAL</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-lg border border-card-border dark:border-gray-700 hover:border-primary hover:shadow-md transition-all aspect-square">
+<div class="w-8 h-8 bg-orange-600 rounded-full mb-1" data-alt="Orange generic logo circle"></div>
+<span class="text-[10px] font-bold text-gray-500">DEN</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-lg border border-card-border dark:border-gray-700 hover:border-primary hover:shadow-md transition-all aspect-square">
+<div class="w-8 h-8 bg-blue-400 rounded-full mb-1" data-alt="Blue generic logo circle"></div>
+<span class="text-[10px] font-bold text-gray-500">DET</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-lg border border-card-border dark:border-gray-700 hover:border-primary hover:shadow-md transition-all aspect-square">
+<div class="w-8 h-8 bg-green-700 rounded-full mb-1" data-alt="Green generic logo circle"></div>
+<span class="text-[10px] font-bold text-gray-500">GB</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-lg border border-card-border dark:border-gray-700 hover:border-primary hover:shadow-md transition-all aspect-square">
+<div class="w-8 h-8 bg-blue-800 rounded-full mb-1" data-alt="Blue generic logo circle"></div>
+<span class="text-[10px] font-bold text-gray-500">HOU</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-lg border border-card-border dark:border-gray-700 hover:border-primary hover:shadow-md transition-all aspect-square">
+<div class="w-8 h-8 bg-blue-600 rounded-full mb-1" data-alt="Blue generic logo circle"></div>
+<span class="text-[10px] font-bold text-gray-500">IND</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-lg border border-card-border dark:border-gray-700 hover:border-primary hover:shadow-md transition-all aspect-square">
+<div class="w-8 h-8 bg-teal-600 rounded-full mb-1" data-alt="Teal generic logo circle"></div>
+<span class="text-[10px] font-bold text-gray-500">JAX</span>
+</button>
+<button class="group flex flex-col items-center justify-center p-2 bg-white dark:bg-gray-800 rounded-lg border border-card-border dark:border-gray-700 hover:border-primary hover:shadow-md transition-all aspect-square">
+<div class="w-8 h-8 bg-red-700 rounded-full mb-1" data-alt="Red generic logo circle"></div>
+<span class="text-[10px] font-bold text-gray-500">KC</span>
+</button>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row gap-8">
+<main class="flex-1 min-w-0">
+<div class="bg-white dark:bg-gray-900 rounded-xl shadow-standing border border-card-border dark:border-gray-800 mb-8 overflow-hidden group">
+<div class="p-6 border-b border-card-border dark:border-gray-800 flex items-center gap-4 bg-gradient-to-r from-background-light to-white dark:from-gray-900 dark:to-gray-800">
+<div class="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center text-white shadow-sm" data-alt="Buffalo Bills Team Logo">
+<span class="text-2xl font-black italic">BUF</span>
+</div>
+<div>
+<h2 class="text-3xl font-black italic text-primary-text dark:text-white">Buffalo Bills</h2>
+<p class="text-secondary-text text-sm font-medium">AFC East • Updated: Today, 9:41 AM</p>
+</div>
+<div class="ml-auto hidden sm:block">
+<button class="px-4 py-2 bg-background-light dark:bg-gray-800 border border-card-border dark:border-gray-700 rounded-lg text-sm font-bold hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">Full Roster</button>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-lg font-bold italic border-b-4 border-primary inline-block mb-4 pr-4">Offense</h3>
+<div class="overflow-x-auto rounded-lg border border-card-border dark:border-gray-700 mb-8">
+<table class="w-full text-sm text-left">
+<thead class="text-xs uppercase bg-gray-50 dark:bg-gray-800 text-secondary-text">
+<tr>
+<th class="px-4 py-3 font-bold w-16" scope="col">Pos</th>
+<th class="px-4 py-3 font-bold text-primary-text dark:text-white w-1/3" scope="col">Starter</th>
+<th class="px-4 py-3 font-medium w-1/3" scope="col">2nd String</th>
+<th class="px-4 py-3 font-medium w-1/3" scope="col">3rd String</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-card-border dark:divide-gray-700">
+<tr class="bg-primary/5 dark:bg-primary/10">
+<td class="px-4 py-3 font-black text-primary-text dark:text-gray-200">QB</td>
+<td class="px-4 py-3 font-bold text-primary-text dark:text-white relative">
+<div class="flex items-center gap-2">
+                                                    Josh Allen
+                                                    <button aria-label="Unfollow" class="text-primary hover:text-yellow-600 transition-colors focus:outline-none" title="Unfollow Player">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+<span class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></span>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Mitchell Trubisky
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Shane Buechele <span class="text-red-500 text-[10px] font-bold ml-1 bg-red-100 dark:bg-red-900/30 px-1 rounded">IR</span>
+<button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="bg-white dark:bg-gray-900">
+<td class="px-4 py-3 font-black text-primary-text dark:text-gray-200">RB</td>
+<td class="px-4 py-3 font-bold text-primary-text dark:text-white relative bg-primary/5 dark:bg-primary/10">
+<div class="flex items-center gap-2">
+                                                    James Cook
+                                                    <button aria-label="Unfollow" class="text-primary hover:text-yellow-600 transition-colors focus:outline-none" title="Unfollow Player">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+<span class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></span>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Ray Davis
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Ty Johnson
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="bg-white dark:bg-gray-900">
+<td class="px-4 py-3 font-black text-primary-text dark:text-gray-200">LWR</td>
+<td class="px-4 py-3 font-bold text-primary-text dark:text-white relative bg-primary/5 dark:bg-primary/10">
+<div class="flex items-center gap-2">
+                                                    Keon Coleman
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+<span class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></span>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Mack Hollins
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Justin Shorter
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="bg-white dark:bg-gray-900">
+<td class="px-4 py-3 font-black text-primary-text dark:text-gray-200">RWR</td>
+<td class="px-4 py-3 font-bold text-primary-text dark:text-white relative bg-primary/5 dark:bg-primary/10">
+<div class="flex items-center gap-2">
+                                                    Curtis Samuel
+                                                    <span class="text-orange-500 text-[10px] font-bold bg-orange-100 dark:bg-orange-900/30 px-1 rounded">Q</span>
+<button aria-label="Unfollow" class="text-primary hover:text-yellow-600 transition-colors focus:outline-none" title="Unfollow Player">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+<span class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></span>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Marquez Valdes-Scantling
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+<td class="px-4 py-3 text-secondary-text">-</td>
+</tr>
+<tr class="bg-white dark:bg-gray-900">
+<td class="px-4 py-3 font-black text-primary-text dark:text-gray-200">SWR</td>
+<td class="px-4 py-3 font-bold text-primary-text dark:text-white relative bg-primary/5 dark:bg-primary/10">
+<div class="flex items-center gap-2">
+                                                    Khalil Shakir
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+<span class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></span>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    KJ Hamler
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+<td class="px-4 py-3 text-secondary-text">-</td>
+</tr>
+<tr class="bg-white dark:bg-gray-900">
+<td class="px-4 py-3 font-black text-primary-text dark:text-gray-200">TE</td>
+<td class="px-4 py-3 font-bold text-primary-text dark:text-white relative bg-primary/5 dark:bg-primary/10">
+<div class="flex items-center gap-2">
+                                                    Dalton Kincaid
+                                                    <button aria-label="Unfollow" class="text-primary hover:text-yellow-600 transition-colors focus:outline-none" title="Unfollow Player">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+<span class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></span>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Dawson Knox
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Quintin Morris
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div>
+<h3 class="text-lg font-bold italic border-b-4 border-gray-200 dark:border-gray-700 inline-block mb-4 pr-4">Defense</h3>
+<div class="overflow-hidden rounded-lg border border-card-border dark:border-gray-700">
+<table class="w-full text-sm text-left">
+<thead class="text-xs uppercase bg-gray-50 dark:bg-gray-800 text-secondary-text">
+<tr>
+<th class="px-4 py-2 font-bold w-12">Pos</th>
+<th class="px-4 py-2 font-bold text-primary-text dark:text-white">Starter</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-card-border dark:divide-gray-700 bg-white dark:bg-gray-900">
+<tr>
+<td class="px-4 py-2 font-black text-primary-text dark:text-gray-200">DE</td>
+<td class="px-4 py-2 font-medium">
+<div class="flex items-center gap-2">
+                                                    Greg Rousseau
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+</tr>
+<tr>
+<td class="px-4 py-2 font-black text-primary-text dark:text-gray-200">DT</td>
+<td class="px-4 py-2 font-medium">
+<div class="flex items-center gap-2">
+                                                    Ed Oliver
+                                                    <button aria-label="Unfollow" class="text-primary hover:text-yellow-600 transition-colors focus:outline-none" title="Unfollow Player">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+</td>
+</tr>
+<tr>
+<td class="px-4 py-2 font-black text-primary-text dark:text-gray-200">LB</td>
+<td class="px-4 py-2 font-medium">
+<div class="flex items-center gap-2">
+                                                    Matt Milano
+                                                    <button aria-label="Unfollow" class="text-primary hover:text-yellow-600 transition-colors focus:outline-none" title="Unfollow Player">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+</td>
+</tr>
+<tr>
+<td class="px-4 py-2 font-black text-primary-text dark:text-gray-200">CB</td>
+<td class="px-4 py-2 font-medium">
+<div class="flex items-center gap-2">
+                                                    Rasul Douglas
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-bold italic border-b-4 border-gray-200 dark:border-gray-700 inline-block mb-4 pr-4">Special Teams</h3>
+<div class="overflow-hidden rounded-lg border border-card-border dark:border-gray-700">
+<table class="w-full text-sm text-left">
+<thead class="text-xs uppercase bg-gray-50 dark:bg-gray-800 text-secondary-text">
+<tr>
+<th class="px-4 py-2 font-bold w-12">Pos</th>
+<th class="px-4 py-2 font-bold text-primary-text dark:text-white">Starter</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-card-border dark:divide-gray-700 bg-white dark:bg-gray-900">
+<tr>
+<td class="px-4 py-2 font-black text-primary-text dark:text-gray-200">K</td>
+<td class="px-4 py-2 font-medium">
+<div class="flex items-center gap-2">
+                                                    Tyler Bass
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+</tr>
+<tr>
+<td class="px-4 py-2 font-black text-primary-text dark:text-gray-200">P</td>
+<td class="px-4 py-2 font-medium">
+<div class="flex items-center gap-2">
+                                                    Sam Martin
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+</tr>
+<tr>
+<td class="px-4 py-2 font-black text-primary-text dark:text-gray-200">LS</td>
+<td class="px-4 py-2 font-medium">
+<div class="flex items-center gap-2">
+                                                    Reid Ferguson
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-900 rounded-xl shadow-standing border border-card-border dark:border-gray-800 mb-8 overflow-hidden group">
+<div class="p-6 border-b border-card-border dark:border-gray-800 flex items-center gap-4 bg-gradient-to-r from-background-light to-white dark:from-gray-900 dark:to-gray-800">
+<div class="w-16 h-16 bg-blue-900 rounded-lg flex items-center justify-center text-white shadow-sm" data-alt="Dallas Cowboys Team Logo">
+<span class="text-2xl font-black italic">DAL</span>
+</div>
+<div>
+<h2 class="text-3xl font-black italic text-primary-text dark:text-white">Dallas Cowboys</h2>
+<p class="text-secondary-text text-sm font-medium">NFC East • Updated: Yesterday</p>
+</div>
+<div class="ml-auto hidden sm:block">
+<button class="px-4 py-2 bg-background-light dark:bg-gray-800 border border-card-border dark:border-gray-700 rounded-lg text-sm font-bold hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">Full Roster</button>
+</div>
+</div>
+<div class="p-6">
+<h3 class="text-lg font-bold italic border-b-4 border-primary inline-block mb-4 pr-4">Offense</h3>
+<div class="overflow-x-auto rounded-lg border border-card-border dark:border-gray-700 mb-8">
+<table class="w-full text-sm text-left">
+<thead class="text-xs uppercase bg-gray-50 dark:bg-gray-800 text-secondary-text">
+<tr>
+<th class="px-4 py-3 font-bold w-16" scope="col">Pos</th>
+<th class="px-4 py-3 font-bold text-primary-text dark:text-white w-1/3" scope="col">Starter</th>
+<th class="px-4 py-3 font-medium w-1/3" scope="col">2nd String</th>
+<th class="px-4 py-3 font-medium w-1/3" scope="col">3rd String</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-card-border dark:divide-gray-700">
+<tr class="bg-primary/5 dark:bg-primary/10">
+<td class="px-4 py-3 font-black text-primary-text dark:text-gray-200">QB</td>
+<td class="px-4 py-3 font-bold text-primary-text dark:text-white relative">
+<div class="flex items-center gap-2">
+                                                    Dak Prescott
+                                                    <button aria-label="Unfollow" class="text-primary hover:text-yellow-600 transition-colors focus:outline-none" title="Unfollow Player">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+<span class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></span>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Cooper Rush
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Trey Lance
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="bg-white dark:bg-gray-900">
+<td class="px-4 py-3 font-black text-primary-text dark:text-gray-200">RB</td>
+<td class="px-4 py-3 font-bold text-primary-text dark:text-white relative bg-primary/5 dark:bg-primary/10">
+<div class="flex items-center gap-2">
+                                                    Ezekiel Elliott
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+<span class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></span>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Rico Dowdle
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Deuce Vaughn
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="bg-white dark:bg-gray-900">
+<td class="px-4 py-3 font-black text-primary-text dark:text-gray-200">LWR</td>
+<td class="px-4 py-3 font-bold text-primary-text dark:text-white relative bg-primary/5 dark:bg-primary/10">
+<div class="flex items-center gap-2">
+                                                    CeeDee Lamb
+                                                    <button aria-label="Unfollow" class="text-primary hover:text-yellow-600 transition-colors focus:outline-none" title="Unfollow Player">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+<span class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></span>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Jalen Tolbert
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Tyron Billy-Johnson
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="bg-white dark:bg-gray-900">
+<td class="px-4 py-3 font-black text-primary-text dark:text-gray-200">RWR</td>
+<td class="px-4 py-3 font-bold text-primary-text dark:text-white relative bg-primary/5 dark:bg-primary/10">
+<div class="flex items-center gap-2">
+                                                    Brandin Cooks
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+<span class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></span>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    KaVontae Turpin
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Jalen Cropper
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="bg-white dark:bg-gray-900">
+<td class="px-4 py-3 font-black text-primary-text dark:text-gray-200">TE</td>
+<td class="px-4 py-3 font-bold text-primary-text dark:text-white relative bg-primary/5 dark:bg-primary/10">
+<div class="flex items-center gap-2">
+                                                    Jake Ferguson
+                                                    <button aria-label="Unfollow" class="text-primary hover:text-yellow-600 transition-colors focus:outline-none" title="Unfollow Player">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+<span class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></span>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Luke Schoonmaker
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+<td class="px-4 py-3 text-secondary-text">
+<div class="flex items-center gap-2">
+                                                    Peyton Hendershot
+                                                    <button aria-label="Follow" class="text-gray-300 dark:text-gray-600 hover:text-primary transition-colors focus:outline-none" title="Follow Player">
+<span class="material-symbols-outlined text-[18px]">star</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<aside class="w-full lg:w-[340px] flex-shrink-0">
+<div class="sticky top-24 space-y-6">
+<div class="bg-white dark:bg-gray-900 rounded-xl shadow-standing border border-card-border dark:border-gray-800 p-6">
+<h3 class="text-xl font-bold italic text-primary-text dark:text-white mb-4">Recent Depth Moves</h3>
+<div class="space-y-4">
+<div class="flex gap-3 pb-3 border-b border-dashed border-card-border dark:border-gray-800">
+<div class="mt-1 size-8 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">person_add</span>
+</div>
+<div>
+<p class="text-xs text-secondary-text mb-1">Today, 10:15 AM</p>
+<p class="text-sm text-primary-text dark:text-gray-200">
+<span class="font-bold">Amari Cooper</span> traded to <span class="font-bold">BUF</span>.
+                                            </p>
+</div>
+</div>
+<div class="flex gap-3 pb-3 border-b border-dashed border-card-border dark:border-gray-800">
+<div class="mt-1 size-8 rounded-full bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-300 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">local_hospital</span>
+</div>
+<div>
+<p class="text-xs text-secondary-text mb-1">Yesterday, 4:30 PM</p>
+<p class="text-sm text-primary-text dark:text-gray-200">
+<span class="font-bold">Christian McCaffrey</span> placed on <span class="text-red-600 font-bold">IR</span>.
+                                            </p>
+</div>
+</div>
+<div class="flex gap-3 pb-3 border-b border-dashed border-card-border dark:border-gray-800">
+<div class="mt-1 size-8 rounded-full bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-300 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">arrow_upward</span>
+</div>
+<div>
+<p class="text-xs text-secondary-text mb-1">Oct 12</p>
+<p class="text-sm text-primary-text dark:text-gray-200">
+<span class="font-bold">Drake Maye</span> named Starter for <span class="font-bold">NE</span>.
+                                            </p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="mt-1 size-8 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">swap_horiz</span>
+</div>
+<div>
+<p class="text-xs text-secondary-text mb-1">Oct 11</p>
+<p class="text-sm text-primary-text dark:text-gray-200">
+<span class="font-bold">Davante Adams</span> traded to <span class="font-bold">NYJ</span>.
+                                            </p>
+</div>
+</div>
+</div>
+<button class="w-full mt-4 py-2 text-sm font-bold text-center text-secondary-text hover:text-primary-text dark:hover:text-white transition-colors">
+                                    View All Transactions
+                                </button>
+</div>
+<div class="bg-primary/10 rounded-xl border border-primary/20 p-6 text-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-2">stars</span>
+<h4 class="text-lg font-black italic text-primary-text dark:text-white mb-2">Go Premium</h4>
+<p class="text-sm text-secondary-text mb-4">Get instant SMS alerts for depth chart changes.</p>
+<button class="w-full bg-primary hover:bg-yellow-300 text-primary-text font-bold py-2 rounded-lg text-sm transition-colors">Start Free Trial</button>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+<footer class="border-t border-card-border bg-white dark:bg-background-dark dark:border-gray-800 py-10 px-6 lg:px-10 mt-auto">
+<div class="w-full max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl">sports_football</span>
+<span class="text-lg font-bold italic text-primary-text dark:text-white">FantasySportsPro</span>
+</div>
+<div class="flex gap-6 flex-wrap justify-center">
+<a class="text-sm font-medium text-secondary-text hover:text-primary-text dark:hover:text-white transition-colors" href="#">About Us</a>
+<a class="text-sm font-medium text-secondary-text hover:text-primary-text dark:hover:text-white transition-colors" href="#">Contact</a>
+<a class="text-sm font-medium text-secondary-text hover:text-primary-text dark:hover:text-white transition-colors" href="#">Terms</a>
+<a class="text-sm font-medium text-secondary-text hover:text-primary-text dark:hover:text-white transition-colors" href="#">Privacy</a>
+<a class="text-sm font-medium text-secondary-text hover:text-primary-text dark:hover:text-white transition-colors" href="#">Careers</a>
+</div>
+<p class="text-sm text-secondary-text text-center md:text-right">© 2024 FantasySportsPro Inc. All rights reserved.</p>
+</div>
+</footer>
+</div>
+
+</body></html>

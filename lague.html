@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fantasy My Leagues Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#FACC15", // Bright Yellow
+                        secondary: "#1F2937", // Dark Gray/Black
+                        "accent-blue": "#38BDF8", // Sky Blue (Keeping variable but will change usage)
+                        "background-light": "#F3F4F6", // Light Gray
+                        "background-dark": "#0F172A", // Deep Navy
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1E293B", // Slate 800
+                    },
+                    fontFamily: {
+                        display: ["Inter", "sans-serif"],
+                        body: ["Inter", "sans-serif"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                    },
+                    boxShadow: {
+                        'standing': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)', // Pronounced shadow
+                    },
+                    backgroundImage: {
+                        'stadium-pattern': "url('https://images.unsplash.com/photo-1566577739112-5180d4bf9390?q=80&w=2626&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+                    }
+                },
+            },
+        };
+    </script>
+<style>body {
+    font-family: "Inter", sans-serif
+    }
+.italic-custom {
+    font-style: italic
+    }
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAbAKHVf3lUKNZNddLnLFnZTD_WPqIq8zNo0pgaSO45ucS5sopscRqNUl-BvkKF_HKZaqTkVeU8PW8mEzmoPSX_ffA8Wvwqezln6RJhG4D0UDx9dGqRzABGIaf0oTL2tIcraQOqhgRm_oVe9p7JCkdN4JAkQIfwoUmvlwN9MLt6_K7-QgKuyoP7x-XISUCWo_mp_8wo3jNscL--wB3FVbtGo804Z0E0aXMfKicYC1oKONniCfzSXEZKGZ271_Q4NBmMnCe5FJKYVRM);
+    background-size: cover;
+    background-position: center;
+    opacity: 0.35;filter: saturate(1.2);}
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200 min-h-screen flex flex-col font-body relative">
+<div class="bg-overlay pointer-events-none"></div>
+<header class="bg-surface-light dark:bg-surface-dark shadow-sm border-b border-gray-200 dark:border-gray-700 h-16 flex items-center justify-between px-6 sticky top-0 z-30">
+<div class="flex items-center space-x-8">
+<div class="flex items-center gap-2 cursor-pointer">
+<div class="bg-primary text-secondary p-1 rounded font-bold text-xl leading-none italic-custom">FB</div>
+<div class="flex flex-col">
+<span class="text-xs text-gray-500 dark:text-gray-400 font-bold tracking-widest leading-none">FANTASY</span>
+<span class="font-black text-xl leading-none italic-custom text-secondary dark:text-white">BUZZ</span>
+</div>
+</div>
+<nav class="hidden md:flex space-x-6">
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary font-medium flex items-center gap-1 text-sm italic-custom" href="#">
+                    Draft Plan <span class="material-icons-outlined text-base not-italic">expand_more</span>
+</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary font-medium flex items-center gap-1 text-sm italic-custom" href="#">
+                    Game Plan <span class="material-icons-outlined text-base not-italic">expand_more</span>
+</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary font-medium flex items-center gap-1 text-sm italic-custom" href="#">
+                    Rankings <span class="material-icons-outlined text-base not-italic">expand_more</span>
+</a>
+<a class="text-gray-600 dark:text-gray-300 hover:text-primary font-medium flex items-center gap-1 text-sm italic-custom" href="#">
+                    Insights <span class="material-icons-outlined text-base not-italic">expand_more</span>
+</a>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+<div class="relative hidden lg:block">
+<span class="material-icons-outlined absolute left-3 top-2.5 text-gray-400 text-lg">search</span>
+<input class="pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-full text-sm w-64 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-gray-400 dark:placeholder-gray-500 text-gray-700 dark:text-gray-200" placeholder="Search..." type="text"/>
+</div>
+<button class="text-gray-500 dark:text-gray-400 hover:text-primary relative">
+<span class="material-icons-outlined">notifications</span>
+<span class="absolute top-0 right-0 h-2 w-2 bg-red-500 rounded-full"></span>
+</button>
+<div class="flex items-center gap-3 border-l border-gray-200 dark:border-gray-700 pl-4">
+<div class="h-9 w-9 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">
+<span class="material-icons-outlined text-xl">person</span>
+</div>
+<div class="hidden xl:flex flex-col">
+<span class="text-sm font-bold text-gray-800 dark:text-white leading-tight">John Doe</span>
+<span class="text-xs text-gray-500 dark:text-gray-400">Pro Member</span>
+</div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden relative z-10">
+<aside class="w-64 bg-surface-light dark:bg-surface-dark border-r border-gray-200 dark:border-gray-700 flex flex-col overflow-y-auto hidden md:flex shadow-[4px_0_24px_rgba(0,0,0,0.02)]">
+<div class="p-6 border-b border-gray-100 dark:border-gray-800 shadow-sm">
+<div class="mb-2">
+<div class="flex items-center justify-between text-gray-500 dark:text-gray-400 mb-4 cursor-pointer hover:text-gray-800 dark:hover:text-gray-200 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-icons-outlined">emoji_events</span>
+<span class="font-bold text-sm tracking-wide italic-custom">DRAFT PLAN</span>
+</div>
+<span class="material-icons-outlined text-sm">expand_more</span>
+</div>
+<div class="pl-2">
+<div class="flex items-center gap-2 mb-2">
+<span class="h-1 w-1 bg-primary rounded-full"></span>
+<span class="h-1 w-1 bg-gray-300 dark:bg-gray-600 rounded-full"></span>
+<span class="h-1 w-1 bg-gray-300 dark:bg-gray-600 rounded-full"></span>
+<span class="h-1 w-1 bg-gray-300 dark:bg-gray-600 rounded-full"></span>
+</div>
+<h3 class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 mt-4 italic-custom">League Management</h3>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-secondary rounded-lg shadow-md mb-2 group transition-transform hover:scale-[1.02]" href="#">
+<span class="material-icons-outlined text-secondary group-hover:text-black transition-colors">groups</span>
+<span class="font-bold text-sm">My Leagues</span>
+</a>
+</div>
+</div>
+</div>
+<div class="p-6 border-b border-gray-100 dark:border-gray-800 shadow-sm">
+<h3 class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 italic-custom">Draft Tools</h3>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined text-gray-400 group-hover:text-primary">smart_toy</span>
+<span class="font-medium text-sm">Draft Simulator</span>
+<span class="ml-auto bg-secondary text-white text-[10px] font-bold px-1.5 py-0.5 rounded">Popular</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined text-gray-400 group-hover:text-primary">touch_app</span>
+<span class="font-medium text-sm">Draft Assist</span>
+<span class="ml-auto bg-primary text-secondary text-[10px] font-bold px-1.5 py-0.5 rounded">New</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined text-gray-400 group-hover:text-primary">poll</span>
+<span class="font-medium text-sm">Mock Draft Lobby</span>
+</a>
+</nav>
+</div>
+<div class="p-6 shadow-sm">
+<h3 class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 italic-custom">Analysis Tools</h3>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg group transition-colors" href="#">
+<span class="material-icons-outlined text-gray-400 group-hover:text-primary">analytics</span>
+<span class="font-medium text-sm">Power Rankings</span>
+</a>
+</nav>
+</div>
+</aside>
+<main class="flex-1 overflow-y-auto p-8 bg-transparent">
+<div class="max-w-6xl mx-auto space-y-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="text-3xl font-extrabold text-secondary dark:text-white italic-custom mb-2 drop-shadow-sm">My Leagues</h1>
+<p class="text-gray-600 dark:text-gray-300 text-sm max-w-lg font-medium drop-shadow-sm">
+                            Configure your league settings to use with the Draft Simulator and Draft Assistant.
+                        </p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-5 py-2.5 bg-primary hover:bg-yellow-400 text-secondary rounded shadow-lg shadow-yellow-500/30 font-bold text-sm transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+<span class="material-icons-outlined text-lg">add</span> Add League
+                        </button>
+<button class="px-5 py-2.5 bg-surface-light dark:bg-surface-dark border-2 border-primary text-gray-800 dark:text-gray-200 rounded shadow-sm hover:shadow-md font-semibold text-sm transition-all transform hover:-translate-y-0.5">
+                            Start a Mock Draft
+                        </button>
+</div>
+</div>
+<div class="bg-surface-light/95 backdrop-blur-sm dark:bg-surface-dark/95 border border-primary/30 rounded-lg p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-md">
+<div class="flex items-start gap-3">
+<div class="bg-primary/20 p-1.5 rounded-full mt-0.5 sm:mt-0 text-yellow-700 dark:text-yellow-400">
+<span class="material-icons-outlined text-lg">warning</span>
+</div>
+<p class="text-sm font-semibold text-gray-800 dark:text-gray-100 pt-1 sm:pt-0">
+                            To use the Sync Assistant with your ESPN leagues install the Fantasybuzz browser extension.
+                        </p>
+</div>
+<button class="bg-secondary hover:bg-gray-800 text-white px-5 py-2 rounded text-sm font-bold shadow-lg shadow-gray-900/20 whitespace-nowrap transition-colors flex items-center gap-2">
+                        Install Now <span class="material-icons-outlined text-base">arrow_forward</span>
+</button>
+</div>
+<div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-standing overflow-hidden border border-gray-100 dark:border-gray-700">
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-primary text-secondary uppercase text-xs font-bold tracking-wider">
+<tr>
+<th class="px-6 py-4 font-bold">Draft</th>
+<th class="px-6 py-4 font-bold">Date &amp; Time</th>
+<th class="px-6 py-4 font-bold">Draft Type</th>
+<th class="px-6 py-4 font-bold text-center">Teams</th>
+<th class="px-6 py-4 font-bold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-gray-800 dark:text-gray-200 cursor-pointer hover:text-primary transition-colors text-base italic-custom">Copy of Imported League</span>
+<span class="text-xs text-gray-400 font-bold mt-1">ESPN</span>
+</div>
+</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300">Unknown</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300 font-medium">SNAKE</td>
+<td class="px-6 py-4 text-center text-gray-600 dark:text-gray-300">10</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded font-semibold text-xs hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm">
+                                                Mock Draft
+                                            </button>
+<button class="px-3 py-1.5 bg-secondary hover:bg-gray-800 text-white rounded font-semibold text-xs shadow-md shadow-gray-500/20 transition-all transform hover:-translate-y-0.5">
+                                                Launch Assistant
+                                            </button>
+<button class="p-1.5 text-gray-400 hover:text-primary transition-colors">
+<span class="text-xs font-bold underline">View</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-gray-800 dark:text-gray-200 cursor-pointer hover:text-primary transition-colors text-base italic-custom">Copy of Imported League</span>
+<span class="text-xs text-gray-400 font-bold mt-1">ESPN</span>
+</div>
+</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300">Unknown</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300 font-medium">SNAKE</td>
+<td class="px-6 py-4 text-center text-gray-600 dark:text-gray-300">10</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded font-semibold text-xs hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm">
+                                                Mock Draft
+                                            </button>
+<button class="px-3 py-1.5 bg-secondary hover:bg-gray-800 text-white rounded font-semibold text-xs shadow-md shadow-gray-500/20 transition-all transform hover:-translate-y-0.5">
+                                                Launch Assistant
+                                            </button>
+<button class="p-1.5 text-gray-400 hover:text-primary transition-colors">
+<span class="text-xs font-bold underline">View</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-gray-800 dark:text-gray-200 cursor-pointer hover:text-primary transition-colors text-base italic-custom">Copy of Imported League</span>
+<span class="text-xs text-gray-400 font-bold mt-1">ESPN</span>
+</div>
+</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300">Unknown</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300 font-medium">SNAKE</td>
+<td class="px-6 py-4 text-center text-gray-600 dark:text-gray-300">10</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded font-semibold text-xs hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm">
+                                                Mock Draft
+                                            </button>
+<button class="px-3 py-1.5 bg-secondary hover:bg-gray-800 text-white rounded font-semibold text-xs shadow-md shadow-gray-500/20 transition-all transform hover:-translate-y-0.5">
+                                                Launch Assistant
+                                            </button>
+<button class="p-1.5 text-gray-400 hover:text-primary transition-colors">
+<span class="text-xs font-bold underline">View</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-gray-800 dark:text-gray-200 cursor-pointer hover:text-primary transition-colors text-base italic-custom">Copy of Imported League</span>
+<span class="text-xs text-gray-400 font-bold mt-1">ESPN</span>
+</div>
+</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300">Unknown</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300 font-medium">SNAKE</td>
+<td class="px-6 py-4 text-center text-gray-600 dark:text-gray-300">10</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded font-semibold text-xs hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm">
+                                                Mock Draft
+                                            </button>
+<button class="px-3 py-1.5 bg-secondary hover:bg-gray-800 text-white rounded font-semibold text-xs shadow-md shadow-gray-500/20 transition-all transform hover:-translate-y-0.5">
+                                                Launch Assistant
+                                            </button>
+<button class="p-1.5 text-gray-400 hover:text-primary transition-colors">
+<span class="text-xs font-bold underline">View</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-gray-800 dark:text-gray-200 cursor-pointer hover:text-primary transition-colors text-base italic-custom">Copy of Imported League</span>
+<span class="text-xs text-gray-400 font-bold mt-1">ESPN</span>
+</div>
+</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300">Unknown</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300 font-medium">SNAKE</td>
+<td class="px-6 py-4 text-center text-gray-600 dark:text-gray-300">10</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded font-semibold text-xs hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm">
+                                                Mock Draft
+                                            </button>
+<button class="px-3 py-1.5 bg-secondary hover:bg-gray-800 text-white rounded font-semibold text-xs shadow-md shadow-gray-500/20 transition-all transform hover:-translate-y-0.5">
+                                                Launch Assistant
+                                            </button>
+<button class="p-1.5 text-gray-400 hover:text-primary transition-colors">
+<span class="text-xs font-bold underline">View</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="font-bold text-gray-800 dark:text-gray-200 cursor-pointer hover:text-primary transition-colors text-base italic-custom">Copy of Imported League</span>
+<span class="text-xs text-gray-400 font-bold mt-1">ESPN</span>
+</div>
+</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300">Unknown</td>
+<td class="px-6 py-4 text-gray-600 dark:text-gray-300 font-medium">SNAKE</td>
+<td class="px-6 py-4 text-center text-gray-600 dark:text-gray-300">10</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded font-semibold text-xs hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm">
+                                                Mock Draft
+                                            </button>
+<button class="px-3 py-1.5 bg-secondary hover:bg-gray-800 text-white rounded font-semibold text-xs shadow-md shadow-gray-500/20 transition-all transform hover:-translate-y-0.5">
+                                                Launch Assistant
+                                            </button>
+<button class="p-1.5 text-gray-400 hover:text-primary transition-colors">
+<span class="text-xs font-bold underline">View</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

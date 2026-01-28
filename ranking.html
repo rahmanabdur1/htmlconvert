@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fantasy Football Rankings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2f20d",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#222210",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>.custom-scrollbar::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f4f4e7;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d4d4b0; 
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #9c9c49; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#1c1c0d] overflow-x-hidden min-h-screen flex flex-col">
+<header class="w-full bg-[#fcfcf8] border-b border-[#f4f4e7] sticky top-0 z-50">
+<div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-[#1c1c0d]">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-black">
+<span class="material-symbols-outlined" style="font-size: 24px;">sports_football</span>
+</div>
+<h2 class="text-[#1c1c0d] text-xl font-bold leading-tight tracking-tight italic">FantasyPro</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-[#1c1c0d] hover:text-[#9c9c49] text-sm font-bold uppercase tracking-wide transition-colors" href="#">News</a>
+<a class="text-[#1c1c0d] hover:text-[#9c9c49] text-sm font-bold uppercase tracking-wide transition-colors" href="#">Scores</a>
+<a class="text-[#1c1c0d] hover:text-[#9c9c49] text-sm font-bold uppercase tracking-wide transition-colors" href="#">Stats</a>
+<a class="text-[#1c1c0d] hover:text-[#9c9c49] text-sm font-bold uppercase tracking-wide transition-colors" href="#">Articles</a>
+<a class="text-[#1c1c0d] hover:text-[#9c9c49] text-sm font-bold uppercase tracking-wide transition-colors" href="#">Premium</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center w-64 bg-[#f4f4e7] rounded-lg h-10 px-3">
+<span class="material-symbols-outlined text-[#9c9c49]" style="font-size: 20px;">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full text-[#1c1c0d] placeholder-[#9c9c49]" placeholder="Search Players..." type="text"/>
+</div>
+<div class="flex gap-2">
+<button class="hidden sm:flex items-center justify-center h-10 px-4 rounded-lg bg-[#f4f4e7] hover:bg-[#e8e8ce] text-[#1c1c0d] text-sm font-bold transition-colors">
+                            Log In
+                        </button>
+<button class="flex items-center justify-center h-10 px-4 rounded-lg bg-primary hover:bg-[#d9d90c] text-[#1c1c0d] text-sm font-bold transition-colors shadow-sm">
+                            Subscribe
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div class="flex flex-col gap-2">
+<h1 class="text-[#1c1c0d] text-4xl md:text-5xl font-black italic tracking-tighter uppercase">Fantasy Football Rankings</h1>
+<p class="text-[#9c9c49] text-base font-medium max-w-2xl">Daily updated projections and consensus rankings for the 2024 season. Find the hidden gems and avoid the busts.</p>
+</div>
+<div class="flex items-center gap-2 text-sm font-medium text-[#9c9c49]">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>Last Updated: Today, 8:42 AM ET</span>
+</div>
+</div>
+<div class="sticky top-16 z-40 bg-[#f8f8f5]/95 backdrop-blur-sm pt-2 pb-4 mb-2 border-b border-[#e8e8ce]">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+<div class="flex overflow-x-auto no-scrollbar gap-8 border-b-0">
+<a class="relative pb-3 text-[#1c1c0d] font-bold text-sm tracking-wide uppercase after:absolute after:bottom-0 after:left-0 after:w-full after:h-[4px] after:bg-primary after:rounded-t-sm" href="#">
+                        PPR
+                    </a>
+<a class="relative pb-3 text-[#9c9c49] hover:text-[#1c1c0d] font-bold text-sm tracking-wide uppercase transition-colors" href="#">
+                        Standard
+                    </a>
+<a class="relative pb-3 text-[#9c9c49] hover:text-[#1c1c0d] font-bold text-sm tracking-wide uppercase transition-colors" href="#">
+                        Dynasty
+                    </a>
+<a class="relative pb-3 text-[#9c9c49] hover:text-[#1c1c0d] font-bold text-sm tracking-wide uppercase transition-colors" href="#">
+                        Half-PPR
+                    </a>
+<a class="relative pb-3 text-[#9c9c49] hover:text-[#1c1c0d] font-bold text-sm tracking-wide uppercase transition-colors" href="#">
+                        Best Ball
+                    </a>
+</div>
+<div class="flex-shrink-0">
+<div class="inline-flex bg-[#f4f4e7] p-1 rounded-lg">
+<button class="px-4 py-1.5 rounded-md bg-white text-[#1c1c0d] text-xs font-bold uppercase shadow-sm transition-all">
+                            Expert Consensus
+                        </button>
+<button class="px-4 py-1.5 rounded-md text-[#9c9c49] hover:text-[#1c1c0d] text-xs font-bold uppercase transition-all">
+                            Site Rankings
+                        </button>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 mt-4 overflow-x-auto pb-2 custom-scrollbar">
+<button class="flex-shrink-0 px-6 py-2 rounded bg-primary text-[#1c1c0d] text-sm font-bold italic uppercase tracking-wider shadow-md transition-all">
+                    All
+                </button>
+<button class="flex-shrink-0 px-6 py-2 rounded bg-white border border-[#e8e8ce] hover:border-[#1c1c0d] text-[#1c1c0d] text-sm font-bold italic uppercase tracking-wider shadow-sm hover:shadow hover:bg-[#fcfcf8] transition-all">
+                    QB
+                </button>
+<button class="flex-shrink-0 px-6 py-2 rounded bg-white border border-[#e8e8ce] hover:border-[#1c1c0d] text-[#1c1c0d] text-sm font-bold italic uppercase tracking-wider shadow-sm hover:shadow hover:bg-[#fcfcf8] transition-all">
+                    RB
+                </button>
+<button class="flex-shrink-0 px-6 py-2 rounded bg-white border border-[#e8e8ce] hover:border-[#1c1c0d] text-[#1c1c0d] text-sm font-bold italic uppercase tracking-wider shadow-sm hover:shadow hover:bg-[#fcfcf8] transition-all">
+                    WR
+                </button>
+<button class="flex-shrink-0 px-6 py-2 rounded bg-white border border-[#e8e8ce] hover:border-[#1c1c0d] text-[#1c1c0d] text-sm font-bold italic uppercase tracking-wider shadow-sm hover:shadow hover:bg-[#fcfcf8] transition-all">
+                    TE
+                </button>
+<button class="flex-shrink-0 px-6 py-2 rounded bg-white border border-[#e8e8ce] hover:border-[#1c1c0d] text-[#1c1c0d] text-sm font-bold italic uppercase tracking-wider shadow-sm hover:shadow hover:bg-[#fcfcf8] transition-all">
+                    K
+                </button>
+<button class="flex-shrink-0 px-6 py-2 rounded bg-white border border-[#e8e8ce] hover:border-[#1c1c0d] text-[#1c1c0d] text-sm font-bold italic uppercase tracking-wider shadow-sm hover:shadow hover:bg-[#fcfcf8] transition-all">
+                    DEF/ST
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-4 gap-8 mt-4">
+<div class="xl:col-span-3">
+<div class="bg-white rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] border border-[#e8e8ce] overflow-hidden">
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#fcfcf8] border-b border-[#e8e8ce]">
+<th class="p-4 text-xs font-black text-[#9c9c49] uppercase tracking-wider w-16 text-center cursor-pointer hover:text-[#1c1c0d] group">
+                                        Rank <span class="material-symbols-outlined align-bottom text-[16px] opacity-0 group-hover:opacity-100">arrow_drop_down</span>
+</th>
+<th class="p-4 text-xs font-black text-[#9c9c49] uppercase tracking-wider w-16 text-center">Trend</th>
+<th class="p-4 text-xs font-black text-[#9c9c49] uppercase tracking-wider cursor-pointer hover:text-[#1c1c0d] group">
+                                        Player <span class="material-symbols-outlined align-bottom text-[16px] opacity-0 group-hover:opacity-100">arrow_drop_down</span>
+</th>
+<th class="p-4 text-xs font-black text-[#9c9c49] uppercase tracking-wider w-24 text-center">Opp</th>
+<th class="p-4 text-xs font-black text-[#9c9c49] uppercase tracking-wider w-20 text-center">Bye</th>
+<th class="p-4 text-xs font-black text-[#9c9c49] uppercase tracking-wider w-24 text-center cursor-pointer hover:text-[#1c1c0d] group">
+                                        ADP <span class="material-symbols-outlined align-bottom text-[16px] opacity-0 group-hover:opacity-100">arrow_drop_down</span>
+</th>
+<th class="p-4 text-xs font-black text-[#9c9c49] uppercase tracking-wider w-32 text-right cursor-pointer hover:text-[#1c1c0d] group">
+                                        Proj Pts <span class="material-symbols-outlined align-bottom text-[16px] opacity-0 group-hover:opacity-100">arrow_drop_down</span>
+</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="border-b border-[#f4f4e7] hover:bg-[#fcfcf8] transition-colors group">
+<td class="p-4 text-center font-black text-lg text-[#1c1c0d] bg-primary/5 group-hover:bg-primary/20 transition-colors">1</td>
+<td class="p-4 text-center">
+<div class="inline-flex items-center justify-center size-6 rounded-full bg-[#e8e8ce] text-[#9c9c49]">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img class="size-10 rounded-full object-cover border border-[#e8e8ce]" data-alt="Portrait of Christian McCaffrey" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYvaX4vl_Vwl8pAxSg7itAXn9jx9nVhGHKys2lCS8Wh-050_LNSOuOIzAgJmjD4H-HeR-HmeP6O5FMPxPPaQNycdpiYdNGfaaFZ9TXK4B_gceUdyiBJ_5IjcIgbIKfMiyLJu8ePkHbzYSCr8IG6xbVdgSSZvFtUwW5buSeu-X2W-EzAgy8vQkeO0ubdWn6Bztm-kMQqllfTd3Bz_ixGj0IvrEwlCGI5gM8eTRE7in2Wd57gy2nbFeUe3ts4WaEM6mpT61Qs-LLQPs"/>
+<div class="absolute -bottom-1 -right-1 bg-white text-[10px] font-bold px-1 rounded border border-[#e8e8ce]">RB</div>
+</div>
+<div>
+<div class="font-bold text-[#1c1c0d] text-base group-hover:text-primary-dark transition-colors">Christian McCaffrey</div>
+<div class="text-xs text-[#9c9c49] font-medium">SF • San Francisco 49ers</div>
+</div>
+<span class="ml-auto material-symbols-outlined text-[#9c9c49] hover:text-[#1c1c0d] cursor-pointer">sticky_note_2</span>
+</div>
+</td>
+<td class="p-4 text-center font-medium text-[#1c1c0d]">vs NYJ</td>
+<td class="p-4 text-center font-medium text-[#9c9c49]">9</td>
+<td class="p-4 text-center font-bold text-[#1c1c0d]">1.1</td>
+<td class="p-4 text-right font-bold text-[#1c1c0d]">342.5</td>
+</tr>
+<tr class="border-b border-[#f4f4e7] hover:bg-[#fcfcf8] transition-colors group">
+<td class="p-4 text-center font-black text-lg text-[#1c1c0d]">2</td>
+<td class="p-4 text-center">
+<div class="inline-flex items-center justify-center size-6 rounded-full bg-primary/20 text-[#8a8a05]">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img class="size-10 rounded-full object-cover border border-[#e8e8ce]" data-alt="Portrait of CeeDee Lamb" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrye0fLFWHirqySW7at-6xGpBx3Y3eAP30l0yto6w_0GcPD6TvNZb1xc-iDjGE8XC2lE3kCc5z_pN4yn6YUK-Cv8GMThgBygHsXObvfihTO9vdTQxDqDK9LHfp6B8cIX1zI3KuONTnr-AZ6j-v1oBZP5SS4C1gF9HbShzHC0FLpUfvNBPTqJ0zXLHTtrxn2yMH6IM8qzN5j05wjXg9vMwnkVkXkHUWyPCxZV0ukuy-mFiX-1PI0AHc4-USZbhsZROxFkP_DdVaZoc"/>
+<div class="absolute -bottom-1 -right-1 bg-white text-[10px] font-bold px-1 rounded border border-[#e8e8ce]">WR</div>
+</div>
+<div>
+<div class="font-bold text-[#1c1c0d] text-base group-hover:text-primary-dark transition-colors">CeeDee Lamb</div>
+<div class="text-xs text-[#9c9c49] font-medium">DAL • Dallas Cowboys</div>
+</div>
+<span class="ml-auto material-symbols-outlined text-[#9c9c49] hover:text-[#1c1c0d] cursor-pointer">sticky_note_2</span>
+</div>
+</td>
+<td class="p-4 text-center font-medium text-[#1c1c0d]">@ CLE</td>
+<td class="p-4 text-center font-medium text-[#9c9c49]">7</td>
+<td class="p-4 text-center font-bold text-[#1c1c0d]">2.4</td>
+<td class="p-4 text-right font-bold text-[#1c1c0d]">312.8</td>
+</tr>
+<tr class="border-b border-[#f4f4e7] hover:bg-[#fcfcf8] transition-colors group">
+<td class="p-4 text-center font-black text-lg text-[#1c1c0d]">3</td>
+<td class="p-4 text-center">
+<div class="inline-flex items-center justify-center size-6 rounded-full bg-[#e8e8ce] text-[#9c9c49]">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img class="size-10 rounded-full object-cover border border-[#e8e8ce]" data-alt="Portrait of Tyreek Hill" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-6n5sY9f1D-3sxyF7YSuU6M5yOfDzcgF7aZt8Pp21y6VcBXq3gUtbu3iuAlsmDUjQuJeYTjblwffhJ7BuJXysre_fzC1MEbSA8kZFSIonwfDZDEnn19c5iA1VjzaFBgFT8EeCOkEVHZuHJoHXk64kjhQ6VrDQwwWNq7-Mv9gSsHvBnsQwTMiH5GO1WfzIckw2DDBF2fA3Uo7aK5IU8urgyYnuKLstS3V2L4F9DATOOo6hKgGw-RmhPl7UmFc-X-e4nusI1rWUwkY"/>
+<div class="absolute -bottom-1 -right-1 bg-white text-[10px] font-bold px-1 rounded border border-[#e8e8ce]">WR</div>
+</div>
+<div>
+<div class="font-bold text-[#1c1c0d] text-base group-hover:text-primary-dark transition-colors">Tyreek Hill</div>
+<div class="text-xs text-[#9c9c49] font-medium">MIA • Miami Dolphins</div>
+</div>
+<span class="ml-auto material-symbols-outlined text-[#9c9c49] hover:text-[#1c1c0d] cursor-pointer">sticky_note_2</span>
+</div>
+</td>
+<td class="p-4 text-center font-medium text-[#1c1c0d]">vs JAX</td>
+<td class="p-4 text-center font-medium text-[#9c9c49]">6</td>
+<td class="p-4 text-center font-bold text-[#1c1c0d]">3.1</td>
+<td class="p-4 text-right font-bold text-[#1c1c0d]">308.2</td>
+</tr>
+<tr class="border-b border-[#f4f4e7] hover:bg-[#fcfcf8] transition-colors group">
+<td class="p-4 text-center font-black text-lg text-[#1c1c0d]">4</td>
+<td class="p-4 text-center">
+<div class="inline-flex items-center justify-center size-6 rounded-full bg-red-100 text-red-600">
+<span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img class="size-10 rounded-full object-cover border border-[#e8e8ce]" data-alt="Portrait of Justin Jefferson" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXrudSaVw3AyP_XsYxIcZnq4N9qIGmrDaygQ45Bkf85WfiHpGPp59lr9KYmumCA1WcAkBAlRCFUc2ccNdIRy6_nTfDaIWY2S8pfXNnPA95n4ESPa1jq6QOvhtYw8dYRMyXDmgOp6RSXPyvP5WuXKtg_YZmSOL2jKGiSpo8GImzks5ms3P5mwGLzJWQZFpKk8Vp0E8mdLckIXrWPvArLasfzp3sNHJqAHLB6YNZgkAzRe7sqsskKjvOdNbmNXmPwKqUA-EgbP0CfG4"/>
+<div class="absolute -bottom-1 -right-1 bg-white text-[10px] font-bold px-1 rounded border border-[#e8e8ce]">WR</div>
+</div>
+<div>
+<div class="font-bold text-[#1c1c0d] text-base group-hover:text-primary-dark transition-colors">Justin Jefferson</div>
+<div class="text-xs text-[#9c9c49] font-medium">MIN • Minnesota Vikings</div>
+</div>
+<span class="ml-auto material-symbols-outlined text-[#9c9c49] hover:text-[#1c1c0d] cursor-pointer">sticky_note_2</span>
+</div>
+</td>
+<td class="p-4 text-center font-medium text-[#1c1c0d]">@ NYG</td>
+<td class="p-4 text-center font-medium text-[#9c9c49]">6</td>
+<td class="p-4 text-center font-bold text-[#1c1c0d]">5.8</td>
+<td class="p-4 text-right font-bold text-[#1c1c0d]">288.4</td>
+</tr>
+<tr class="border-b border-[#f4f4e7] hover:bg-[#fcfcf8] transition-colors group">
+<td class="p-4 text-center font-black text-lg text-[#1c1c0d]">5</td>
+<td class="p-4 text-center">
+<div class="inline-flex items-center justify-center size-6 rounded-full bg-primary/20 text-[#8a8a05]">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img class="size-10 rounded-full object-cover border border-[#e8e8ce]" data-alt="Portrait of Ja'Marr Chase" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLg-PdbL3hSgImkr1aLkCcwH9PSlbMKJ06s2YuicyEcR2wdEc-cwgeEXXuPkRbWtVPVGbnR6OSe1jliKzdjvkhR3zUkQxwFOhXDKQBfYd8h114BAUta3C07xllMmGXx_P5PDufNjsPnL1sy3FWq724RBy5YslCD1-xSk3PLpluc2pJkzlaI2GaQ1eA9_1NvqZ-_66FQ4F4VVZjbvTsNYbcyUs2XUh1HHIC6XHLxT3T7peHP4uKKjfB_aDKebBC_dVMsv2cENdljzU"/>
+<div class="absolute -bottom-1 -right-1 bg-white text-[10px] font-bold px-1 rounded border border-[#e8e8ce]">WR</div>
+</div>
+<div>
+<div class="font-bold text-[#1c1c0d] text-base group-hover:text-primary-dark transition-colors">Ja'Marr Chase</div>
+<div class="text-xs text-[#9c9c49] font-medium">CIN • Cincinnati Bengals</div>
+</div>
+<span class="ml-auto material-symbols-outlined text-[#9c9c49] hover:text-[#1c1c0d] cursor-pointer">sticky_note_2</span>
+</div>
+</td>
+<td class="p-4 text-center font-medium text-[#1c1c0d]">vs NE</td>
+<td class="p-4 text-center font-medium text-[#9c9c49]">12</td>
+<td class="p-4 text-center font-bold text-[#1c1c0d]">6.2</td>
+<td class="p-4 text-right font-bold text-[#1c1c0d]">294.1</td>
+</tr>
+<tr class="hover:bg-[#fcfcf8] transition-colors group">
+<td class="p-4 text-center font-black text-lg text-[#1c1c0d]">6</td>
+<td class="p-4 text-center">
+<div class="inline-flex items-center justify-center size-6 rounded-full bg-[#e8e8ce] text-[#9c9c49]">
+<span class="material-symbols-outlined text-[16px]">remove</span>
+</div>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="relative">
+<img class="size-10 rounded-full object-cover border border-[#e8e8ce]" data-alt="Portrait of Breece Hall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD0EZJralLBip9SxlcjGHMu3t1xowgJiYzVANyKv4aGrqikVE340i6N7e4TpoRCwWrs4n8zqCI98BKyPyEiLOw7nlTK7Xd9oHZkMvI-kLZ5W4XGUuaX7Fyx8h_akV_Jdek4kDlSmsOXsXu7OVQnujr_KUkrrkjKUcUGWGOw-NmLJp7i6sNvaSpvG96t4W5k-tnx0Y5m0zho_h5iKnu6VmVIxIYzzIl9iZJ-6aPjnPUD44y2eWmEESwid1fqcKRHjWIJWgYP5jk_Y4"/>
+<div class="absolute -bottom-1 -right-1 bg-white text-[10px] font-bold px-1 rounded border border-[#e8e8ce]">RB</div>
+</div>
+<div>
+<div class="font-bold text-[#1c1c0d] text-base group-hover:text-primary-dark transition-colors">Breece Hall</div>
+<div class="text-xs text-[#9c9c49] font-medium">NYJ • New York Jets</div>
+</div>
+<span class="ml-auto material-symbols-outlined text-[#9c9c49] hover:text-[#1c1c0d] cursor-pointer">sticky_note_2</span>
+</div>
+</td>
+<td class="p-4 text-center font-medium text-[#1c1c0d]">@ SF</td>
+<td class="p-4 text-center font-medium text-[#9c9c49]">12</td>
+<td class="p-4 text-center font-bold text-[#1c1c0d]">7.5</td>
+<td class="p-4 text-right font-bold text-[#1c1c0d]">276.9</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-3 bg-[#fcfcf8] border-t border-[#f4f4e7] flex justify-center">
+<button class="text-xs font-bold uppercase tracking-wide text-[#9c9c49] hover:text-[#1c1c0d] flex items-center gap-1 transition-colors">
+                            Show More Rankings <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+<div class="xl:col-span-1 space-y-6">
+<div class="bg-white rounded-xl shadow-sm border border-[#e8e8ce] overflow-hidden">
+<div class="bg-[#fcfcf8] border-b border-[#f4f4e7] px-4 py-3 flex justify-between items-center">
+<h3 class="font-black italic text-[#1c1c0d] uppercase tracking-tight">Top Risers</h3>
+<span class="material-symbols-outlined text-[#9c9c49]">trending_up</span>
+</div>
+<div class="divide-y divide-[#f4f4e7]">
+<div class="p-3 flex items-center gap-3 hover:bg-[#fcfcf8] group cursor-pointer">
+<div class="relative">
+<img class="size-9 rounded-full object-cover" data-alt="Puka Nacua Portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeR7_GSbELk8VgwilmUXRymqEVq7qi8IBTnRZwERYSb_6mRx7kY2p7uM7sPGmskMo5AgqzMAUc0hp9TODBD3s0ePOJG_vERAhSBwq-k1tPs0QWX_Rw2F-NdgytpoYJuU9Ts2SJcxe5Ijq8cSRsEv9qifPi5row2hcPH2SW14Xqasy5OklhwcC7EGRrI-fTUPuk9CyvTooltYA7q7BFTeh3qRjSTYr79q7Jxm18uqURJDIk2GMlZsLjo0RY-f2Q8-LsivAtYeZ3gkI"/>
+<div class="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-[#1c1c0d] border border-white">+4</div>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-[#1c1c0d] truncate">Puka Nacua</p>
+<p class="text-[10px] text-[#9c9c49] uppercase font-medium">WR • Rams</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-[#1c1c0d]">#12</p>
+</div>
+</div>
+<div class="p-3 flex items-center gap-3 hover:bg-[#fcfcf8] group cursor-pointer">
+<div class="relative">
+<img class="size-9 rounded-full object-cover" data-alt="Kyren Williams Portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLoZF-UsHUJRg6g-9ZfIfdDGzt8Pzx9cE8p9auzTdorikkJkcuatNg2_sOE2R8ZQiDU9rJe5tK3hIphOqFEUKDdeyblGkWZOcpE7zp2AdvHFEM7Bu7WOtiFtKS_J1xqIxjPoLKHbvWCvmFjo51SjfCH9XTcW4ZXjouPyyvBi3kqwTTy3rSP6xPSvF3rSQA8qr2g7vA88fSDXiUVqrpKO7ivRgZtB6OF1ea3yTfKmpvkVe-exIxTt2148yAuNpmTdv5MXFQ30GfUI0"/>
+<div class="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-[#1c1c0d] border border-white">+3</div>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-[#1c1c0d] truncate">Kyren Williams</p>
+<p class="text-[10px] text-[#9c9c49] uppercase font-medium">RB • Rams</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-[#1c1c0d]">#18</p>
+</div>
+</div>
+<div class="p-3 flex items-center gap-3 hover:bg-[#fcfcf8] group cursor-pointer">
+<div class="relative">
+<img class="size-9 rounded-full object-cover" data-alt="Garrett Wilson Portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVLbgMlbPJGitaZADsaYnp93d-ieCuGYHlJGClkBOV5rjwQQNePc4A3JaTkg8K3jluUO-3O_0kuSLj7C5NvkX9V3mzZXqujWGzeLk93amv27JIxq7Jn8lbdYqR2Ae6sNWC3QEObTvgFbXqecu-TwgQj3F2wQvF5eJrtSCn-Pdkj8QvLO8NtrV2GhR3VBkcmsTlVc-1IlPmvKQf8iOSudQ7CWAiKJjAjOnkVwvgGTRNsqugk4rt0FNLthVbKxLnLb3FnXiBQFlxFJw"/>
+<div class="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-[#1c1c0d] border border-white">+2</div>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-[#1c1c0d] truncate">Garrett Wilson</p>
+<p class="text-[10px] text-[#9c9c49] uppercase font-medium">WR • Jets</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-[#1c1c0d]">#14</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border border-[#e8e8ce] overflow-hidden">
+<div class="bg-[#fcfcf8] border-b border-[#f4f4e7] px-4 py-3 flex justify-between items-center">
+<h3 class="font-black italic text-[#1c1c0d] uppercase tracking-tight">Top Fallers</h3>
+<span class="material-symbols-outlined text-[#9c9c49]">trending_down</span>
+</div>
+<div class="divide-y divide-[#f4f4e7]">
+<div class="p-3 flex items-center gap-3 hover:bg-[#fcfcf8] group cursor-pointer">
+<div class="relative">
+<img class="size-9 rounded-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all" data-alt="Davante Adams Portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB34SVG7FCfSZnwCtyDKSe8Giyk4kbUBPnCQBCmzdqQLFWoN3nGn1aYKEgvrKA0WwoIb_bvVbj4nSuRnQE0zErPzpzEOJO-YX2BQpOAPHA-HhJzsWuYFxCtW1HgxIflCffnHGn6v_64EQy7Ccwjm5Ol2bfjuI0AUaYQeVMDj3Q1nGslTcpXla9YmmXlPtqWLNLT-rh4B_smRMBSnVvlFO1Mx5Dd8rUdvM2z2yKR1MjJ4J3Ak2--tbNMxBCzkCQ-sE_qzcq6yyKJ1hE"/>
+<div class="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-red-100 text-[10px] font-bold text-red-600 border border-white">-3</div>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-[#1c1c0d] truncate">Davante Adams</p>
+<p class="text-[10px] text-[#9c9c49] uppercase font-medium">WR • Raiders</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-[#1c1c0d]">#24</p>
+</div>
+</div>
+<div class="p-3 flex items-center gap-3 hover:bg-[#fcfcf8] group cursor-pointer">
+<div class="relative">
+<img class="size-9 rounded-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all" data-alt="Josh Jacobs Portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpuYjxDnBu25SOV6Me8iKfCArnj6dStetVJ-dhMu2Gr3myWKQ8Lkt5wr_qlAaHIb0tWQkL2TzDE4Kq_Xnhvo9zDiIZXw-4etoxQ-98UYld0LTX8UXTBFONhLh-koEZnB021SgI8LGQU6e1fMRdYTVZCaKufyyS8G70WR1PFLKgZgH0IWb5j7u_BU0hl5RQo2punZ3ONleCT2dR-NGkqQ9XgYvi4Yflpoy6QHJ3zQLWKv4RxhKXOuqzbEy0mcv3y_Zb_JCBzJAcr6Y"/>
+<div class="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-red-100 text-[10px] font-bold text-red-600 border border-white">-2</div>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold text-[#1c1c0d] truncate">Josh Jacobs</p>
+<p class="text-[10px] text-[#9c9c49] uppercase font-medium">RB • Packers</p>
+</div>
+<div class="text-right">
+<p class="text-xs font-bold text-[#1c1c0d]">#31</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-[#1c1c0d] rounded-xl p-5 text-center relative overflow-hidden group cursor-pointer">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/20 rounded-full blur-2xl -mr-10 -mt-10"></div>
+<span class="material-symbols-outlined text-primary text-4xl mb-2">workspace_premium</span>
+<h4 class="text-white font-black italic text-lg leading-tight mb-2">Unlock Premium Draft Kit</h4>
+<p class="text-gray-400 text-xs mb-4">Get access to custom cheat sheets, draft assistant, and more.</p>
+<button class="w-full py-2 bg-primary hover:bg-[#d9d90c] text-[#1c1c0d] font-bold rounded uppercase text-xs tracking-wider transition-colors">Upgrade Now</button>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-auto bg-white border-t border-[#f4f4e7] py-8">
+<div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="text-[#9c9c49] text-xs">
+                © 2024 FantasyPro Rankings. All rights reserved.
+            </div>
+<div class="flex gap-6">
+<a class="text-[#9c9c49] hover:text-[#1c1c0d] text-xs font-medium" href="#">Privacy Policy</a>
+<a class="text-[#9c9c49] hover:text-[#1c1c0d] text-xs font-medium" href="#">Terms of Service</a>
+<a class="text-[#9c9c49] hover:text-[#1c1c0d] text-xs font-medium" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+</body></html>
